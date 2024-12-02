@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +8,11 @@ AppBar buildAppBar({context, required String text, Widget? leading}) {
     scrolledUnderElevation: 0,
     title: Text(
       text,
+      style: TextStyles.semibold30insturment.copyWith(
+        color: AppColors.secondaryColor,
+      ),
     ),
+    centerTitle: true,
     actions: [
       leading ?? const SizedBox(),
     ],
@@ -24,6 +29,41 @@ AppBar buildAppBar({context, required String text, Widget? leading}) {
               ),
             ),
           ),
-    centerTitle: true,
   );
+}
+
+PreferredSize paddingAppbar({context, required String text}) {
+  return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight + 16),
+      child: Container(
+        padding: const EdgeInsets.only(top: 16),
+        child: buildAppBar(text: text, context: context),
+      ));
+}
+
+PreferredSize otpAppBar(BuildContext context) {
+  return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight + 16),
+      child: Container(
+          padding: const EdgeInsets.only(top: 16),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            scrolledUnderElevation: 0,
+            title: Text(
+              'Forgot Password ?',
+              style: TextStyles.semibold16inter.copyWith(),
+            ),
+            centerTitle: true,
+            leading: GestureDetector(
+              onTap: () {
+                Navigator.of(context).pop();
+              },
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: Icon(
+                  Icons.arrow_back_ios_new,
+                ),
+              ),
+            ),
+          )));
 }

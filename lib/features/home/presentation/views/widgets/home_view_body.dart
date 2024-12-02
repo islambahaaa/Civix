@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 
-import 'package:civix_app/core/widgets/search_text_field.dart';
-
 import 'package:svg_flutter/svg_flutter.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -28,7 +26,6 @@ class HomeViewBody extends StatelessWidget {
                 SizedBox(
                   height: 16,
                 ),
-                SearchTextField(),
                 SizedBox(
                   height: 12,
                 ),

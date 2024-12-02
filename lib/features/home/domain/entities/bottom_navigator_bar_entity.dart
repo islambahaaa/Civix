@@ -10,21 +10,21 @@ class BottomNavigationBarEntity {
   });
 }
 
-List<BottomNavigationBarEntity> get bottomNavigatorBarList => [
-      BottomNavigationBarEntity(
-          activeImage: Assets.imagesNavBarIconsActiveHome,
-          inActiveImage: Assets.imagesNavBarIconsInActiveHome,
-          name: 'الرئيسية'),
-      BottomNavigationBarEntity(
-          activeImage: Assets.imagesNavBarIconsActiveProducts,
-          inActiveImage: Assets.imagesNavBarIconsInActiveProducts,
-          name: 'المنتجات'),
-      BottomNavigationBarEntity(
-          activeImage: Assets.imagesNavBarIconsActiveShoppingCart,
-          inActiveImage: Assets.imagesNavBarIconsInActiveShoppingCart,
-          name: 'سلة التسوق'),
-      BottomNavigationBarEntity(
-          activeImage: Assets.imagesNavBarIconsActiveUser,
-          inActiveImage: Assets.imagesNavBarIconsInActiveUser,
-          name: 'حسابي'),
-    ];
+// List<BottomNavigationBarEntity> get bottomNavigatorBarList => [
+//       BottomNavigationBarEntity(
+//           activeImage: Assets.imagesNavBarIconsActiveHome,
+//           inActiveImage: Assets.imagesNavBarIconsInActiveHome,
+//           name: 'الرئيسية'),
+//       BottomNavigationBarEntity(
+//           activeImage: Assets.imagesNavBarIconsActiveProducts,
+//           inActiveImage: Assets.imagesNavBarIconsInActiveProducts,
+//           name: 'المنتجات'),
+//       BottomNavigationBarEntity(
+//           activeImage: Assets.imagesNavBarIconsActiveShoppingCart,
+//           inActiveImage: Assets.imagesNavBarIconsInActiveShoppingCart,
+//           name: 'سلة التسوق'),
+//       BottomNavigationBarEntity(
+//           activeImage: Assets.imagesNavBarIconsActiveUser,
+//           inActiveImage: Assets.imagesNavBarIconsInActiveUser,
+//           name: 'حسابي'),
+//     ];

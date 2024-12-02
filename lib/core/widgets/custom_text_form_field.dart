@@ -9,26 +9,35 @@ class CustomTextFormField extends StatelessWidget {
     required this.textInputType,
     this.suffixIcon,
     this.onSaved,
+    this.onChanged,
     this.obscureText = false,
+    this.prefixIcon,
   });
   final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
+  final IconData? prefixIcon;
   final void Function(String?)? onSaved;
+  final void Function(String?)? onChanged;
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText,
       onSaved: onSaved,
+      onChanged: onChanged,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'هذا الحقل مطلوب';
+          return 'This Field is required';
         }
         return null;
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
+        prefixIcon: Icon(
+          prefixIcon,
+          color: AppColors.secondaryColor,
+        ),
         suffixIcon: suffixIcon,
         filled: true,
         fillColor: const Color(0xFFF9FAFA),
@@ -40,12 +49,6 @@ class CustomTextFormField extends StatelessWidget {
           color: AppColors.lightGrayColor,
         ),
       ),
-      // validator: (value) {
-      //   if (value == null || value.isEmpty) {
-      //     return 'Please enter some text';
-      //   }
-      //   return null;
-      // },
     );
   }
 

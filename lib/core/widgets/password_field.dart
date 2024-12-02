@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
@@ -5,9 +6,12 @@ class PasswordField extends StatefulWidget {
   const PasswordField({
     super.key,
     this.onSaved,
+    this.onchanged,
+    this.hintText = 'Password',
   });
   final void Function(String?)? onSaved;
-
+  final void Function(String?)? onchanged;
+  final String hintText;
   @override
   State<PasswordField> createState() => _PasswordFieldState();
 }
@@ -19,8 +23,10 @@ class _PasswordFieldState extends State<PasswordField> {
     return CustomTextFormField(
       obscureText: obscureText,
       onSaved: widget.onSaved,
-      hintText: 'كلمة المرور',
+      onChanged: widget.onchanged,
+      hintText: widget.hintText,
       textInputType: TextInputType.visiblePassword,
+      prefixIcon: Icons.lock,
       suffixIcon: GestureDetector(
         onTap: () {
           setState(() {

@@ -11,9 +11,8 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      bottomNavigationBar: GoogleNavBotoomBar(),
-      // CustomBottomNavigationBar(),
-      body: SafeArea(child: HomeViewBody()),
-    );
+        // CustomBottomNavigationBar(),
+
+        );
   }
 }

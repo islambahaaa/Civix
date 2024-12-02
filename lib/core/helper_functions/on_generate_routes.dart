@@ -1,3 +1,6 @@
+import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
+import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
 import 'package:civix_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
@@ -9,6 +12,13 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
     case SplashView.routeName:
       return MaterialPageRoute(builder: (context) => const SplashView());
+    case OtpView.routeName:
+      return MaterialPageRoute(builder: (context) => const OtpView());
+    case NewPasswordView.routeName:
+      return MaterialPageRoute(builder: (context) => const NewPasswordView());
+    case ForgotPasswordView.routeName:
+      return MaterialPageRoute(
+          builder: (context) => const ForgotPasswordView());
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
     case SigninView.routeName:

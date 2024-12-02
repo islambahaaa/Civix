@@ -1,5 +1,6 @@
 import 'dart:ffi';
 
+import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:civix_app/constants.dart';
@@ -21,7 +22,7 @@ class SignUpViewBody extends StatefulWidget {
 class _SignUpViewBodyState extends State<SignUpViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  late String email, password, name;
+  late String email, password, confirmpass, name;
   late bool isTermsAccepted = false;
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               onSaved: (value) {
                 name = value!;
               },
-              hintText: 'الاسم كامل',
+              hintText: 'Name',
+              prefixIcon: Icons.person,
               textInputType: TextInputType.name),
           const SizedBox(
             height: 16,
@@ -48,16 +50,26 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             onSaved: (value) {
               email = value!;
             },
-            hintText: 'البريد الإلكتروني',
+            hintText: 'Email',
+            prefixIcon: Icons.email,
             textInputType: TextInputType.emailAddress,
           ),
           const SizedBox(
             height: 16,
           ),
           PasswordField(
-            onSaved: (value) {
+            onchanged: (value) {
               password = value!;
             },
+          ),
+          const SizedBox(
+            height: 16,
+          ),
+          PasswordField(
+            onchanged: (value) {
+              confirmpass = value!;
+            },
+            hintText: 'Confirm Password',
           ),
           const SizedBox(
             height: 16,
@@ -74,13 +86,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               onPressed: () {
                 if (formKey.currentState!.validate()) {
                   formKey.currentState!.save();
-                  if (isTermsAccepted) {
-                    context
-                        .read<SignupCubit>()
-                        .createUserWithEmailAndPassword(email, password, name);
-                    buildSnackBar(context, 'تم التسجيل بنجاح');
+                  if (password != confirmpass) {
+                    buildSnackBar(context, 'Password does not match');
+                  } else if (isTermsAccepted) {
+                    // context
+                    //     .read<SignupCubit>()
+                    //     .createUserWithEmailAndPassword(email, password, name);
+                    buildSnackBar(context, 'Success');
                   } else {
-                    buildSnackBar(context, 'الرجاء قبول الشروط والإحكام');
+                    buildSnackBar(
+                        context, 'Please accept terms and conditions');
                   }
                 } else {
                   setState(() {
@@ -88,7 +103,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   });
                 }
               },
-              text: 'إنشاء حساب جديد'),
+              text: 'Sign Up'),
           const SizedBox(
             height: 26,
           ),

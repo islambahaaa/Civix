@@ -13,8 +13,10 @@ class DontHaveAccount extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
-          const TextSpan(
-            text: 'لا تمتلك حساب؟',
+          TextSpan(
+            text: 'Don\'t have an account?',
+            style: TextStyles.semibold16inter
+                .copyWith(color: AppColors.lightGrayColor),
           ),
           const TextSpan(
             text: ' ',
@@ -24,7 +26,9 @@ class DontHaveAccount extends StatelessWidget {
               ..onTap = () {
                 Navigator.of(context).pushNamed(SignUpView.routeName);
               },
-            text: 'قم بإنشاء حساب',
+            text: 'Create Account',
+            style: TextStyles.semibold16inter
+                .copyWith(color: AppColors.primaryColor),
           ),
         ],
       ),

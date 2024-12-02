@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,13 +40,14 @@ class _SigninViewBodyState extends State<SigninViewBody> {
           child: Column(
             children: [
               const SizedBox(
-                height: 24,
+                height: 16,
               ),
               CustomTextFormField(
                 onSaved: (value) {
                   email = value!;
                 },
-                hintText: 'البريد الإلكتروني',
+                hintText: 'Email',
+                prefixIcon: Icons.email,
                 textInputType: TextInputType.emailAddress,
               ),
               const SizedBox(
@@ -58,16 +61,24 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              const Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    'نسيت كلمة المرور؟',
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushNamed(ForgotPasswordView.routeName);
+                    },
+                    child: Text(
+                      'Forgot your password?',
+                      style: TextStyles.semibold16inter
+                          .copyWith(color: AppColors.primaryColor),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 33,
+                height: 16,
               ),
               CustomButton(
                 onPressed: () {
@@ -82,47 +93,12 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                     });
                   }
                 },
-                text: 'تسجيل دخول',
+                text: 'Log In',
               ),
               const SizedBox(
-                height: 33,
+                height: 16,
               ),
               const DontHaveAccount(),
-              const SizedBox(
-                height: 33,
-              ),
-              const OrDivider(),
-              const SizedBox(
-                height: 16,
-              ),
-              SocialLoginButton(
-                  title: 'تسجيل بواسطة جوجل',
-                  onPressed: () {
-                    context.read<SigninCubit>().signInWithGoogle();
-                  },
-                  image: Assets.imagesGoogle),
-              const SizedBox(
-                height: 16,
-              ),
-              Platform.isIOS
-                  ? Column(
-                      children: [
-                        SocialLoginButton(
-                            title: 'تسجيل بواسطة أبل',
-                            onPressed: () {},
-                            image: Assets.imagesApple),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    )
-                  : const SizedBox(),
-              SocialLoginButton(
-                  title: 'تسجيل بواسطة فيسبوك',
-                  onPressed: () {
-                    context.read<SigninCubit>().signInWithFacebook();
-                  },
-                  image: Assets.imagesFacebook),
             ],
           ),
         ),

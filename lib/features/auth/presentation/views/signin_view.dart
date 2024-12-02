@@ -15,7 +15,7 @@ class SigninView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(text: 'تسجيل الدخول'),
+      appBar: paddingAppbar(text: 'Log In'),
       body: const SigninViewBody(),
     );
   }

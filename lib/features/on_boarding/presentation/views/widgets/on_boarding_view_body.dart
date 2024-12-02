@@ -2,6 +2,7 @@ import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
+import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/widgets/on_boarding_page_view.dart';
@@ -51,13 +52,15 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
               Prefs.setBool(kIsOnBoardingSeen, true);
               Navigator.of(context).pushReplacementNamed(SigninView.routeName);
             },
-            child: const Padding(
-              padding: EdgeInsets.all(16),
+            child: Padding(
+              padding: const EdgeInsets.all(16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
                     'Skip',
+                    style: TextStyles.regular17inter
+                        .copyWith(color: AppColors.secondaryColor),
                   ),
                 ],
               ),
