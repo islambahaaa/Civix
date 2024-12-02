@@ -27,8 +27,8 @@ class Assets {
   static const String imagesGoogle = "assets/images/google.svg";
 
   /// Assets for imagesLogo
-  /// assets/images/logo.svg
-  static const String imagesLogo = "assets/images/logo.svg";
+  /// assets/images/logo.png
+  static const String imagesLogo = "assets/images/logo.png";
 
   /// Assets for imagesNavBarIconsActiveHome
   /// assets/images/navBarIcons/Active/home.svg
@@ -81,6 +81,18 @@ class Assets {
   /// Assets for imagesPageView2Image
   /// assets/images/page_view2_image.svg
   static const String imagesPageView2Image = "assets/images/page_view2_image.svg";
+
+  /// Assets for imagesPageview1
+  /// assets/images/pageview1.svg
+  static const String imagesPageview1 = "assets/images/pageview1.svg";
+
+  /// Assets for imagesPageview2
+  /// assets/images/pageview2.svg
+  static const String imagesPageview2 = "assets/images/pageview2.svg";
+
+  /// Assets for imagesPageview3
+  /// assets/images/pageview3.svg
+  static const String imagesPageview3 = "assets/images/pageview3.svg";
 
   /// Assets for imagesPlantSplash
   /// assets/images/plant_splash.svg

@@ -1,11 +1,13 @@
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/widgets/on_boarding_page_view.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnBoardingViewBody extends StatefulWidget {
   const OnBoardingViewBody({super.key});
@@ -39,35 +41,66 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Visibility(
+          visible: currentPage != 2,
+          maintainAnimation: true,
+          maintainSize: true,
+          maintainState: true,
+          child: GestureDetector(
+            onTap: () {
+              Prefs.setBool(kIsOnBoardingSeen, true);
+              Navigator.of(context).pushReplacementNamed(SigninView.routeName);
+            },
+            child: const Padding(
+              padding: EdgeInsets.all(16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Skip',
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        Image.asset(
+          Assets.imagesLogo,
+          width: 200,
+          height: 100,
+          fit: BoxFit.contain,
+        ),
         Expanded(
             child: OnBoardingPageView(
           pageController: pageController,
         )),
-        DotsIndicator(
-          dotsCount: 2,
-          decorator: DotsDecorator(
-              color: currentPage == 0
-                  ? AppColors.primaryColor.withOpacity(0.5)
-                  : AppColors.primaryColor,
-              activeColor: AppColors.primaryColor),
-        ),
+        SmoothPageIndicator(
+            controller: pageController,
+            count: 3,
+            effect: const ExpandingDotsEffect(
+              activeDotColor: AppColors.primaryColor,
+            )),
         const SizedBox(height: 29),
-        Visibility(
-          maintainSize: true,
-          maintainAnimation: true,
-          maintainState: true,
-          visible: currentPage == 1,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
-            child: CustomButton(
-              text: 'ابدأ الان',
-              onPressed: () {
-                Prefs.setBool(kIsOnBoardingSeen, true);
-                Navigator.of(context)
-                    .pushReplacementNamed(SigninView.routeName);
-              },
-            ),
-          ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 116),
+          child: currentPage == 2
+              ? CustomButton(
+                  text: 'Done',
+                  onPressed: () {
+                    Prefs.setBool(kIsOnBoardingSeen, true);
+                    Navigator.of(context)
+                        .pushReplacementNamed(SigninView.routeName);
+                  },
+                )
+              : CustomButton(
+                  text: 'Next',
+                  onPressed: () {
+                    pageController.nextPage(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.fastLinearToSlowEaseIn,
+                    );
+                  },
+                ),
         ),
         const SizedBox(height: 43),
       ],

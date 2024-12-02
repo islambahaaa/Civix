@@ -13,14 +13,9 @@ class SignUpView extends StatelessWidget {
   static const String routeName = 'signUp';
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => SignupCubit(
-        getIt.get<AuthRepo>(),
-      ),
-      child: Scaffold(
-        appBar: buildAppBar(text: 'تسجيل جديد', context: context),
-        body: const SignUpBodyBlocConsumer(),
-      ),
+    return Scaffold(
+      appBar: buildAppBar(text: 'تسجيل جديد', context: context),
+      body: const SignUpViewBody(),
     );
   }
 }

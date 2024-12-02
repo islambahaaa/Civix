@@ -16,17 +16,13 @@ class CustomHomeAppBar extends StatelessWidget {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: SvgPicture.asset(Assets.imagesProfileImage),
-      title: Text(
+      title: const Text(
         'صباح الخير !..',
         textAlign: TextAlign.right,
-        style: TextStyles.regular16.copyWith(
-          color: AppColors.lightGrayColor,
-        ),
       ),
       subtitle: const Text(
         'getUser().name',
         textAlign: TextAlign.right,
-        style: TextStyles.bold16,
       ),
       trailing: const NotificationWidget(),
     );

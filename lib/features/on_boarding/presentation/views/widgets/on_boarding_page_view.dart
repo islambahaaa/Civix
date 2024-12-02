@@ -16,39 +16,35 @@ class OnBoardingPageView extends StatelessWidget {
       children: [
         PageViewItem(
           isVisible: true,
-          image: Assets.imagesPageView1Image,
-          backgroundImage: Assets.imagesPageView1BackgroundImage,
-          subtitle:
-              'اكتشف تجربة تسوق فريدة مع FruitHUB. استكشف مجموعتنا الواسعة من الفواكه الطازجة الممتازة واحصل على أفضل العروض والجودة العالية.',
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text('مرحبًا بك في', style: TextStyles.bold23),
-              Text(' HUB',
-                  style: TextStyles.bold23.copyWith(
-                    color: AppColors.secondaryColor,
-                  )),
-              Text(
-                'Fruit',
-                style: TextStyles.bold23.copyWith(
-                  color: AppColors.primaryColor,
-                ),
-              ),
-            ],
+          image: Assets.imagesPageview1,
+          subtitle: 'report your issues from the comfort of your own house',
+          title: Text(
+            'COMFORT',
+            style: TextStyles.bold28insturment
+                .copyWith(color: AppColors.secondaryColor),
           ),
         ),
-        const PageViewItem(
-          isVisible: false,
-          image: Assets.imagesPageView2Image,
-          backgroundImage: Assets.imagesPageView2BackgroundImage,
+        PageViewItem(
+          isVisible: true,
+          image: Assets.imagesPageview2,
           subtitle:
-              'نقدم لك أفضل الفواكه المختارة بعناية. اطلع على التفاصيل والصور والتقييمات لتتأكد من اختيار الفاكهة المثالية',
+              'Providing you with the trusted authorities to fix your issues ',
           title: Text(
-            'ابحث وتسوق',
+            'TRUST',
+            style: TextStyles.bold28insturment
+                .copyWith(color: AppColors.secondaryColor),
             textAlign: TextAlign.center,
-            style: TextStyles.bold23,
           ),
-        )
+        ),
+        PageViewItem(
+            isVisible: false,
+            image: Assets.imagesPageview3,
+            subtitle: 'create a safe and peaceful neighborhood',
+            title: Text(
+              'SAFETY',
+              style: TextStyles.bold28insturment
+                  .copyWith(color: AppColors.secondaryColor),
+            ))
       ],
     );
   }

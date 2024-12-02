@@ -58,14 +58,11 @@ class _SigninViewBodyState extends State<SigninViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
                     'نسيت كلمة المرور؟',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
-                    ),
                   ),
                 ],
               ),

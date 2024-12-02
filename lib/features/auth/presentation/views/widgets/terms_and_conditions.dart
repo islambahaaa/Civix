@@ -29,38 +29,28 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
         const SizedBox(
           width: 16,
         ),
-        Expanded(
+        const Expanded(
           child: Text.rich(
             TextSpan(
               children: [
                 TextSpan(
-                    text: 'من خلال إنشاء حساب ، فإنك توافق على ',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightGrayColor,
-                    )),
-                TextSpan(
-                    text: 'الشروط والأحكام',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
-                    )),
-                const TextSpan(
-                  text: ' ',
-                  style: TextStyles.semiBold13,
+                  text: 'من خلال إنشاء حساب ، فإنك توافق على ',
                 ),
                 TextSpan(
-                    text: 'الخاصة',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
-                    )),
-                const TextSpan(
-                  text: ' ',
-                  style: TextStyles.semiBold13,
+                  text: 'الشروط والأحكام',
                 ),
                 TextSpan(
-                    text: 'بنا',
-                    style: TextStyles.semiBold13.copyWith(
-                      color: AppColors.lightPrimaryColor,
-                    )),
+                  text: ' ',
+                ),
+                TextSpan(
+                  text: 'الخاصة',
+                ),
+                TextSpan(
+                  text: ' ',
+                ),
+                TextSpan(
+                  text: 'بنا',
+                ),
               ],
             ),
             textAlign: TextAlign.right,

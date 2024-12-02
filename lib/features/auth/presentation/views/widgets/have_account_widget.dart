@@ -12,25 +12,19 @@ class HaveAccountWidget extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
+          const TextSpan(
+            text: 'تمتلك حساب بالفعل؟',
+          ),
+          const TextSpan(
+            text: ' ',
+          ),
           TextSpan(
-              text: 'تمتلك حساب بالفعل؟',
-              style: TextStyles.semiBold16.copyWith(
-                color: AppColors.lightGrayColor,
-              )),
-          TextSpan(
-              text: ' ',
-              style: TextStyles.semiBold16.copyWith(
-                color: const Color(0xFF616A6B),
-              )),
-          TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.of(context).pop();
-                },
-              text: 'تسجيل دخول',
-              style: TextStyles.semiBold16.copyWith(
-                color: AppColors.primaryColor,
-              )),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.of(context).pop();
+              },
+            text: 'تسجيل دخول',
+          ),
         ],
       ),
       textAlign: TextAlign.center,

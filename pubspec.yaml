@@ -16,6 +16,7 @@ dependencies:
   google_nav_bar: ^5.0.7
   modal_progress_hud_nsn: ^0.5.1
   shared_preferences: ^2.3.3
+  smooth_page_indicator: ^1.2.0+3
   svg_flutter: ^0.0.1
 
 dev_dependencies:
@@ -28,15 +29,24 @@ flutter:
   assets:
     - assets/images/
   fonts:
-    - family: Cairo
+    - family: ins
       fonts:
-        - asset: assets/fonts/Cairo-Regular.ttf
-        - asset: assets/fonts/Cairo-Bold.ttf
+        - asset: assets/fonts/InstrumentSans-Regular.ttf
+        - asset: assets/fonts/InstrumentSans-Bold.ttf
           weight: 700
-        - asset: assets/fonts/Cairo-Medium.ttf
+        - asset: assets/fonts/InstrumentSans-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Cairo-SemiBold.ttf
+        - asset: assets/fonts/InstrumentSans-SemiBold.ttf
           weight: 600
+    - family: inter
+      fonts:
+        - asset: assets/fonts/Inter_24pt-Regular.ttf
+        - asset: assets/fonts/Inter_24pt-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Inter_24pt-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/Inter_24pt-SemiBold.ttf
+          weight: 600  
 flutter_assets:
   assets_path: assets/images/
   output_path: lib/core/utils/

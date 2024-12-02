@@ -7,7 +7,6 @@ AppBar buildAppBar({context, required String text, Widget? leading}) {
     scrolledUnderElevation: 0,
     title: Text(
       text,
-      style: TextStyles.bold19,
     ),
     actions: [
       leading ?? const SizedBox(),

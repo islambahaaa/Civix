@@ -13,25 +13,19 @@ class DontHaveAccount extends StatelessWidget {
     return Text.rich(
       TextSpan(
         children: [
+          const TextSpan(
+            text: 'لا تمتلك حساب؟',
+          ),
+          const TextSpan(
+            text: ' ',
+          ),
           TextSpan(
-              text: 'لا تمتلك حساب؟',
-              style: TextStyles.semiBold16.copyWith(
-                color: AppColors.lightGrayColor,
-              )),
-          TextSpan(
-              text: ' ',
-              style: TextStyles.semiBold16.copyWith(
-                color: const Color(0xFF616A6B),
-              )),
-          TextSpan(
-              recognizer: TapGestureRecognizer()
-                ..onTap = () {
-                  Navigator.of(context).pushNamed(SignUpView.routeName);
-                },
-              text: 'قم بإنشاء حساب',
-              style: TextStyles.semiBold16.copyWith(
-                color: AppColors.primaryColor,
-              )),
+            recognizer: TapGestureRecognizer()
+              ..onTap = () {
+                Navigator.of(context).pushNamed(SignUpView.routeName);
+              },
+            text: 'قم بإنشاء حساب',
+          ),
         ],
       ),
       textAlign: TextAlign.center,

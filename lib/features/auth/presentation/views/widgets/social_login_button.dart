@@ -33,7 +33,6 @@ class SocialLoginButton extends StatelessWidget {
             leading: SvgPicture.asset(image),
             title: Text(
               title,
-              style: TextStyles.semiBold16,
               textAlign: TextAlign.center,
             ),
           )),

@@ -18,7 +18,6 @@ class OrDivider extends StatelessWidget {
         ),
         Text(
           'أو',
-          style: TextStyles.semiBold16,
         ),
         SizedBox(
           width: 18,
