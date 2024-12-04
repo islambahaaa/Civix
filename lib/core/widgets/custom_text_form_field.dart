@@ -1,3 +1,4 @@
+import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:email_validator/email_validator.dart';
@@ -29,6 +30,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      textInputAction: TextInputAction.next,
       obscureText: obscureText,
       onSaved: onSaved,
       onChanged: onChanged,
@@ -37,6 +39,7 @@ class CustomTextFormField extends StatelessWidget {
           return 'This Field is required';
         } else if (isEmailform) {
           if (!EmailValidator.validate(value)) {
+            buildSnackBar(context, 'Enter a valid email');
             return 'Enter a valid email';
           }
         }

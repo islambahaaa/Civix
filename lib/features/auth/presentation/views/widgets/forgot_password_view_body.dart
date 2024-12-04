@@ -50,6 +50,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                 height: 16,
               ),
               CustomTextFormField(
+                isEmailform: true,
                 onSaved: (value) {
                   email = value!;
                 },
