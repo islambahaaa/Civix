@@ -22,7 +22,7 @@ class _PasswordFieldState extends State<PasswordField> {
   bool obscureText = true;
   @override
   Widget build(BuildContext context) {
-    return CustomTextFormField(
+    return CustomChangeBorderTextField(
       controller: widget.controller,
       obscureText: obscureText,
       onSaved: widget.onSaved,
