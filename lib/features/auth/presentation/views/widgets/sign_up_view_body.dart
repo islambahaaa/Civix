@@ -53,6 +53,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
             hintText: 'Email',
             prefixIcon: Icons.email,
             textInputType: TextInputType.emailAddress,
+            isEmailform: true,
           ),
           const SizedBox(
             height: 16,

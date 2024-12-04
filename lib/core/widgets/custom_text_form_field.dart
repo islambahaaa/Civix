@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -12,6 +13,7 @@ class CustomTextFormField extends StatelessWidget {
     this.onChanged,
     this.obscureText = false,
     this.prefixIcon,
+    this.isEmailform = false,
   });
   final String hintText;
   final TextInputType textInputType;
@@ -20,6 +22,7 @@ class CustomTextFormField extends StatelessWidget {
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
   final bool obscureText;
+  final bool isEmailform;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
@@ -29,6 +32,10 @@ class CustomTextFormField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'This Field is required';
+        } else if (isEmailform) {
+          if (!EmailValidator.validate(value)) {
+            return 'Enter a valid email';
+          }
         }
         return null;
       },

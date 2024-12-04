@@ -30,36 +30,42 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
           width: 16,
         ),
         Expanded(
-          child: Text.rich(
-            TextSpan(
-              children: [
-                TextSpan(
-                  text: 'By clicking Sign up, you Agree to our ',
-                  style: TextStyles.regular14inter
-                      .copyWith(color: AppColors.lightGrayColor),
-                ),
-                TextSpan(
-                  text: 'Terms',
-                  style: TextStyles.regular14inter
-                      .copyWith(color: AppColors.secondaryColor),
-                ),
-                const TextSpan(
-                  text: ' ',
-                ),
-                TextSpan(
-                  text: 'and',
-                  style: TextStyles.regular14inter
-                      .copyWith(color: AppColors.secondaryColor),
-                ),
-                const TextSpan(
-                  text: ' ',
-                ),
-                TextSpan(
-                  text: 'Conditions',
-                  style: TextStyles.regular14inter
-                      .copyWith(color: AppColors.secondaryColor),
-                ),
-              ],
+          child: GestureDetector(
+            onTap: () {
+              isTermsAccepted = !isTermsAccepted;
+              setState(() {});
+            },
+            child: Text.rich(
+              TextSpan(
+                children: [
+                  TextSpan(
+                    text: 'By clicking Sign up, you Agree to our ',
+                    style: TextStyles.regular14inter
+                        .copyWith(color: AppColors.lightGrayColor),
+                  ),
+                  TextSpan(
+                    text: 'Terms',
+                    style: TextStyles.regular14inter
+                        .copyWith(color: AppColors.secondaryColor),
+                  ),
+                  const TextSpan(
+                    text: ' ',
+                  ),
+                  TextSpan(
+                    text: 'and',
+                    style: TextStyles.regular14inter
+                        .copyWith(color: AppColors.secondaryColor),
+                  ),
+                  const TextSpan(
+                    text: ' ',
+                  ),
+                  TextSpan(
+                    text: 'Conditions',
+                    style: TextStyles.regular14inter
+                        .copyWith(color: AppColors.secondaryColor),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
