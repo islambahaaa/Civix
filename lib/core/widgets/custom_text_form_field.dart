@@ -14,11 +14,13 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     this.prefixIcon,
     this.isEmailform = false,
+    this.controller,
   });
   final String hintText;
   final TextInputType textInputType;
   final Widget? suffixIcon;
   final IconData? prefixIcon;
+  final TextEditingController? controller;
   final void Function(String?)? onSaved;
   final void Function(String?)? onChanged;
   final bool obscureText;
@@ -26,6 +28,7 @@ class CustomTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       obscureText: obscureText,
       onSaved: onSaved,
       onChanged: onChanged,

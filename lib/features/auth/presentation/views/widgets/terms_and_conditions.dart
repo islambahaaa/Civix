@@ -33,6 +33,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
           child: GestureDetector(
             onTap: () {
               isTermsAccepted = !isTermsAccepted;
+              widget.onChange(isTermsAccepted);
               setState(() {});
             },
             child: Text.rich(

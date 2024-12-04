@@ -8,9 +8,11 @@ class PasswordField extends StatefulWidget {
     this.onSaved,
     this.onchanged,
     this.hintText = 'Password',
+    this.controller,
   });
   final void Function(String?)? onSaved;
   final void Function(String?)? onchanged;
+  final TextEditingController? controller;
   final String hintText;
   @override
   State<PasswordField> createState() => _PasswordFieldState();
@@ -21,6 +23,7 @@ class _PasswordFieldState extends State<PasswordField> {
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      controller: widget.controller,
       obscureText: obscureText,
       onSaved: widget.onSaved,
       onChanged: widget.onchanged,
