@@ -69,6 +69,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                   password = value!;
                 },
               ),
+              const SizedBox(
+                height: 8,
+              ),
               PasswordValidator(
                 controller: passwordController,
                 onFailure: (value) {
@@ -123,6 +126,9 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 height: 26,
               ),
               const HaveAccountWidget(),
+              const SizedBox(
+                height: 8,
+              ),
             ]),
           )),
     );
