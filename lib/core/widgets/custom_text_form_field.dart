@@ -44,7 +44,6 @@ class CustomTextFormField extends StatelessWidget {
           return 'This Field is required';
         } else if (isEmailform) {
           if (!EmailValidator.validate(value)) {
-            buildSnackBar(context, 'Enter a valid email');
             return 'Enter a valid email';
           }
         }

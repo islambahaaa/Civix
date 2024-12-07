@@ -17,7 +17,7 @@ class OnBoardingPageView extends StatelessWidget {
         PageViewItem(
           isVisible: true,
           image: Assets.imagesPageview1,
-          subtitle: 'report your issues from the comfort of your own house',
+          subtitle: 'Report your issues from the comfort of your own house',
           title: Text(
             'COMFORT',
             style: TextStyles.bold28insturment
@@ -39,7 +39,7 @@ class OnBoardingPageView extends StatelessWidget {
         PageViewItem(
             isVisible: false,
             image: Assets.imagesPageview3,
-            subtitle: 'create a safe and peaceful neighborhood',
+            subtitle: 'Create a safe and peaceful neighborhood',
             title: Text(
               'SAFETY',
               style: TextStyles.bold28insturment
