@@ -133,6 +133,7 @@ class _CustomChangeBorderTextFieldState
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      isEmailform: widget.isEmailform,
       suffixIcon: widget.suffixIcon,
       prefixIcon: widget.prefixIcon,
       controller: widget.controller,

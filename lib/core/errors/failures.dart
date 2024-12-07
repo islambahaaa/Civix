@@ -34,6 +34,24 @@ class ServerFailure extends Failure {
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
+      if (response is String) {
+        return ServerFailure(response);
+      } else if (response is Map<String, dynamic>) {
+        if (response.containsKey('errors')) {
+          Map<String, dynamic> errors = response['errors'];
+          if (errors.containsKey('Email')) {
+            List<dynamic> errors = response['errors']['Email'];
+            String errmsg = errors.join(', ');
+            return ServerFailure(errmsg);
+          }
+          if (errors.containsKey('ConfirmedPassword')) {
+            List<dynamic> errors = response['errors']['ConfirmedPassword'];
+            String errmsg = errors.join(', ');
+            return ServerFailure(errmsg);
+          }
+          return ServerFailure(response.toString());
+        }
+      }
       return ServerFailure(response.toString());
     } else if (statusCode == 404) {
       return ServerFailure('Your request not found. Please try again!');
