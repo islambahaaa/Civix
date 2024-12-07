@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/errors/exceptions.dart';
 import 'package:civix_app/core/errors/failures.dart';
+import 'package:civix_app/core/services/api_auth_service.dart';
 import 'package:civix_app/core/services/database_service.dart';
 
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
@@ -11,34 +12,36 @@ import 'package:civix_app/core/utils/backend_endpoints.dart';
 import 'package:civix_app/features/auth/data/models/user_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../domain/repos/auth_repo.dart';
 
 class AuthRepoImpl implements AuthRepo {
   //final FirebaseAuthService firebaseAuthService;
-  final DatabaseService databaseService;
-  AuthRepoImpl({
-    required this.databaseService,
-  });
+  final ApiAuthService apiAuthService;
+
+  AuthRepoImpl({required this.apiAuthService});
+
   @override
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
-      String name, String email, String password) async {
+      String fname,
+      String lname,
+      String email,
+      String password,
+      String confirmedPassword) async {
     try {
-      // user = await firebaseAuthService.createUserWithEmailAndPassword(
-      //     email, password);
-      var userEntity = UserEntity(name: name, email: email, uId: 'user.uid');
-      await addUserData(user: userEntity);
+      var response = await apiAuthService.createUserWithEmailAndPassword(
+          fname, lname, email, password, confirmedPassword);
+      var userEntity = UserEntity(
+          fname: fname, lname: lname, email: email, token: response['token']);
       return right(userEntity);
-    } on CustomException catch (e) {
-      // await deleteUser(user);
-      return left(ServerFailure(e.message));
     } catch (e) {
-      // if (user != null) {
-      //   await firebaseAuthService.deleteUser();
-      // }
-      log('Exception in AuthRepoImpl.createUserWithEmailAndPassword: ${e.toString()}');
-
-      return left(ServerFailure('حدث خطأ غير متوقع'));
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
     }
   }
 
@@ -51,87 +54,44 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password) async {
-    try {
-      // var user =
-      //     await firebaseAuthService.signInWithEmailAndPassword(email, password);
-      var userEntity = await getUserData(uId: 'user.uid');
-      await saveUserData(user: userEntity);
-      return right(userEntity);
-    } on CustomException catch (e) {
-      return left(ServerFailure(e.message));
-    } catch (e) {
-      log('Exception in AuthRepoImpl.signInWithEmailAndPassword: ${e.toString()}');
-
-      return left(ServerFailure('حدث خطأ غير متوقع'));
-    }
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> signInWithGoogle() async {
-    // User? user;
+    return left(ServerFailure('حدث خطأ غير متوقع'));
     // try {
-    //   //user = await firebaseAuthService.signInWithGoogle();
-    //   //var userEntity = UserModel.fromFirebaseUser(user);
-    //   var isUserExist = await databaseService.isDataExists(
-    //       path: BackendEndpoints.isDataExists, docId: user.uid);
-    //   if (isUserExist) {
-    //     await getUserData(uId: user.uid);
-    //   } else {
-    //     await addUserData(user: userEntity);
-    //   }
+    //   // var user =
+    //   //     await firebaseAuthService.signInWithEmailAndPassword(email, password);
+    //   var userEntity = await getUserData(uId: 'user.uid');
     //   await saveUserData(user: userEntity);
     //   return right(userEntity);
+    // } on CustomException catch (e) {
+    //   return left(ServerFailure(e.message));
     // } catch (e) {
-    //   await deleteUser(user);
-    //   log('Exception in AuthRepoImpl.signInWithGoogle: ${e.toString()}');
+    //   log('Exception in AuthRepoImpl.signInWithEmailAndPassword: ${e.toString()}');
 
     //   return left(ServerFailure('حدث خطأ غير متوقع'));
     // }
-    return left(ServerFailure('حدث خطأ غير متوقع'));
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> signInWithFacebook() async {
-    // User? user;
-    // try {
-    //   user = await firebaseAuthService.signInWithFacebook();
-    //   var userEntity = UserModel.fromFirebaseUser(user);
-    //   var isUserExist = await databaseService.isDataExists(
-    //       path: BackendEndpoints.isDataExists, docId: user.uid);
-    //   if (isUserExist) {
-    //     await getUserData(uId: user.uid);
-    //   } else {
-    //     await addUserData(user: userEntity);
-    //   }
-    //   await saveUserData(user: userEntity);
-
-    //   return right(userEntity);
-    // } catch (e) {
-    //   await deleteUser(user);
-    //   log('Exception in AuthRepoImpl.signInWithFacebook: ${e.toString()}');
-    //   return left(ServerFailure('حدث خطأ غير متوقع'));
-    // }
-    return left(ServerFailure('حدث خطأ غير متوقع'));
-  }
-
-  @override
-  Future addUserData({required UserEntity user}) async {
-    await databaseService.addData(
-        path: BackendEndpoints.addUserData,
-        data: UserModel.fromUserEntity(user).toMap(),
-        docId: user.uId);
-  }
-
-  @override
-  Future<UserEntity> getUserData({required String uId}) async {
-    var data = await databaseService.getData(
-        path: BackendEndpoints.getUserData, docId: uId);
-    return UserModel.fromJson(data);
   }
 
   @override
   Future saveUserData({required UserEntity user}) async {
-    var jsonData = jsonEncode(UserModel.fromUserEntity(user).toMap());
-    await Prefs.setString(kUserData, jsonData);
+    // var jsonData = jsonEncode(UserModel.fromUserEntity(user));
+    // await Prefs.setString(kUserData, jsonData);
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> checkOtp(String email, String password) {
+    // TODO: implement checkOtp
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> newPassword(
+      String token, String email, String password, String confirmedPassword) {
+    // TODO: implement newPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, UserEntity>> sendOtp(String email) {
+    // TODO: implement sendOtp
+    throw UnimplementedError();
   }
 }

@@ -107,10 +107,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       } else if (password != confirmpass) {
                         buildSnackBar(context, 'Password does not match');
                       } else if (isTermsAccepted) {
-                        // context
-                        //     .read<SignupCubit>()
-                        //     .createUserWithEmailAndPassword(email, password, name);
-                        buildSnackBar(context, 'Success');
+                        context
+                            .read<SignupCubit>()
+                            .createUserWithEmailAndPassword(
+                                name.split(' ')[0],
+                                name.split(' ')[1],
+                                email,
+                                password,
+                                confirmpass);
                       } else {
                         buildSnackBar(
                             context, 'Please accept terms and conditions');

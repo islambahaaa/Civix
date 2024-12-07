@@ -1,33 +1,25 @@
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  UserModel({required super.name, required super.email, required super.uId});
-  // factory UserModel.fromFirebaseUser(User user) {
-  //   return UserModel(
-  //     name: user.displayName ?? '',
-  //     email: user.email ?? '',
-  //     uId: user.uid,
-  //   );
-  // }
+  UserModel(
+      {required super.fname,
+      required super.lname,
+      required super.email,
+      required super.token});
   factory UserModel.fromUserEntity(UserEntity user) {
     return UserModel(
-      name: user.name,
+      fname: user.fname,
+      lname: user.lname,
       email: user.email,
-      uId: user.uId,
+      token: user.token,
     );
   }
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      name: json['name'],
+      fname: json['fullName'].split(' ')[0],
+      lname: json['fullName'].split(' ')[1],
       email: json['email'],
-      uId: json['uId'],
+      token: json['token'],
     );
-  }
-  toMap() {
-    return {
-      'name': name,
-      'email': email,
-      'uId': uId,
-    };
   }
 }
