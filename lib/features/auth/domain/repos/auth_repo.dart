@@ -12,9 +12,9 @@ abstract class AuthRepo {
 
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password);
-  Future<Either<Failure, UserEntity>> sendOtp(String email);
-  Future<Either<Failure, UserEntity>> checkOtp(String email, String otp);
-  Future<Either<Failure, UserEntity>> newPassword(
+  Future<Either<Failure, String>> sendOtp(String email);
+  Future<Either<Failure, String>> checkOtp(String email, String otp);
+  Future<Either<Failure, String>> newPassword(
     String token,
     String email,
     String password,

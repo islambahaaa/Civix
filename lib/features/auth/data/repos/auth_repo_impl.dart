@@ -54,44 +54,75 @@ class AuthRepoImpl implements AuthRepo {
   @override
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password) async {
-    return left(ServerFailure('حدث خطأ غير متوقع'));
-    // try {
-    //   // var user =
-    //   //     await firebaseAuthService.signInWithEmailAndPassword(email, password);
-    //   var userEntity = await getUserData(uId: 'user.uid');
-    //   await saveUserData(user: userEntity);
-    //   return right(userEntity);
-    // } on CustomException catch (e) {
-    //   return left(ServerFailure(e.message));
-    // } catch (e) {
-    //   log('Exception in AuthRepoImpl.signInWithEmailAndPassword: ${e.toString()}');
+    try {
+      var response =
+          await apiAuthService.signInWithEmailAndPassword(email, password);
+      var userEntity = UserEntity(
+          fname: response['fullName'].split(' ')[0],
+          lname: response['fullName'].split(' ')[1],
+          email: email,
+          token: response['token']);
+      return right(userEntity);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
+  }
 
-    //   return left(ServerFailure('حدث خطأ غير متوقع'));
-    // }
+  @override
+  Future<Either<Failure, String>> checkOtp(String email, String otp) async {
+    try {
+      var response = await apiAuthService.checkOtp(email, otp);
+      return right(response['token']);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> newPassword(String token, String email,
+      String password, String confirmedPassword) async {
+    try {
+      var response = await apiAuthService.newPassword(
+          token, email, password, confirmedPassword);
+      return right(response['message']);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, String>> sendOtp(String email) async {
+    try {
+      var response = await apiAuthService.sendOtp(email);
+      return right(response.toString());
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
   }
 
   @override
   Future saveUserData({required UserEntity user}) async {
     // var jsonData = jsonEncode(UserModel.fromUserEntity(user));
     // await Prefs.setString(kUserData, jsonData);
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> checkOtp(String email, String password) {
-    // TODO: implement checkOtp
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> newPassword(
-      String token, String email, String password, String confirmedPassword) {
-    // TODO: implement newPassword
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<Either<Failure, UserEntity>> sendOtp(String email) {
-    // TODO: implement sendOtp
-    throw UnimplementedError();
   }
 }

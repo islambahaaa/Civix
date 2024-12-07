@@ -9,20 +9,19 @@ import 'package:svg_flutter/svg_flutter.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
-  const CustomHomeAppBar({super.key});
-
+  const CustomHomeAppBar({super.key, required this.fname, required this.lname});
+  final String fname;
+  final String lname;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
       leading: SvgPicture.asset(Assets.imagesProfileImage),
       title: const Text(
-        'صباح الخير !..',
-        textAlign: TextAlign.right,
+        'Hello,',
       ),
-      subtitle: const Text(
-        'getUser().name',
-        textAlign: TextAlign.right,
+      subtitle: Text(
+        "$fname $lname",
       ),
       trailing: const NotificationWidget(),
     );

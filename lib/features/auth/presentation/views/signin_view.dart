@@ -14,9 +14,14 @@ class SigninView extends StatelessWidget {
   static const String routeName = 'login';
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: paddingAppbar(text: 'Log In'),
-      body: const SigninViewBody(),
+    return BlocProvider(
+      create: (context) => SigninCubit(
+        getIt.get<AuthRepo>(),
+      ),
+      child: Scaffold(
+        appBar: paddingAppbar(text: 'Log In'),
+        body: const SigninViewBodyBlocConsumer(),
+      ),
     );
   }
 }

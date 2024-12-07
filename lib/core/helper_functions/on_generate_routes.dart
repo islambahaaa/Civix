@@ -1,3 +1,4 @@
+import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
@@ -26,7 +27,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case HomeView.routeName:
-      return MaterialPageRoute(builder: (context) => const HomeView());
+      final UserEntity user = settings.arguments as UserEntity;
+      return MaterialPageRoute(
+          builder: (context) => HomeView(
+                user: user,
+              ));
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }
