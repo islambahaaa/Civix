@@ -25,7 +25,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final TextEditingController passwordController = TextEditingController();
 
-  late String email, password, confirmpass, name;
+  late String email, password, confirmpass, fname, lname;
   late bool isTermsAccepted = false;
   late bool isPasswordValid;
   @override
@@ -41,13 +41,29 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 24,
               ),
-              CustomChangeBorderTextField(
-                  onSaved: (value) {
-                    name = value!;
-                  },
-                  hintText: 'Name',
-                  prefixIcon: Icons.person,
-                  textInputType: TextInputType.name),
+              Row(children: [
+                Flexible(
+                  child: CustomChangeBorderTextField(
+                      onSaved: (value) {
+                        fname = value!;
+                      },
+                      hintText: 'First Name',
+                      prefixIcon: Icons.person,
+                      textInputType: TextInputType.name),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Flexible(
+                  child: CustomChangeBorderTextField(
+                      onSaved: (value) {
+                        lname = value!;
+                      },
+                      hintText: 'Last Name',
+                      prefixIcon: Icons.person,
+                      textInputType: TextInputType.name),
+                ),
+              ]),
               const SizedBox(
                 height: 16,
               ),
@@ -110,11 +126,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                         context
                             .read<SignupCubit>()
                             .createUserWithEmailAndPassword(
-                                name.split(' ')[0],
-                                name.split(' ')[1],
-                                email,
-                                password,
-                                confirmpass);
+                                fname, lname, email, password, confirmpass);
                       } else {
                         buildSnackBar(
                             context, 'Please accept terms and conditions');
