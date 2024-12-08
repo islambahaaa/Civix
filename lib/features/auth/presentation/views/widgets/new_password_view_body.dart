@@ -4,12 +4,12 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/password_field.dart';
+import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class NewPasswordViewBody extends StatefulWidget {
   const NewPasswordViewBody({super.key});
-
   @override
   State<NewPasswordViewBody> createState() => _NewPasswordViewBodyState();
 }

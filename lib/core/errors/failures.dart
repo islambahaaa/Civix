@@ -39,7 +39,10 @@ class ServerFailure extends Failure {
         return ServerFailure(response);
       } else if (response is Map<String, dynamic>) {
         if (response.containsKey('errors')) {
-          Map<String, dynamic> errors = response['errors'];
+          Map<String, dynamic> errors = response['errors'][0];
+          if (errors.containsKey('description')) {
+            return ServerFailure(errors['description']);
+          }
           if (errors.containsKey('Email')) {
             List<dynamic> errors = response['errors']['Email'];
             String errmsg = errors.join(', ');
