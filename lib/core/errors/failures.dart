@@ -39,21 +39,30 @@ class ServerFailure extends Failure {
         return ServerFailure(response);
       } else if (response is Map<String, dynamic>) {
         if (response.containsKey('errors')) {
-          Map<String, dynamic> errors = response['errors'][0];
-          if (errors.containsKey('description')) {
-            return ServerFailure(errors['description']);
+          if (response['errors'] is Map<String, dynamic>) {
+            Map<String, dynamic> errors = response['errors'];
+            if (errors.containsKey('NewPassword')) {
+              List<dynamic> errors = response['errors']['NewPassword'];
+              String errmsg = errors.join(', ');
+              return ServerFailure(errmsg);
+            }
+            if (errors.containsKey('Email')) {
+              List<dynamic> errors = response['errors']['Email'];
+              String errmsg = errors.join(', ');
+              return ServerFailure(errmsg);
+            }
+            if (errors.containsKey('ConfirmedPassword')) {
+              List<dynamic> errors = response['errors']['ConfirmedPassword'];
+              String errmsg = errors.join(', ');
+              return ServerFailure(errmsg);
+            }
+            return ServerFailure(response.toString());
           }
-          if (errors.containsKey('Email')) {
-            List<dynamic> errors = response['errors']['Email'];
-            String errmsg = errors.join(', ');
-            return ServerFailure(errmsg);
-          }
-          if (errors.containsKey('ConfirmedPassword')) {
-            List<dynamic> errors = response['errors']['ConfirmedPassword'];
-            String errmsg = errors.join(', ');
-            return ServerFailure(errmsg);
-          }
-          return ServerFailure(response.toString());
+        }
+        Map<String, dynamic> listedErrors = response['errors'][0];
+
+        if (listedErrors.containsKey('description')) {
+          return ServerFailure(listedErrors['description']);
         }
       }
       return ServerFailure(response.toString());

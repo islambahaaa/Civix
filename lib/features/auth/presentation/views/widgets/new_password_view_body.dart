@@ -5,11 +5,14 @@ import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/password_field.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
+import 'package:civix_app/features/auth/presentation/cubits/new_password/new_password_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class NewPasswordViewBody extends StatefulWidget {
-  const NewPasswordViewBody({super.key});
+  const NewPasswordViewBody({super.key, required this.user});
+  final UserEntity user;
   @override
   State<NewPasswordViewBody> createState() => _NewPasswordViewBodyState();
 }
@@ -63,12 +66,11 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                       if (password != confirmpass) {
                         buildSnackBar(context, 'Password does not match');
                       } else {
-                        // TODO: implement
-                        _showCongratulationsDialog(context);
-                        Future.delayed(const Duration(seconds: 5), () {
-                          Navigator.of(context).pop();
-                          Navigator.of(context).pop();
-                        });
+                        context.read<NewPasswordCubit>().newPassword(
+                            widget.user.token,
+                            widget.user.email,
+                            password,
+                            confirmpass);
                       }
                     } else {
                       setState(() {
@@ -83,44 +85,4 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
       ),
     );
   }
-}
-
-void _showCongratulationsDialog(BuildContext context) {
-  showDialog(
-      context: context,
-      barrierDismissible: false, // Prevent dismissing by tapping outside
-      builder: (BuildContext context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Stack(alignment: Alignment.center, children: [
-                  SvgPicture.asset(Assets.imagesVerified),
-                  SvgPicture.asset(Assets.imagesBubbles),
-                ]),
-                const SizedBox(height: 20),
-                const Text(
-                  'Congratulations!',
-                  style: TextStyles.semibold24inter,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                const Text(
-                  'Password Reset Successful\nYou’ll be redirected to the login screen now',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        );
-      });
 }
