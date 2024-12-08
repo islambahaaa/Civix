@@ -22,7 +22,7 @@ class ApiAuthService {
       "confirmedPassword": confirmedPassword,
       "phoneNumber": "011111111",
     });
-    return response;
+    return response.data;
   }
 
   Future<Map<String, dynamic>> signInWithEmailAndPassword(
@@ -31,14 +31,14 @@ class ApiAuthService {
       "email": email,
       "password": password,
     });
-    return response;
+    return response.data;
   }
 
-  Future<Map<String, dynamic>> sendOtp(String email) async {
+  Future<String> sendOtp(String email) async {
     var response = await dio.post(ApiConstants.sendOtp, {
       "email": email,
     });
-    return response;
+    return response.data;
   }
 
   Future<Map<String, dynamic>> checkOtp(String email, String otp) async {
@@ -46,7 +46,7 @@ class ApiAuthService {
       "email": email,
       "inputOtp": otp,
     });
-    return response;
+    return response.data;
   }
 
   Future<Map<String, dynamic>> newPassword(String token, String email,
@@ -57,6 +57,6 @@ class ApiAuthService {
       "newPassword": password,
       "confirmedPassword": confirmedPassword,
     });
-    return response;
+    return response.data;
   }
 }

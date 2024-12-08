@@ -1,9 +1,11 @@
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/features/auth/presentation/cubits/send_otp_cubit/cubit/send_otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
 import 'package:flutter/material.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 import '../../../../../core/widgets/custom_text_form_field.dart';
@@ -65,12 +67,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    // context
-                    //     .read<SigninCubit>()
-                    //     .signInWithEmailAndPassword(email, password);
-
-                    Navigator.of(context)
-                        .pushReplacementNamed(OtpView.routeName);
+                    context.read<SendOtpCubit>().sendOtp(email);
                   } else {
                     setState(() {
                       autovalidateMode = AutovalidateMode.always;

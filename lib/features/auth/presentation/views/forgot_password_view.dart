@@ -1,6 +1,11 @@
+import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/widgets/custom_app_bar.dart';
+import 'package:civix_app/features/auth/domain/repos/auth_repo.dart';
+import 'package:civix_app/features/auth/presentation/cubits/send_otp_cubit/cubit/send_otp_cubit.dart';
+import 'package:civix_app/features/auth/presentation/views/widgets/forgot_password_view_bloc_consumer.dart';
 import 'package:civix_app/features/auth/presentation/views/widgets/forgot_password_view_body.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({super.key});
@@ -8,9 +13,14 @@ class ForgotPasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: paddingAppbar(text: 'Forgot Password ?', context: context),
-      body: const ForgotPasswordViewBody(),
+    return BlocProvider(
+      create: (context) => SendOtpCubit(
+        getIt.get<AuthRepo>(),
+      ),
+      child: Scaffold(
+        appBar: paddingAppbar(text: 'Forgot Password ?', context: context),
+        body: const ForgotPasswordBlocConsumer(),
+      ),
     );
   }
 }

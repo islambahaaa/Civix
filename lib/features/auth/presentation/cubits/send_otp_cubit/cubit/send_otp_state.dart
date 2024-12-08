@@ -8,9 +8,9 @@ final class SendOtpInitial extends SendOtpState {}
 final class SendOtpLoading extends SendOtpState {}
 
 final class SendOtpSuccess extends SendOtpState {
-  final String response;
+  final String email;
 
-  SendOtpSuccess(this.response);
+  SendOtpSuccess(this.email);
 }
 
 final class SendOtpFailure extends SendOtpState {

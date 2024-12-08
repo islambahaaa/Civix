@@ -5,17 +5,19 @@ import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
+import 'package:civix_app/features/auth/presentation/cubits/send_otp_cubit/cubit/send_otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:pinput/pinput.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class OtpViewBody extends StatefulWidget {
-  const OtpViewBody({super.key});
-
+  const OtpViewBody({super.key, required this.email});
+  final String email;
   @override
   State<OtpViewBody> createState() => _OtpViewBodyState();
 }
@@ -59,7 +61,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
   }
 
   void _resendCode() {
-    // Logic to resend OTP goes here
+    BlocProvider.of<SendOtpCubit>(context).sendOtp(widget.email);
     _startCountdown(); // Restart the countdown
   }
 
@@ -152,7 +154,7 @@ class OtpForm extends StatelessWidget {
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
       ],
-      length: 4,
+      length: 6,
       defaultPinTheme: defaultPinTheme,
       focusedPinTheme: defaultPinTheme.copyDecorationWith(
         border: Border.all(color: AppColors.primaryColor),
