@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/widgets/custom_progress_hud.dart';
-import 'package:civix_app/features/auth/presentation/cubits/send_otp_cubit/cubit/send_otp_cubit.dart';
+import 'package:civix_app/features/auth/presentation/cubits/otp_cubit/otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
 import 'package:civix_app/features/auth/presentation/views/widgets/forgot_password_view_body.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class ForgotPasswordBlocConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SendOtpCubit, SendOtpState>(
+    return BlocConsumer<OtpCubit, OtpState>(
       listener: (context, state) {
         if (state is SendOtpSuccess) {
           Navigator.of(context).pushReplacementNamed(

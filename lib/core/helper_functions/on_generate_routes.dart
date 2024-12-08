@@ -22,7 +22,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
                 email: email,
               ));
     case NewPasswordView.routeName:
-      return MaterialPageRoute(builder: (context) => const NewPasswordView());
+      final UserEntity userEntity = settings.arguments as UserEntity;
+      return MaterialPageRoute(
+          builder: (context) => NewPasswordView(
+                userEntity: userEntity,
+              ));
     case ForgotPasswordView.routeName:
       return MaterialPageRoute(
           builder: (context) => const ForgotPasswordView());

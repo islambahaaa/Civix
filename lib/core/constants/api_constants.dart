@@ -4,6 +4,6 @@ class ApiConstants {
   static const String register = 'register';
   static const String login = 'login';
   static const String sendOtp = 'password-reset';
-  static const String checkOtp = 'reset-password';
-  static const String newPassword = 'check-otp';
+  static const String checkOtp = 'check-otp';
+  static const String newPassword = 'reset-password';
 }

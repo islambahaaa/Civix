@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
-import 'package:civix_app/features/auth/presentation/cubits/send_otp_cubit/cubit/send_otp_cubit.dart';
+import 'package:civix_app/features/auth/presentation/cubits/otp_cubit/otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,6 +19,7 @@ import '../../../../../core/widgets/custom_text_form_field.dart';
 class OtpViewBody extends StatefulWidget {
   const OtpViewBody({super.key, required this.email});
   final String email;
+
   @override
   State<OtpViewBody> createState() => _OtpViewBodyState();
 }
@@ -61,9 +63,11 @@ class _OtpViewBodyState extends State<OtpViewBody> {
   }
 
   void _resendCode() {
-    BlocProvider.of<SendOtpCubit>(context).sendOtp(widget.email);
+    BlocProvider.of<OtpCubit>(context).sendOtp(widget.email);
     _startCountdown(); // Restart the countdown
   }
+
+  late String otp;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +100,12 @@ class _OtpViewBodyState extends State<OtpViewBody> {
               const SizedBox(
                 height: 36,
               ),
-              const OtpForm(),
+              OtpForm(
+                onCompleted: (value) {
+                  otp = value;
+                  log(otp);
+                },
+              ),
               const SizedBox(
                 height: 64,
               ),
@@ -121,8 +130,8 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 child: CustomButton(
                     onPressed: () {
                       stopTimer();
-                      Navigator.pushReplacementNamed(
-                          context, NewPasswordView.routeName);
+                      BlocProvider.of<OtpCubit>(context)
+                          .checkOtp(widget.email, otp);
                     },
                     text: 'Verify'),
               ),
@@ -135,8 +144,8 @@ class _OtpViewBodyState extends State<OtpViewBody> {
 }
 
 class OtpForm extends StatelessWidget {
-  const OtpForm({super.key});
-
+  const OtpForm({super.key, this.onCompleted});
+  final void Function(String)? onCompleted;
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -160,7 +169,7 @@ class OtpForm extends StatelessWidget {
         border: Border.all(color: AppColors.primaryColor),
         borderRadius: BorderRadius.circular(8),
       ),
-      onCompleted: (value) => debugPrint(value),
+      onCompleted: onCompleted,
     );
   }
 }
