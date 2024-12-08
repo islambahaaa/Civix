@@ -21,7 +21,8 @@ class OtpViewBodyBlocConsumer extends StatelessWidget {
             email: email,
             token: state.token,
           );
-          Navigator.pushReplacementNamed(context, NewPasswordView.routeName);
+          Navigator.pushReplacementNamed(context, NewPasswordView.routeName,
+              arguments: userEntity);
         }
         if (state is CheckOtpFailure) {
           buildSnackBar(context, state.message);
