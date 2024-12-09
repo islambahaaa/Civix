@@ -18,62 +18,25 @@ import 'package:svg_flutter/svg_flutter.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 
 class OtpViewBody extends StatefulWidget {
-  const OtpViewBody({super.key, required this.email});
+  const OtpViewBody(
+      {super.key,
+      required this.email,
+      required this.countdown,
+      required this.resendCode});
   final String email;
+  final int countdown;
+  final VoidCallback resendCode;
 
   @override
   State<OtpViewBody> createState() => _OtpViewBodyState();
 }
 
+String? otp;
+
 class _OtpViewBodyState extends State<OtpViewBody> {
-  int _countdown = 30; // Countdown in seconds
-  late Timer timer;
-
-  @override
-  void initState() {
-    super.initState();
-    _startCountdown();
-  }
-
-  @override
-  void dispose() {
-    timer.cancel(); // Cancel the timer when the widget is disposed
-    super.dispose();
-  }
-
-  void _startCountdown() {
-    setState(() {
-      _countdown = 30;
-    });
-
-    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      setState(() {
-        if (_countdown > 0) {
-          _countdown--;
-        } else {
-          timer.cancel();
-        }
-      });
-    });
-  }
-
-  stopTimer() {
-    if (timer.isActive) {
-      timer.cancel();
-    }
-  }
-
-  void _resendCode() {
-    BlocProvider.of<OtpCubit>(context).sendOtp(widget.email);
-    _startCountdown(); // Restart the countdown
-  }
-
-  String? otp;
-  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: const ValueKey('otpForm'),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: SizedBox(
         width: double.infinity,
@@ -103,6 +66,11 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 height: 36,
               ),
               OtpForm(
+                onChanged: (value) {
+                  if (value.length < 6) {
+                    otp = value;
+                  }
+                },
                 onCompleted: (value) {
                   otp = value;
                   log(otp!);
@@ -117,10 +85,10 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                     .copyWith(color: AppColors.lightGrayColor),
               ),
               GestureDetector(
-                onTap: _countdown == 0 ? _resendCode : null,
+                onTap: widget.countdown == 0 ? widget.resendCode : null,
                 child: Text(
-                    _countdown > 0
-                        ? 'Resend code in $_countdown seconds'
+                    widget.countdown > 0
+                        ? 'Resend code in ${widget.countdown} seconds'
                         : 'Resend Code',
                     style: TextStyles.bold15inter),
               ),
@@ -131,11 +99,11 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: CustomButton(
                     onPressed: () {
-                      if (otp == null) {
+                      if (otp == null || otp!.length < 6) {
                         buildSnackBar(context, 'Otp must be 6 digits');
                         return;
                       }
-                      stopTimer();
+
                       BlocProvider.of<OtpCubit>(context)
                           .checkOtp(widget.email, otp!);
                     },
@@ -150,8 +118,9 @@ class _OtpViewBodyState extends State<OtpViewBody> {
 }
 
 class OtpForm extends StatelessWidget {
-  const OtpForm({super.key, this.onCompleted});
+  const OtpForm({super.key, this.onCompleted, this.onChanged});
   final void Function(String)? onCompleted;
+  final void Function(String)? onChanged;
   @override
   Widget build(BuildContext context) {
     final defaultPinTheme = PinTheme(
@@ -165,6 +134,7 @@ class OtpForm extends StatelessWidget {
       ),
     );
     return Pinput(
+      onChanged: onChanged,
       autofocus: true,
       inputFormatters: [
         FilteringTextInputFormatter.digitsOnly,
