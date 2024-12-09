@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -67,11 +68,12 @@ class _OtpViewBodyState extends State<OtpViewBody> {
     _startCountdown(); // Restart the countdown
   }
 
-  late String otp;
-
+  String? otp;
+  final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Padding(
+      key: const ValueKey('otpForm'),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: SizedBox(
         width: double.infinity,
@@ -103,7 +105,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
               OtpForm(
                 onCompleted: (value) {
                   otp = value;
-                  log(otp);
+                  log(otp!);
                 },
               ),
               const SizedBox(
@@ -129,9 +131,13 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 padding: const EdgeInsets.symmetric(horizontal: 9),
                 child: CustomButton(
                     onPressed: () {
+                      if (otp == null) {
+                        buildSnackBar(context, 'Otp must be 6 digits');
+                        return;
+                      }
                       stopTimer();
                       BlocProvider.of<OtpCubit>(context)
-                          .checkOtp(widget.email, otp);
+                          .checkOtp(widget.email, otp!);
                     },
                     text: 'Verify'),
               ),
