@@ -56,6 +56,11 @@ class ServerFailure extends Failure {
               String errmsg = errors.join(', ');
               return ServerFailure(errmsg);
             }
+            if (errors.containsKey('InputOtp')) {
+              List<dynamic> errors = response['errors']['ConfirmedPassword'];
+              String errmsg = errors.join(', ');
+              return ServerFailure(errmsg);
+            }
             return ServerFailure(response.toString());
           }
         }

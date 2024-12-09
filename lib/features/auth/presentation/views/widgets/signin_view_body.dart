@@ -43,6 +43,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 height: 16,
               ),
               CustomChangeBorderTextField(
+                isEmailform: true,
                 onSaved: (value) {
                   email = value!;
                 },
