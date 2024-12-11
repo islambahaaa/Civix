@@ -5,6 +5,7 @@ import 'package:civix_app/features/on_boarding/presentation/views/widgets/page_v
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lottie/lottie.dart';
 
 class OnBoardingPageView extends StatelessWidget {
   const OnBoardingPageView({super.key, required this.pageController});
@@ -16,7 +17,7 @@ class OnBoardingPageView extends StatelessWidget {
       children: [
         PageViewItem(
           isVisible: true,
-          image: Assets.imagesPageview1,
+          image: Assets.animationsCaptureAnimation,
           subtitle: 'Report your issues from the comfort of your own house',
           title: Text(
             'COMFORT',
@@ -26,7 +27,7 @@ class OnBoardingPageView extends StatelessWidget {
         ),
         PageViewItem(
           isVisible: true,
-          image: Assets.imagesPageview2,
+          image: Assets.animationsFixAnimation,
           subtitle:
               'Providing you with the trusted authorities to fix your issues ',
           title: Text(
@@ -38,7 +39,7 @@ class OnBoardingPageView extends StatelessWidget {
         ),
         PageViewItem(
             isVisible: false,
-            image: Assets.imagesPageview3,
+            image: Assets.animationsOnBoarding33,
             subtitle: 'Create a safe and peaceful neighborhood',
             title: Text(
               'SAFETY',

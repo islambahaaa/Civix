@@ -23,13 +23,13 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Image.asset(Assets.imagesLogo),
+      child: Image.asset(Assets.animationsA),
     );
   }
 
   void excuiteNavigation() {
     bool isOnBoardingSeen = Prefs.getBool(kIsOnBoardingSeen);
-    Future.delayed(const Duration(seconds: 2), () {
+    Future.delayed(const Duration(milliseconds: 1600), () {
       if (false) {
         // var isLoggedIn = FirebaseAuthService().isLoggedIn();
         //if (isLoggedIn) {

@@ -3,6 +3,7 @@ import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -28,7 +29,7 @@ class PageViewItem extends StatelessWidget {
         child: Column(
           children: [
             Center(
-                child: SvgPicture.asset(
+                child: Lottie.asset(
               image,
               height: MediaQuery.of(context).size.height * 0.4,
             )),

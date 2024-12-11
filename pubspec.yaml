@@ -14,10 +14,10 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
-  
   flutter_pw_validator: ^1.6.0
   get_it: ^8.0.2
   google_nav_bar: ^5.0.7
+  lottie: ^3.2.0
   modal_progress_hud_nsn: ^0.5.1
   pinput: ^5.0.0
   shared_preferences: ^2.3.3
@@ -25,10 +25,10 @@ dependencies:
   svg_flutter: ^0.0.1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.2
   flutter_lints: ^4.0.0
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.2
 flutter_launcher_icons:
   android: true
   ios: true
@@ -39,6 +39,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/animations/
   fonts:
     - family: ins
       fonts:
@@ -59,7 +60,7 @@ flutter:
         - asset: assets/fonts/Inter_24pt-SemiBold.ttf
           weight: 600
 flutter_assets:
-  assets_path: assets/images/
+  assets_path: assets/
   output_path: lib/core/utils/
   filename: app_images.dart
   field_prefix: null
