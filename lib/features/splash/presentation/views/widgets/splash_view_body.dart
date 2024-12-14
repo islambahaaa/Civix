@@ -1,6 +1,7 @@
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_images.dart';
+import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
@@ -30,12 +31,12 @@ class _SplashViewBodyState extends State<SplashViewBody> {
   void excuiteNavigation() {
     bool isOnBoardingSeen = Prefs.getBool(kIsOnBoardingSeen);
     Future.delayed(const Duration(milliseconds: 1600), () {
-      if (false) {
+      if (isOnBoardingSeen) {
         // var isLoggedIn = FirebaseAuthService().isLoggedIn();
         //if (isLoggedIn) {
-        Navigator.pushReplacementNamed(context, HomeView.routeName);
+        // Navigator.pushReplacementNamed(context, HomeView.routeName);
         //} else {
-        //  Navigator.pushReplacementNamed(context, SigninView.routeName);
+        Navigator.pushReplacementNamed(context, SigninView.routeName);
         //}
       } else {
         Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
