@@ -22,4 +22,11 @@ class UserModel extends UserEntity {
       token: json['token'],
     );
   }
+  Map<String, dynamic> toJson() {
+    return {
+      'fullName': '$fname $lname',
+      'email': email,
+      'token': token,
+    };
+  }
 }

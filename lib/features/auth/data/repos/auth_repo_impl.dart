@@ -57,11 +57,8 @@ class AuthRepoImpl implements AuthRepo {
     try {
       var response =
           await apiAuthService.signInWithEmailAndPassword(email, password);
-      var userEntity = UserEntity(
-          fname: response['fullName'].split(' ')[0],
-          lname: response['fullName'].split(' ')[1],
-          email: email,
-          token: response['token']);
+      var userEntity = UserModel.fromJson(response);
+      saveUserData(user: userEntity);
       return right(userEntity);
     } catch (e) {
       if (e is DioException) {
@@ -122,7 +119,8 @@ class AuthRepoImpl implements AuthRepo {
 
   @override
   Future saveUserData({required UserEntity user}) async {
-    // var jsonData = jsonEncode(UserModel.fromUserEntity(user));
-    // await Prefs.setString(kUserData, jsonData);
+    final userModel = UserModel.fromUserEntity(user);
+    var jsonData = jsonEncode(userModel.toJson());
+    await Prefs.setString(kUserData, jsonData);
   }
 }

@@ -12,7 +12,7 @@ class Prefs {
   }
 
   static getString(String key) {
-    return _instance.getString(key) ?? "";
+    return _instance.getString(key);
   }
 
   static setBool(String key, bool value) {
@@ -21,5 +21,9 @@ class Prefs {
 
   static getBool(String key) {
     return _instance.getBool(key) ?? false;
+  }
+
+  static remove(String key) {
+    _instance.remove(key);
   }
 }

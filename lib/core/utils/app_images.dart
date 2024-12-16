@@ -14,18 +14,6 @@ class Assets {
   /// assets/animations/fix_animation.json
   static const String animationsFixAnimation = "assets/animations/fix_animation.json";
 
-  /// Assets for animationsOnBoarding1
-  /// assets/animations/on_boarding1.json
-  static const String animationsOnBoarding1 = "assets/animations/on_boarding1.json";
-
-  /// Assets for animationsOnBoarding2
-  /// assets/animations/on_boarding2.json
-  static const String animationsOnBoarding2 = "assets/animations/on_boarding2.json";
-
-  /// Assets for animationsOnBoarding3
-  /// assets/animations/on_boarding3.json
-  static const String animationsOnBoarding3 = "assets/animations/on_boarding3.json";
-
   /// Assets for animationsOnBoarding33
   /// assets/animations/on_boarding33.json
   static const String animationsOnBoarding33 = "assets/animations/on_boarding33.json";
@@ -86,6 +74,10 @@ class Assets {
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
 
+  /// Assets for imagesLogout
+  /// assets/images/logout.svg
+  static const String imagesLogout = "assets/images/logout.svg";
+
   /// Assets for imagesNotification
   /// assets/images/notification.svg
   static const String imagesNotification = "assets/images/notification.svg";
@@ -107,8 +99,8 @@ class Assets {
   static const String imagesPageview3 = "assets/images/pageview3.svg";
 
   /// Assets for imagesProfileImage
-  /// assets/images/profile_image.svg
-  static const String imagesProfileImage = "assets/images/profile_image.svg";
+  /// assets/images/profile_image.png
+  static const String imagesProfileImage = "assets/images/profile_image.png";
 
   /// Assets for imagesSearchIcon
   /// assets/images/search_icon.svg

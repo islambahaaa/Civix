@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -36,6 +37,60 @@ void showCongratulationsDialog(BuildContext context) {
                   ),
                   textAlign: TextAlign.center,
                 ),
+              ],
+            ),
+          ),
+        );
+      });
+}
+
+void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
+  showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Are You Sure!',
+                  style: TextStyles.semibold24inter,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  'Are you sure you want to logout?',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: CustomButton(
+                        text: 'No',
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: CustomButton(
+                        text: 'Yes',
+                        onPressed: onYesPressed,
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),

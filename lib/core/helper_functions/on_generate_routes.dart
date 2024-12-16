@@ -37,11 +37,7 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case HomeView.routeName:
-      final UserEntity user = settings.arguments as UserEntity;
-      return MaterialPageRoute(
-          builder: (context) => HomeView(
-                user: user,
-              ));
+      return MaterialPageRoute(builder: (context) => const HomeView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }
