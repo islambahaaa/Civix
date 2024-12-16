@@ -73,7 +73,6 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 },
                 onCompleted: (value) {
                   otp = value;
-                  log(otp!);
                 },
               ),
               const SizedBox(

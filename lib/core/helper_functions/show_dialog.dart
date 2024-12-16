@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
@@ -75,17 +76,30 @@ void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
                 Row(
                   children: [
                     Expanded(
-                      child: CustomButton(
-                        text: 'No',
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
+                      child: SizedBox(
+                        width: double.infinity,
+                        height: 54,
+                        child: TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: const Color(0xfff0f0f2),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text('Cancel',
+                              style: TextStyles.semibold16inter.copyWith(
+                                color: Colors.black,
+                              )),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 10),
                     Expanded(
                       child: CustomButton(
-                        text: 'Yes',
+                        text: 'Log Out',
                         onPressed: onYesPressed,
                       ),
                     ),

@@ -17,7 +17,6 @@ class UserCubit extends Cubit<UserState> {
     try {
       String? user = await Prefs.getString(kUserData);
       if (user != null) {
-        log(user);
         Map<String, dynamic> userMap = jsonDecode(user);
         emit(UserSuccess(UserModel.fromJson(userMap)));
       } else {
