@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
@@ -18,8 +19,13 @@ class HomeView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UserCubit()..fetchUser(),
-      child: const Scaffold(
-        body: SafeArea(child: HomeViewBody()),
+      child: Scaffold(
+        floatingActionButton: FloatingActionButton(
+            backgroundColor: AppColors.secondaryColor,
+            onPressed: () {},
+            child: const Icon(Icons.add, color: Colors.white, size: 30)),
+        bottomNavigationBar: const GoogleNavBotoomBar(),
+        body: const SafeArea(child: HomeViewBody()),
       ),
     );
   }
