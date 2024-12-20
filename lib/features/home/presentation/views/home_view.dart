@@ -44,10 +44,8 @@ class _HomeViewState extends State<HomeView> {
   }
 
   void _onNavItemTapped(int index) {
-    pageController.animateToPage(
+    pageController.jumpToPage(
       index,
-      duration: const Duration(milliseconds: 100),
-      curve: Curves.easeInOut,
     );
   }
 
