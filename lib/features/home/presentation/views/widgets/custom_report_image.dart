@@ -18,10 +18,11 @@ class CustomReportImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: borderRadius ?? BorderRadius.circular(20),
         child: AspectRatio(
-          aspectRatio: 2.6 / 4,
+          aspectRatio: 4 / 3.5,
+          // child: Image.network(imageUrl, fit: BoxFit.cover),
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),

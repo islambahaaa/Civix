@@ -13,20 +13,19 @@ class ReportItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: SizedBox(
-        // height: 100,
+        height: 100,
         child: Row(
           children: [
-            // CustomReportImage(
-            //     borderRadius: BorderRadius.circular(12),
-            //     imageUrl:
-            //         'https://media.istockphoto.com/id/1628010210/photo/empty-streets-and-sidewalks-of-soho-are-eerily-quiet-during-the-2020-coronavirus-pandemic.webp?s=2048x2048&w=is&k=20&c=i1vvTegni7jpYT5K_zsuWnFbcf1FfgjItdf6NtDcLXg='),
+            CustomReportImage(
+                borderRadius: BorderRadius.circular(12),
+                imageUrl: 'https://picsum.photos/200'),
 
-            Image.asset(
-              Assets.imagesLogo,
-              fit: BoxFit.cover,
-              width: 100,
-              height: 50,
-            ),
+            // Image.asset(
+            //   Assets.imagesLogo,
+            //   fit: BoxFit.cover,
+            //   width: 100,
+            //   height: 50,
+            // ),
             const SizedBox(
               width: 30,
             ),
