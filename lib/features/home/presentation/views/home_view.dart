@@ -53,7 +53,7 @@ class _HomeViewState extends State<HomeView> {
       child: Scaffold(
         floatingActionButton: FloatingActionButton.extended(
           label: Text(
-            'Report an issue',
+            'Report',
             style: TextStyles.regular14inter.copyWith(color: Colors.white),
           ),
           icon: const Icon(Icons.add, color: Colors.white, size: 24),
