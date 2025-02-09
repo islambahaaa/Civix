@@ -10,7 +10,7 @@ class NewestReportsHeader extends StatelessWidget {
     return const Row(
       children: [
         Text(
-          'Newest Reports',
+          'Latest Reports',
           style: TextStyles.regular17inter,
         ),
       ],

@@ -13,7 +13,7 @@ class ReportItem extends StatelessWidget {
     return GestureDetector(
       onTap: () {},
       child: SizedBox(
-        height: 100,
+        height: 90,
         child: Row(
           children: [
             CustomReportImage(
@@ -27,7 +27,7 @@ class ReportItem extends StatelessWidget {
             //   height: 50,
             // ),
             const SizedBox(
-              width: 30,
+              width: 20,
             ),
             Expanded(
               child: Column(
@@ -65,7 +65,7 @@ class ReportItem extends StatelessWidget {
                     ],
                   ),
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   Text(
                     report.title,
@@ -73,14 +73,14 @@ class ReportItem extends StatelessWidget {
                     style: TextStyles.semibold16inter,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 3,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        report.city,
-                      ),
+                      Text(report.city,
+                          style:
+                              TextStyle(fontSize: 12, color: Colors.grey[600])),
                     ],
                   )
                 ],
