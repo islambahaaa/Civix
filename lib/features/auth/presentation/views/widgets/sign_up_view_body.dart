@@ -41,20 +41,33 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 24,
               ),
-              CustomChangeBorderTextField(
-                  onSaved: (value) {
-                    fname = value!.split(' ')[0];
-                    lname = value.split(' ')[1];
-                  },
-                  hintText: 'Name',
-                  prefixIcon: Icons.person,
-                  textInputType: TextInputType.name),
+              Row(children: [
+                Flexible(
+                  child: CustomChangeBorderTextField(
+                      onSaved: (value) {
+                        fname = value!.trim();
+                      },
+                      hintText: 'First Name',
+                      prefixIcon: Icons.person,
+                      textInputType: TextInputType.name),
+                ),
+                const SizedBox(width: 8),
+                Flexible(
+                  child: CustomChangeBorderTextField(
+                      onSaved: (value) {
+                        lname = value!.trim();
+                      },
+                      hintText: 'Last Name',
+                      prefixIcon: Icons.person,
+                      textInputType: TextInputType.name),
+                ),
+              ]),
               const SizedBox(
                 height: 16,
               ),
               CustomChangeBorderTextField(
                 onSaved: (value) {
-                  email = value!;
+                  email = value!.trim();
                 },
                 hintText: 'Email',
                 prefixIcon: Icons.email,

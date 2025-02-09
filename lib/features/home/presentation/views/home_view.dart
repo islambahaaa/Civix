@@ -71,10 +71,10 @@ class _HomeViewState extends State<HomeView> {
             children: const [
               HomeViewBody(),
               Center(
-                child: Text('Profile'),
+                child: Text('Solved Issues'),
               ),
               Center(
-                child: Text('Alerts'),
+                child: Text('Profile'),
               ),
             ],
           ),

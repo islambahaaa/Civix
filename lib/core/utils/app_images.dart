@@ -58,9 +58,17 @@ class Assets {
   /// assets/icon/icon.jpg
   static const String iconIcon = "assets/icon/icon.jpg";
 
+  /// Assets for imagesBrokenStreet
+  /// assets/images/broken_street.svg
+  static const String imagesBrokenStreet = "assets/images/broken_street.svg";
+
   /// Assets for imagesBubbles
   /// assets/images/Bubbles.svg
   static const String imagesBubbles = "assets/images/Bubbles.svg";
+
+  /// Assets for imagesCairo
+  /// assets/images/cairo.jpg
+  static const String imagesCairo = "assets/images/cairo.jpg";
 
   /// Assets for imagesChecked
   /// assets/images/checked.svg
@@ -105,6 +113,10 @@ class Assets {
   /// Assets for imagesSearchIcon
   /// assets/images/search_icon.svg
   static const String imagesSearchIcon = "assets/images/search_icon.svg";
+
+  /// Assets for imagesSolvedInMyAreaItemShape
+  /// assets/images/solved_in_my_area_item_shape.svg
+  static const String imagesSolvedInMyAreaItemShape = "assets/images/solved_in_my_area_item_shape.svg";
 
   /// Assets for imagesVerified
   /// assets/images/Verified.svg

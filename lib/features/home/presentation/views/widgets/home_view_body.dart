@@ -1,16 +1,10 @@
-import 'package:civix_app/core/helper_functions/show_dialog.dart';
-import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
-import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
-import 'package:flutter/foundation.dart';
+import 'package:civix_app/features/home/presentation/views/widgets/solved_in_my_area.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/constants.dart';
-import 'package:civix_app/core/utils/app_images.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'package:svg_flutter/svg_flutter.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({
@@ -50,6 +44,7 @@ class HomeViewBody extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
+                const SolvedInMyAreaWidget(),
                 const SizedBox(
                   height: 12,
                 ),
