@@ -1,3 +1,4 @@
+import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -5,8 +6,8 @@ import 'package:civix_app/features/home/presentation/views/widgets/custom_report
 import 'package:flutter/material.dart';
 
 class ReportItem extends StatelessWidget {
-  const ReportItem({super.key});
-
+  const ReportItem({super.key, required this.report});
+  final ReportModel report;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -39,20 +40,25 @@ class ReportItem extends StatelessWidget {
                       Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                            color: Colors.grey[200],
+                            color: report.status == 'Solved'
+                                ? Colors.green[500]
+                                : report.status == 'In Progress'
+                                    ? Colors.grey[200]
+                                    : Colors.red[500],
+                            //color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(8)),
-                        child: const Text(
-                          'Solved',
-                          style: TextStyle(
+                        child: Text(
+                          report.status,
+                          style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                       ),
                       const Spacer(),
-                      const Text(
-                        'Jan 4,2022',
-                        style: TextStyle(
+                      Text(
+                        report.date,
+                        style: const TextStyle(
                             fontSize: 10,
                             fontWeight: FontWeight.w300,
                             color: AppColors.lightGrayColor),
@@ -62,19 +68,19 @@ class ReportItem extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  const Text(
-                    'Problem title',
+                  Text(
+                    report.title,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyles.semibold16inter,
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Giza',
+                        report.city,
                       ),
                     ],
                   )
