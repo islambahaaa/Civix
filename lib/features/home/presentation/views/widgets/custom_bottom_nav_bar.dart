@@ -73,11 +73,8 @@ class CustomNavigationBar extends StatelessWidget {
                               : index == 1
                                   ? 'Notifications'
                                   : 'Profile',
-                          style: isSelected
-                              ? const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.w600)
-                              : const TextStyle(
-                                  fontSize: 14, fontWeight: FontWeight.normal),
+                          style: const TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.normal),
                         ),
                       ),
                     ],
