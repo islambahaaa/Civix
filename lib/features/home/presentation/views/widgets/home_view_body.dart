@@ -38,7 +38,11 @@ class HomeViewBody extends StatelessWidget {
                         lname: state.user.lname,
                       );
                     } else if (state is UserFailure) {
-                      return Center(child: Text(state.message));
+                      //return Center(child: Text(state.message));
+                      return const CustomHomeAppBar(
+                        fname: 'Islam',
+                        lname: 'Bahaa',
+                      );
                     } else {
                       return const Center(child: Text('No user data.'));
                     }

@@ -9,7 +9,7 @@ class NewestReportsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<ReportModel> reports = [
       ReportModel(
-          id: 'id',
+          id: '1',
           title: 'a pothole in the main street',
           description: 'description',
           imageUrl: 'imageUrl',
@@ -18,7 +18,7 @@ class NewestReportsListView extends StatelessWidget {
           city: 'Giza',
           status: 'Solved'),
       ReportModel(
-          id: 'id',
+          id: '2',
           title: 'street light problem',
           description: 'description',
           imageUrl: 'imageUrl',
@@ -27,7 +27,7 @@ class NewestReportsListView extends StatelessWidget {
           city: 'New Cairo',
           status: 'In Progress'),
       ReportModel(
-          id: 'id',
+          id: '3',
           title: 'Graffiti on the wall',
           description: 'description',
           imageUrl: 'imageUrl',
@@ -36,7 +36,7 @@ class NewestReportsListView extends StatelessWidget {
           city: 'Alexandria',
           status: 'Denied'),
       ReportModel(
-          id: 'id',
+          id: '4',
           title: 'Water leak',
           description: 'description',
           imageUrl: 'imageUrl',
@@ -45,7 +45,7 @@ class NewestReportsListView extends StatelessWidget {
           city: 'Maadi',
           status: 'Solved'),
       ReportModel(
-          id: 'id',
+          id: '5',
           title: 'A broken Street',
           description: 'description',
           imageUrl: 'imageUrl',

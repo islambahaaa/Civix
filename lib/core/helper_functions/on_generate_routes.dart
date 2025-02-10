@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
@@ -8,7 +9,8 @@ import 'package:civix_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:civix_app/features/solved_in_my_area/presentation/solved_in_my_area_view.dart';
+import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
+import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +40,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           builder: (context) => const SolvedInMyAreaView());
     case SigninView.routeName:
       return MaterialPageRoute(builder: (context) => const SigninView());
+    case ReportDetailsView.routeName:
+      final ReportModel report = settings.arguments as ReportModel;
+      return MaterialPageRoute(
+          builder: (context) => ReportDetailsView(
+                report: report,
+              ));
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
     case HomeView.routeName:

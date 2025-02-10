@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
-import 'package:civix_app/features/solved_in_my_area/presentation/solved_in_my_area_view.dart';
+import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg_provider/flutter_svg_provider.dart' as svg;
