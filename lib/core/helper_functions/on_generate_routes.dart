@@ -9,6 +9,7 @@ import 'package:civix_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
 import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
@@ -33,6 +34,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case ForgotPasswordView.routeName:
       return MaterialPageRoute(
           builder: (context) => const ForgotPasswordView());
+    case ReportView.routeName:
+      return MaterialPageRoute(builder: (context) => const ReportView());
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
     case SolvedInMyAreaView.routeName:

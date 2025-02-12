@@ -38,6 +38,7 @@ class HomeViewBody extends StatelessWidget {
                         lname: state.user.lname,
                       );
                     } else if (state is UserFailure) {
+                      // !temporary only
                       //return Center(child: Text(state.message));
                       return const CustomHomeAppBar(
                         fname: 'Islam',

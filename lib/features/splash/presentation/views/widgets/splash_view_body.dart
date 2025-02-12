@@ -32,7 +32,7 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     bool isOnBoardingSeen = Prefs.getBool(kIsOnBoardingSeen);
     String? user = Prefs.getString(kUserData);
     Future.delayed(const Duration(milliseconds: 1600), () {
-      //!temprary only
+      //!temporary only
       Navigator.pushReplacementNamed(context, HomeView.routeName);
       return;
       //!temporary only

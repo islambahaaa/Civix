@@ -2,6 +2,7 @@ import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
+import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/home_view_body.dart';
@@ -59,7 +60,9 @@ class _HomeViewState extends State<HomeView> {
           icon: const Icon(Icons.add, color: Colors.white, size: 24),
           splashColor: AppColors.primaryColor,
           backgroundColor: AppColors.secondaryColor,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, ReportView.routeName);
+          },
         ),
         bottomNavigationBar: CustomNavigationBar(
           selectedIndex: currentIndex,
