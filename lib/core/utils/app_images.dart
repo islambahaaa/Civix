@@ -114,6 +114,10 @@ class Assets {
   /// assets/images/search_icon.svg
   static const String imagesSearchIcon = "assets/images/search_icon.svg";
 
+  /// Assets for imagesSendReport
+  /// assets/images/send_report.png
+  static const String imagesSendReport = "assets/images/send_report.png";
+
   /// Assets for imagesSolvedInMyAreaItemShape
   /// assets/images/solved_in_my_area_item_shape.svg
   static const String imagesSolvedInMyAreaItemShape = "assets/images/solved_in_my_area_item_shape.svg";
