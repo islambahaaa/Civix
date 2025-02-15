@@ -9,8 +9,8 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class MultiImagePickerScreen extends StatefulWidget {
-  const MultiImagePickerScreen({super.key});
-
+  const MultiImagePickerScreen({super.key, this.onImagePicked});
+  final Function(List<XFile>)? onImagePicked;
   @override
   _MultiImagePickerScreenState createState() => _MultiImagePickerScreenState();
 }
@@ -80,6 +80,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           setState(() {
             if (_images.length < maxImages) {
               _images.add(selectedImage);
+              widget.onImagePicked!(_images);
             } else {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(

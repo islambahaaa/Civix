@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:civix_app/core/helper_functions/on_generate_routes.dart';
 import 'package:civix_app/core/services/custom_bloc_observer.dart';
 import 'package:civix_app/core/services/get_it_service.dart';
@@ -13,7 +15,12 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
-  runApp(const MainApp());
+  runZonedGuarded(() {
+    runApp(const MainApp());
+  }, (error, stackTrace) {
+    print("Uncaught error: $error");
+    print("Stack trace: $stackTrace");
+  });
 }
 
 class MainApp extends StatelessWidget {
