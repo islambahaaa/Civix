@@ -14,7 +14,7 @@ class ApiAuthService {
       String email,
       String password,
       String confirmedPassword) async {
-    var response = await dio.post(ApiConstants.register, {
+    var response = await dio.authPost(ApiConstants.register, {
       "firstName": fname,
       "lastName": lname,
       "email": email,
@@ -27,7 +27,7 @@ class ApiAuthService {
 
   Future<Map<String, dynamic>> signInWithEmailAndPassword(
       String email, String password) async {
-    var response = await dio.post(ApiConstants.login, {
+    var response = await dio.authPost(ApiConstants.login, {
       "email": email,
       "password": password,
     });
@@ -35,14 +35,14 @@ class ApiAuthService {
   }
 
   Future<String> sendOtp(String email) async {
-    var response = await dio.post(ApiConstants.sendOtp, {
+    var response = await dio.authPost(ApiConstants.sendOtp, {
       "email": email,
     });
     return response.data;
   }
 
   Future<Map<String, dynamic>> checkOtp(String email, String otp) async {
-    var response = await dio.post(ApiConstants.checkOtp, {
+    var response = await dio.authPost(ApiConstants.checkOtp, {
       "email": email,
       "inputOtp": otp,
     });
@@ -51,7 +51,7 @@ class ApiAuthService {
 
   Future<Map<String, dynamic>> newPassword(String token, String email,
       String password, String confirmedPassword) async {
-    var response = await dio.post(ApiConstants.newPassword, {
+    var response = await dio.authPost(ApiConstants.newPassword, {
       "email": email,
       "token": token,
       "newPassword": password,

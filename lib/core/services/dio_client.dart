@@ -6,9 +6,10 @@ class DioClient {
   final Dio dio;
 
   DioClient(this.dio);
-  Future<Response> post(String endpoint, var data) async {
-    Response response =
-        await dio.post('${ApiConstants.baseUrl}$endpoint', data: data);
+  Future<Response> authPost(String endpoint, var data) async {
+    Response response = await dio.post(
+        '${ApiConstants.baseUrl}${ApiConstants.AuthEndpoint}$endpoint',
+        data: data);
 
     return response;
   }
