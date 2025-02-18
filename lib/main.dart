@@ -15,12 +15,7 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
-  runZonedGuarded(() {
-    runApp(const MainApp());
-  }, (error, stackTrace) {
-    print("Uncaught error: $error");
-    print("Stack trace: $stackTrace");
-  });
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
