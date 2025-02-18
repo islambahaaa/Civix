@@ -10,7 +10,8 @@ class DioClient {
     Response response = await dio.post(
         '${ApiConstants.baseUrl}${ApiConstants.AuthEndpoint}$endpoint',
         data: data);
-
+    log(response.data.toString());
+    log(response.statusCode.toString());
     return response;
   }
 }
