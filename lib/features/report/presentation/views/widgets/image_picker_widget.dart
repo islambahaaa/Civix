@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:io';
 
+import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/list_view_image_item.dart';
@@ -21,6 +23,19 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
   final int maxImages = 5;
   final int maxImageSizeInBytes = 5 * 1024 * 1024;
 
+  Future<bool> isDuplicate(XFile newFile) async {
+    List<int> newBytes = await File(newFile.path).readAsBytes();
+    String newHash = base64Encode(newBytes);
+
+    for (XFile existingFile in _images) {
+      List<int> existingBytes = await File(existingFile.path).readAsBytes();
+      String existingHash = base64Encode(existingBytes);
+
+      if (existingHash == newHash) return true;
+    }
+    return false;
+  }
+
   Future<bool> requestCameraPermission() async {
     var status = await Permission.camera.request();
     return status.isGranted;
@@ -40,7 +55,10 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         for (var image in selectedImages) {
           final File file = File(image.path);
           final int fileSizeInBytes = await file.length();
-
+          if (await isDuplicate(image)) {
+            buildSnackBar(context, 'You have already selected this image.');
+            continue;
+          }
           if (fileSizeInBytes > maxImageSizeInBytes) {
             // Show error message if the image is too large
             ScaffoldMessenger.of(context).showSnackBar(
@@ -52,6 +70,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           setState(() {
             if (_images.length < maxImages) {
               _images.add(image);
+              widget.onImagePicked!(_images);
             } else {
               ScaffoldMessenger.of(context).clearSnackBars();
               ScaffoldMessenger.of(context).showSnackBar(

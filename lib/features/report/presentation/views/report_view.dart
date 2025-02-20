@@ -36,6 +36,7 @@ class ReportView extends StatelessWidget {
             MultiImagePickerScreen(
               onImagePicked: (images) {
                 imagesList = images;
+                print(imagesList);
               },
             ),
             const SizedBox(height: 20),
@@ -53,44 +54,21 @@ class ReportView extends StatelessWidget {
             ),
             CustomButton(
                 onPressed: () async {
-                  // bool serviceEnabled;
-                  // LocationPermission permission;
-                  // if (!await Geolocator.isLocationServiceEnabled()) {
-                  //   print("GPS is disabled. Opening location settings...");
-                  //   await Geolocator.openLocationSettings();
-                  //   return;
-                  // }
-                  // await Geolocator.checkPermission();
-                  // permission = await Geolocator.requestPermission();
-                  // if (permission == LocationPermission.denied) {
-                  //   buildSnackBar(context, 'Location permissions are denied');
-                  //   return;
-                  // }
-
-                  // try {
-                  //   const locationSettings = LocationSettings(
-                  //     accuracy: LocationAccuracy.high,
-                  //     distanceFilter: 100,
-                  //   );
-                  //   Position position = await Geolocator.getCurrentPosition(
-                  //       locationSettings: locationSettings);
-                  //   print(position);
-                  // } on PlatformException catch (e) {
-                  //   buildSnackBar(context, 'Please provide location');
-                  //   return;
-                  // }
+                  if (await Gal.requestAccess()) {
+                    if (imagesList != null) {
+                      print("hello this is $imagesList");
+                      for (var image in imagesList!) {
+                        await Gal.putImage(image.path, album: 'Civix');
+                      }
+                    } else {
+                      buildSnackBar(context, 'Please provide images');
+                      return;
+                    }
+                  } else {
+                    buildSnackBar(context, 'Please give permission');
+                    return;
+                  }
                   await checkAndGetLocation(context);
-                  // if (await Gal.requestAccess()) {
-                  //   if (imagesList != null) {
-                  //     for (var image in imagesList!) {
-                  //       await Gal.putImage(image.path, album: 'Civix');
-                  //     }
-                  //     return;
-                  //   }
-                  //   buildSnackBar(context, 'Please provide images');
-                  // } else {
-                  //   buildSnackBar(context, 'Please give permission');
-                  // }
                 },
                 text: 'Submit')
           ]),
@@ -108,17 +86,15 @@ Future<void> getCurrentLocation(BuildContext context) async {
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      // Handle case when user denies permission
-      print("Location permission denied");
-      //showSnackBar("Location permission is required to access your location.");
+      buildSnackBar(
+          context, "Location permission is required to access your location.");
       return;
     }
   }
 
   if (permission == LocationPermission.deniedForever) {
-    // Handle case when user permanently denies permission
-    print("Location permission permanently denied");
-    //showSnackBar("Location permission is permanently denied. Please enable it in app settings.");
+    buildSnackBar(context,
+        "Location permission is permanently denied. Please enable it in app settings.");
     await Geolocator.openAppSettings();
     return;
   }
@@ -129,16 +105,16 @@ Future<void> getCurrentLocation(BuildContext context) async {
     buildSnackBar(context,
         'Location fetched: ${position.latitude}, ${position.longitude}');
   } catch (e) {
-    print("Error getting location: $e");
-    //showSnackBar("Failed to fetch location. Please try again.");
+    buildSnackBar(context, "Failed to fetch location. Please try again.");
   }
 }
 
 Future<void> checkAndGetLocation(BuildContext context) async {
   bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!isLocationServiceEnabled) {
-    print("GPS is disabled. Prompting user to enable it.");
-    //showSnackBar("GPS is disabled. Please enable it to fetch your location.");
+    buildSnackBar(
+        context, 'GPS is disabled. Please enable it to fetch your location.');
+    Future.delayed(const Duration(seconds: 2));
     await Geolocator.openLocationSettings();
     return;
   }
