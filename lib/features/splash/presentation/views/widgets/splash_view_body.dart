@@ -32,15 +32,18 @@ class _SplashViewBodyState extends State<SplashViewBody> {
     bool isOnBoardingSeen = Prefs.getBool(kIsOnBoardingSeen);
     String? user = Prefs.getString(kUserData);
     Future.delayed(const Duration(milliseconds: 1600), () {
-      if (isOnBoardingSeen) {
-        if (user != null) {
-          Navigator.pushReplacementNamed(context, HomeView.routeName);
-        } else {
-          Navigator.pushReplacementNamed(context, SigninView.routeName);
-        }
-      } else {
-        Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
-      }
+      //!only temp
+      Navigator.pushReplacementNamed(context, HomeView.routeName);
+      //!only temp
+      // if (isOnBoardingSeen) {
+      //   if (user != null) {
+      //     Navigator.pushReplacementNamed(context, HomeView.routeName);
+      //   } else {
+      //     Navigator.pushReplacementNamed(context, SigninView.routeName);
+      //   }
+      // } else {
+      //   Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+      // }
     });
   }
 }

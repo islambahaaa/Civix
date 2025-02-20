@@ -21,6 +21,7 @@ class ListViewImageItem extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: Image.file(
+          fit: BoxFit.cover,
           File(image.path),
           height: double.infinity,
           width: 200,

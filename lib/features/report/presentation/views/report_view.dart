@@ -42,6 +42,10 @@ class ReportView extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
+            const CustomTitleField(),
+            const SizedBox(
+              height: 12,
+            ),
             const CustomDescriptionField(),
             const SizedBox(
               height: 16,
@@ -106,10 +110,12 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
   String? selectedValue; // Track the selected value
   final List<String> items = [
     'Pothole',
-    'Broken Road',
-    'Street Light Problem',
-    'Water Leak',
-    'Others',
+    'Garbage',
+    'Broken Streetlight',
+    'Manhole',
+    'Flooding',
+    'Grafitti',
+    'Other'
   ];
 
   @override
@@ -117,7 +123,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
             color: AppColors.primaryColor, width: 2), // Border Styling
         color: Colors.white, // Background color
@@ -127,7 +133,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           padding: const EdgeInsets.all(4),
           isExpanded: true,
           hint: const Text(
-            "Select an option",
+            "Select Issue Type",
             style: TextStyle(color: Colors.grey),
           ),
           icon:
@@ -135,7 +141,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           value: selectedValue,
 
           // Dropdown icon
-          iconSize: 24,
+          iconSize: 32,
           elevation: 16,
           style: const TextStyle(color: Colors.black, fontSize: 16),
           // Remove the default underline

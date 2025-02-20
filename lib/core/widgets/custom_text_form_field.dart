@@ -157,7 +157,7 @@ class CustomDescriptionField extends StatelessWidget {
         width: 1.8,
         color: AppColors.primaryColor,
       ),
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: BorderRadius.circular(8),
     );
   }
 
@@ -165,7 +165,7 @@ class CustomDescriptionField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       maxLength: 300,
-      maxLines: 5,
+      maxLines: 4,
       textInputAction: TextInputAction.done,
       onSaved: onSaved,
       validator: (value) {
@@ -182,6 +182,46 @@ class CustomDescriptionField extends StatelessWidget {
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
         hintText: 'Description',
+        hintStyle: TextStyles.medium16inter.copyWith(
+          color: AppColors.lightGrayColor,
+        ),
+      ),
+    );
+  }
+}
+
+class CustomTitleField extends StatelessWidget {
+  const CustomTitleField({super.key, this.onSaved});
+  final void Function(String?)? onSaved;
+  OutlineInputBorder buildBorder() {
+    return OutlineInputBorder(
+      borderSide: const BorderSide(
+        width: 1.8,
+        color: AppColors.primaryColor,
+      ),
+      borderRadius: BorderRadius.circular(8),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      textInputAction: TextInputAction.next,
+      onSaved: onSaved,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'This Field is required';
+        }
+        return null;
+      },
+      keyboardType: TextInputType.multiline,
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: const Color(0xFFF9FAFA),
+        border: buildBorder(),
+        enabledBorder: buildBorder(),
+        focusedBorder: buildBorder(),
+        hintText: 'Title',
         hintStyle: TextStyles.medium16inter.copyWith(
           color: AppColors.lightGrayColor,
         ),
