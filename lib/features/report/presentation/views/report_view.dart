@@ -5,6 +5,7 @@ import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';
+import 'package:civix_app/features/report/presentation/views/widgets/report_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gal/gal.dart';
@@ -95,77 +96,6 @@ class ReportView extends StatelessWidget {
           ]),
         ),
       )),
-    );
-  }
-}
-
-class DropdownMenuExample extends StatefulWidget {
-  const DropdownMenuExample({super.key});
-
-  @override
-  _DropdownMenuExampleState createState() => _DropdownMenuExampleState();
-}
-
-class _DropdownMenuExampleState extends State<DropdownMenuExample> {
-  String? selectedValue; // Track the selected value
-  final List<String> items = [
-    'Pothole',
-    'Garbage',
-    'Broken Streetlight',
-    'Manhole',
-    'Flooding',
-    'Grafitti',
-    'Other'
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: AppColors.primaryColor, width: 2), // Border Styling
-        color: Colors.white, // Background color
-      ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          padding: const EdgeInsets.all(4),
-          isExpanded: true,
-          hint: const Text(
-            "Select Issue Type",
-            style: TextStyle(color: Colors.grey),
-          ),
-          icon:
-              const Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),
-          value: selectedValue,
-
-          // Dropdown icon
-          iconSize: 32,
-          elevation: 16,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
-          // Remove the default underline
-          // Make the dropdown take up available width
-          onChanged: (String? newValue) {
-            setState(() {
-              selectedValue = newValue; // Update the selected value
-            });
-          },
-          items: items.map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
-              value: value,
-              child: Text(
-                value,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-            );
-          }).toList(),
-          // Background color of the dropdown menu
-          // Maximum height of the dropdown menu
-        ),
-      ),
     );
   }
 }
