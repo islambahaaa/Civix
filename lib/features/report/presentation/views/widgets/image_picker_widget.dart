@@ -61,9 +61,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           }
           if (fileSizeInBytes > maxImageSizeInBytes) {
             // Show error message if the image is too large
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Image "${image.name}" exceeds 5 MB')),
-            );
+            buildSnackBar(context, 'Image "${image.name}" exceeds 5 MB');
             continue; // Skip this image
           }
 
@@ -72,19 +70,13 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               _images.add(image);
               widget.onImagePicked!(_images);
             } else {
-              ScaffoldMessenger.of(context).clearSnackBars();
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Maximum number of images reached')),
-              );
+              buildSnackBar(context, 'Maximum number of images reached');
             }
           });
         }
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to pick images: $e')),
-      );
+      buildSnackBar(context, 'Failed to pick images: $e');
     }
   }
 
@@ -101,22 +93,15 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               _images.add(selectedImage);
               widget.onImagePicked!(_images);
             } else {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text('Maximum number of images reached')),
-              );
+              buildSnackBar(context, 'Maximum number of images reached');
             }
           });
         }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to pick images: $e')),
-        );
+        buildSnackBar(context, 'Failed to pick images: $e');
       }
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Camera permission denied')),
-      );
+      buildSnackBar(context, 'Camera permission denied');
     }
   }
 

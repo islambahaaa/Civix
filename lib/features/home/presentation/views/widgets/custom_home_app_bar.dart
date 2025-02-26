@@ -14,16 +14,19 @@ class CustomHomeAppBar extends StatelessWidget {
   final String lname;
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      contentPadding: EdgeInsets.zero,
-      leading: Image.asset(Assets.imagesProfileImage),
-      title: const Text(
-        'Hello,',
+    return GestureDetector(
+      onTap: () {},
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+        leading: Image.asset(Assets.imagesProfileImage),
+        title: const Text(
+          'Hello,',
+        ),
+        subtitle: Text(
+          "$fname $lname",
+        ),
+        trailing: const LogOutWidget(),
       ),
-      subtitle: Text(
-        "$fname $lname",
-      ),
-      trailing: const LogOutWidget(),
     );
   }
 }

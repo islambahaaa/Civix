@@ -5,6 +5,44 @@ import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
+void showCustomDialog(BuildContext context, String text) {
+  showDialog(
+      context: context,
+      // Prevent dismissing by tapping outside
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.check_circle,
+                    color: AppColors.primaryColor, size: 100),
+                const SizedBox(height: 16),
+                const Text(
+                  'Success!',
+                  style: TextStyles.semibold24inter,
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  text,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        );
+      });
+}
+
 void showCongratulationsDialog(BuildContext context) {
   showDialog(
       context: context,

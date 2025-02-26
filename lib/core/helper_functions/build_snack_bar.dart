@@ -8,6 +8,7 @@ void buildSnackBar(BuildContext context, String message) {
       backgroundColor: AppColors.secondaryColor,
       behavior: SnackBarBehavior.floating,
       duration: const Duration(seconds: 1),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       content: Text(message),
     ),
   );
