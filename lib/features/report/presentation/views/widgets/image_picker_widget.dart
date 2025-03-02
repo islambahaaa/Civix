@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
+import 'package:civix_app/features/report/presentation/views/widgets/images_list_view_items.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/list_view_image_item.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -108,8 +109,6 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
   Future<void> show(
     BuildContext context,
   ) async {
-    final ImagePicker picker = ImagePicker();
-
     return showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -170,20 +169,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
             children: [
               // ReorderableListView for images
               _images.isEmpty
-                  ? Center(
-                      child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Image.asset(
-                          Assets.imagesSendReport,
-                          width: 45,
-                          height: 45,
-                        ),
-                        const Text(
-                          'Image size must be less than 5 MB',
-                        ),
-                      ],
-                    ))
+                  ? const ImageWidgetPlaceHolder()
                   : ReorderableListView.builder(
                       itemCount: _images.length,
                       keyboardDismissBehavior:
@@ -203,28 +189,13 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                         final image = _images[index];
                         // Display selected images
 
-                        return Padding(
-                          key: ValueKey(image.path),
-                          padding: const EdgeInsets.symmetric(horizontal: 4),
-                          child: Stack(
-                            // Unique key for each image
-                            children: [
-                              ListViewImageItem(image: image),
-                              Positioned(
-                                top: -5,
-                                right: -5,
-                                child: IconButton(
-                                  icon: const Icon(Icons.cancel,
-                                      color: Colors.red, size: 24),
-                                  onPressed: () {
-                                    setState(() {
-                                      _images.remove(image);
-                                    });
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
+                        return ReorderableListViewItem(
+                          image: image,
+                          onPressed: () {
+                            setState(() {
+                              _images.remove(image);
+                            });
+                          },
                         );
                       }),
 
@@ -240,17 +211,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                       );
                     },
                     //onTap: pickImages,
-                    child: Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: const Center(
-                        child: Icon(Icons.add, size: 30, color: Colors.white),
-                      ),
-                    ),
+                    child: const AddImageIcon(),
                   ),
                 ),
             ],
