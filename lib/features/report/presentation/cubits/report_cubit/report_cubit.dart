@@ -12,10 +12,12 @@ part 'report_state.dart';
 
 class ReportCubit extends Cubit<ReportState> {
   ReportCubit() : super(ReportInitial());
-  final ImagePicker _picker = ImagePicker();
-  final List<XFile> _images = [];
-  final int maxImages = 5;
-  final int maxImageSizeInBytes = 5 * 1024 * 1024;
+
+  final List<XFile> images = [];
+
+  Future<void> addImages(List<XFile> pickedImages) async {
+    images.addAll(pickedImages);
+  }
 
   Future<void> getCurrentLocation() async {
     LocationPermission permission;
@@ -43,23 +45,7 @@ class ReportCubit extends Cubit<ReportState> {
     // Proceed to get location
     try {
       Position position = await Geolocator.getCurrentPosition();
-      emit(ReportLocationSuccess(position));
-      // BuildContext rootContext =
-      //     Navigator.of(context, rootNavigator: true).context;
-
-      // Navigator.of(context).pop(); // Close the current screen
-
-      // Future.delayed(const Duration(milliseconds: 300), () {
-      //   showCustomDialog(rootContext,
-      //       'Report submitted successfully.\n \nLocation: ${position.latitude}, ${position.longitude}');
-
-      //   Future.delayed(const Duration(seconds: 2), () {
-      //     if (rootContext.mounted) {
-      //       Navigator.of(rootContext).pop(); // Close the dialog
-      //     }
-      //   });
-      // });
-      // Close the current screen
+      emit(ReportSuccess());
     } catch (e) {
       emit(ReportFailure('Failed to fetch location: $e'));
     }
@@ -82,10 +68,9 @@ class ReportCubit extends Cubit<ReportState> {
 //
   Future<void> submitReport() async {
     if (await Gal.requestAccess()) {
-      if (_images.isNotEmpty) {
-        for (var image in _images) {
+      if (images.isNotEmpty) {
+        for (var image in images) {
           emit(ReportLoading());
-
           await Gal.putImage(image.path, album: 'Civix');
         }
       } else {
@@ -101,77 +86,77 @@ class ReportCubit extends Cubit<ReportState> {
     await checkAndGetLocation();
   }
 
-  Future<bool> isDuplicate(XFile newFile) async {
-    List<int> newBytes = await File(newFile.path).readAsBytes();
-    String newHash = base64Encode(newBytes);
+  // Future<bool> isDuplicate(XFile newFile) async {
+  //   List<int> newBytes = await File(newFile.path).readAsBytes();
+  //   String newHash = base64Encode(newBytes);
 
-    for (XFile existingFile in _images) {
-      List<int> existingBytes = await File(existingFile.path).readAsBytes();
-      String existingHash = base64Encode(existingBytes);
+  //   for (XFile existingFile in _images) {
+  //     List<int> existingBytes = await File(existingFile.path).readAsBytes();
+  //     String existingHash = base64Encode(existingBytes);
 
-      if (existingHash == newHash) return true;
-    }
-    return false;
-  }
+  //     if (existingHash == newHash) return true;
+  //   }
+  //   return false;
+  // }
 
-  Future<bool> requestCameraPermission() async {
-    var status = await Permission.camera.request();
-    return status.isGranted;
-  }
+  // Future<bool> requestCameraPermission() async {
+  //   var status = await Permission.camera.request();
+  //   return status.isGranted;
+  // }
 
-  Future<bool> requestGalleryPermission() async {
-    var status = await Permission.photos.request();
-    return status.isGranted;
-  }
+  // Future<bool> requestGalleryPermission() async {
+  //   var status = await Permission.photos.request();
+  //   return status.isGranted;
+  // }
 
-  Future<void> pickImagesFromGallery() async {
-    try {
-      final List<XFile> selectedImages = await _picker.pickMultiImage();
-      if (selectedImages.isNotEmpty) {
-        for (var image in selectedImages) {
-          final File file = File(image.path);
-          final int fileSizeInBytes = await file.length();
-          if (await isDuplicate(image)) {
-            emit(ReportFailure('You have already selected this image.'));
+  // Future<void> pickImagesFromGallery() async {
+  //   try {
+  //     final List<XFile> selectedImages = await _picker.pickMultiImage();
+  //     if (selectedImages.isNotEmpty) {
+  //       for (var image in selectedImages) {
+  //         final File file = File(image.path);
+  //         final int fileSizeInBytes = await file.length();
+  //         if (await isDuplicate(image)) {
+  //           emit(ReportFailure('You have already selected this image.'));
 
-            continue;
-          }
-          if (fileSizeInBytes > maxImageSizeInBytes) {
-            emit(ReportFailure('Image "${image.name}" exceeds 5 MB'));
-            continue; // Skip this image
-          }
+  //           continue;
+  //         }
+  //         if (fileSizeInBytes > maxImageSizeInBytes) {
+  //           emit(ReportFailure('Image "${image.name}" exceeds 5 MB'));
+  //           continue; // Skip this image
+  //         }
 
-          if (_images.length < maxImages) {
-            _images.add(image);
-            emit(ReportImagesSuccess(_images));
-          } else {
-            emit(ReportFailure('Maximum number of images reached'));
-          }
-        }
-      }
-    } catch (e) {
-      emit(ReportFailure('Failed to pick images: $e'));
-    }
-  }
+  //         if (_images.length < maxImages) {
+  //           _images.add(image);
+  //           emit(ReportImagesSuccess(_images));
+  //         } else {
+  //           emit(ReportFailure('Maximum number of images reached'));
+  //         }
+  //       }
+  //     }
+  //   } catch (e) {
+  //     emit(ReportFailure('Failed to pick images: $e'));
+  //   }
+  // }
 
-  Future<void> pickImagesFromCamera() async {
-    if (await requestCameraPermission()) {
-      try {
-        final XFile? selectedImage =
-            await _picker.pickImage(source: ImageSource.camera);
-        if (selectedImage != null) {
-          if (_images.length < maxImages) {
-            _images.add(selectedImage);
-            emit(ReportImagesSuccess(_images));
-          } else {
-            emit(ReportFailure('Maximum number of images reached'));
-          }
-        }
-      } catch (e) {
-        emit(ReportFailure('Failed to pick images: $e'));
-      }
-    } else {
-      emit(ReportFailure('Camera permission denied'));
-    }
-  }
+  // Future<void> pickImagesFromCamera() async {
+  //   if (await requestCameraPermission()) {
+  //     try {
+  //       final XFile? selectedImage =
+  //           await _picker.pickImage(source: ImageSource.camera);
+  //       if (selectedImage != null) {
+  //         if (_images.length < maxImages) {
+  //           _images.add(selectedImage);
+  //           emit(ReportImagesSuccess(_images));
+  //         } else {
+  //           emit(ReportFailure('Maximum number of images reached'));
+  //         }
+  //       }
+  //     } catch (e) {
+  //       emit(ReportFailure('Failed to pick images: $e'));
+  //     }
+  //   } else {
+  //     emit(ReportFailure('Camera permission denied'));
+  //   }
+  // }
 }

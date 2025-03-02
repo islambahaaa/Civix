@@ -10,6 +10,10 @@ class CustomProgressHud extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ModalProgressHUD(
-        color: AppColors.primaryColor, inAsyncCall: isLoading, child: child);
+        progressIndicator: const CircularProgressIndicator(
+          color: AppColors.primaryColor,
+        ),
+        inAsyncCall: isLoading,
+        child: child);
   }
 }

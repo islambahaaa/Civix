@@ -16,7 +16,6 @@ class ReorderableListViewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      key: ValueKey(image.path),
       padding: const EdgeInsets.symmetric(horizontal: 4),
       child: Stack(
         // Unique key for each image

@@ -190,6 +190,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                         // Display selected images
 
                         return ReorderableListViewItem(
+                          key: ValueKey(image.path),
                           image: image,
                           onPressed: () {
                             setState(() {
