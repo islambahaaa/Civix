@@ -1,4 +1,4 @@
-import 'package:civix_app/core/models/report_model.dart';
+import 'package:civix_app/features/report/data/models/report_model.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_report_image.dart';
 import 'package:flutter/material.dart';
 
