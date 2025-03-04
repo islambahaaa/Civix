@@ -78,12 +78,18 @@ class _HomeViewState extends State<HomeView> {
           child: PageView(
             controller: pageController,
             onPageChanged: _onPageChanged,
-            children: const [
-              HomeViewBody(),
-              Center(
+            children: [
+              HomeViewBody(
+                onNameTap: () {
+                  pageController.animateToPage(2,
+                      duration: const Duration(milliseconds: 50),
+                      curve: Curves.easeInOut);
+                },
+              ),
+              const Center(
                 child: Text('Solved Issues'),
               ),
-              ProfileView(),
+              const ProfileView(),
             ],
           ),
         ),

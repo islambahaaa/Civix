@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({
     super.key,
+    this.onNameTap,
   });
-
+  final void Function()? onNameTap;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -34,6 +35,7 @@ class HomeViewBody extends StatelessWidget {
                       );
                     } else if (state is UserSuccess) {
                       return CustomHomeAppBar(
+                        onTap: onNameTap,
                         fname: state.user.fname,
                         lname: state.user.lname,
                       );
