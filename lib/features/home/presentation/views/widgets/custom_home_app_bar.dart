@@ -9,13 +9,15 @@ import 'package:svg_flutter/svg_flutter.dart';
 import '../../../../../core/utils/app_images.dart';
 
 class CustomHomeAppBar extends StatelessWidget {
-  const CustomHomeAppBar({super.key, required this.fname, required this.lname});
+  const CustomHomeAppBar(
+      {super.key, required this.fname, required this.lname, this.onTap});
   final String fname;
   final String lname;
+  final void Function()? onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: Image.asset(Assets.imagesProfileImage),
