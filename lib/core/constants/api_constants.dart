@@ -6,4 +6,5 @@ class ApiConstants {
   static const String sendOtp = 'password-reset';
   static const String checkOtp = 'check-otp';
   static const String newPassword = 'reset-password';
+  static const String createIssueEndPoint = '/api/issues/';
 }

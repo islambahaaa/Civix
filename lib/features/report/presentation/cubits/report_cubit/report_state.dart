@@ -12,4 +12,7 @@ class ReportFailure extends ReportState {
   ReportFailure(this.message);
 }
 
-class ReportSuccess extends ReportState {}
+class ReportSuccess extends ReportState {
+  final String message;
+  ReportSuccess(this.message);
+}

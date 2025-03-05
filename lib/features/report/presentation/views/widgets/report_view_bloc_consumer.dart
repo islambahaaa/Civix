@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/widgets/custom_progress_hud.dart';
@@ -16,6 +18,7 @@ class ReportViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<ReportCubit, ReportState>(
       listener: (context, state) {
         if (state is ReportSuccess) {
+          log(state.message);
           BuildContext rootContext =
               Navigator.of(context, rootNavigator: true).context;
 

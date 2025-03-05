@@ -1,7 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
+import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/repos/report_repo.dart';
+import 'package:civix_app/core/services/api_report_service.dart';
+import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:gal/gal.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,12 +16,16 @@ import 'package:permission_handler/permission_handler.dart';
 part 'report_state.dart';
 
 class ReportCubit extends Cubit<ReportState> {
-  ReportCubit() : super(ReportInitial());
-
-  final List<XFile> images = [];
+  ReportCubit(this.reportRepo) : super(ReportInitial());
+  ReportRepo reportRepo;
+  final List<File> images = [];
+  double? latitude;
+  double? longitude;
 
   Future<void> addImages(List<XFile> pickedImages) async {
-    images.addAll(pickedImages);
+    for (var image in pickedImages) {
+      images.add(File(image.path));
+    }
   }
 
   Future<void> getCurrentLocation() async {
@@ -45,7 +54,8 @@ class ReportCubit extends Cubit<ReportState> {
     // Proceed to get location
     try {
       Position position = await Geolocator.getCurrentPosition();
-      emit(ReportSuccess());
+      latitude = position.latitude;
+      longitude = position.longitude;
     } catch (e) {
       emit(ReportFailure('Failed to fetch location: $e'));
     }
@@ -66,7 +76,14 @@ class ReportCubit extends Cubit<ReportState> {
   }
 
 //
-  Future<void> submitReport() async {
+  Future<void> submitReport(
+    String title,
+    String description,
+    int category,
+  ) async {
+    log(title);
+    log(description);
+    log(category.toString());
     if (await Gal.requestAccess()) {
       if (images.isNotEmpty) {
         for (var image in images) {
@@ -82,81 +99,46 @@ class ReportCubit extends Cubit<ReportState> {
       emit(ReportFailure('Gallery permission denied'));
       return;
     }
-    emit(ReportLoading());
     await checkAndGetLocation();
+    String token = await getToken();
+    if (token.isEmpty) return;
+    if (latitude == null || longitude == null) {
+      emit(ReportFailure('Failed to get location. Please try again.'));
+      return;
+    }
+    await createIssue(
+        title, description, latitude!, longitude!, category, images, token);
   }
 
-  // Future<bool> isDuplicate(XFile newFile) async {
-  //   List<int> newBytes = await File(newFile.path).readAsBytes();
-  //   String newHash = base64Encode(newBytes);
+  Future<String> getToken() async {
+    try {
+      String? user = await Prefs.getString(kUserData);
+      if (user != null) {
+        Map<String, dynamic> userMap = jsonDecode(user);
+        return userMap['token'] ?? '';
+      } else {
+        emit(ReportFailure('Please Login First'));
+        return '';
+      }
+    } catch (e) {
+      emit(ReportFailure("Failed to fetch user: ${e.toString()}"));
+      return '';
+    }
+  }
 
-  //   for (XFile existingFile in _images) {
-  //     List<int> existingBytes = await File(existingFile.path).readAsBytes();
-  //     String existingHash = base64Encode(existingBytes);
-
-  //     if (existingHash == newHash) return true;
-  //   }
-  //   return false;
-  // }
-
-  // Future<bool> requestCameraPermission() async {
-  //   var status = await Permission.camera.request();
-  //   return status.isGranted;
-  // }
-
-  // Future<bool> requestGalleryPermission() async {
-  //   var status = await Permission.photos.request();
-  //   return status.isGranted;
-  // }
-
-  // Future<void> pickImagesFromGallery() async {
-  //   try {
-  //     final List<XFile> selectedImages = await _picker.pickMultiImage();
-  //     if (selectedImages.isNotEmpty) {
-  //       for (var image in selectedImages) {
-  //         final File file = File(image.path);
-  //         final int fileSizeInBytes = await file.length();
-  //         if (await isDuplicate(image)) {
-  //           emit(ReportFailure('You have already selected this image.'));
-
-  //           continue;
-  //         }
-  //         if (fileSizeInBytes > maxImageSizeInBytes) {
-  //           emit(ReportFailure('Image "${image.name}" exceeds 5 MB'));
-  //           continue; // Skip this image
-  //         }
-
-  //         if (_images.length < maxImages) {
-  //           _images.add(image);
-  //           emit(ReportImagesSuccess(_images));
-  //         } else {
-  //           emit(ReportFailure('Maximum number of images reached'));
-  //         }
-  //       }
-  //     }
-  //   } catch (e) {
-  //     emit(ReportFailure('Failed to pick images: $e'));
-  //   }
-  // }
-
-  // Future<void> pickImagesFromCamera() async {
-  //   if (await requestCameraPermission()) {
-  //     try {
-  //       final XFile? selectedImage =
-  //           await _picker.pickImage(source: ImageSource.camera);
-  //       if (selectedImage != null) {
-  //         if (_images.length < maxImages) {
-  //           _images.add(selectedImage);
-  //           emit(ReportImagesSuccess(_images));
-  //         } else {
-  //           emit(ReportFailure('Maximum number of images reached'));
-  //         }
-  //       }
-  //     } catch (e) {
-  //       emit(ReportFailure('Failed to pick images: $e'));
-  //     }
-  //   } else {
-  //     emit(ReportFailure('Camera permission denied'));
-  //   }
-  // }
+  Future<void> createIssue(
+      String title,
+      String description,
+      double latitude,
+      double longitude,
+      int category,
+      List<File> imageFiles,
+      String token) async {
+    var result = await reportRepo.createReport(
+        title, description, latitude, longitude, category, imageFiles, token);
+    result.fold(
+      (failure) => emit(ReportFailure(failure.message)),
+      (s) => emit(ReportSuccess(s)),
+    );
+  }
 }

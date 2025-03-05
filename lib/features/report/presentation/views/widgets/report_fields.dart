@@ -85,14 +85,19 @@ class CustomTitleField extends StatelessWidget {
 }
 
 class DropdownMenuExample extends StatefulWidget {
-  const DropdownMenuExample({super.key});
+  final Function(int?) onSelected;
+
+  const DropdownMenuExample({
+    super.key,
+    required this.onSelected,
+  });
 
   @override
   _DropdownMenuExampleState createState() => _DropdownMenuExampleState();
 }
 
 class _DropdownMenuExampleState extends State<DropdownMenuExample> {
-  String? selectedValue; // Track the selected value
+  String? selectedValue;
   final List<String> items = [
     'Pothole',
     'Garbage',
@@ -102,6 +107,26 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
     'Grafitti',
     'Other'
   ];
+  int _getCategoryId(String category) {
+    switch (category) {
+      case 'Pothole':
+        return 1;
+      case 'Broken Streetlight':
+        return 2;
+      case 'Garbage':
+        return 3;
+      case 'Manhole':
+        return 4;
+      case 'Grafitti':
+        return 5;
+      case 'Flooding':
+        return 6;
+      case 'Other':
+        return 7;
+      default:
+        return 0; // Fallback value
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,8 +134,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: AppColors.primaryColor, width: 2), // Border Styling
+        border: Border.all(color: Colors.blue, width: 2), // Border Styling
         color: Colors.white, // Background color
       ),
       child: DropdownButtonHideUnderline(
@@ -121,34 +145,27 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
             "Select Issue Type",
             style: TextStyle(color: Colors.grey),
           ),
-          icon:
-              const Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),
+          icon: const Icon(Icons.arrow_drop_down, color: Colors.blue),
           value: selectedValue,
-
-          // Dropdown icon
           iconSize: 32,
           elevation: 16,
           style: const TextStyle(color: Colors.black, fontSize: 16),
-          // Remove the default underline
-          // Make the dropdown take up available width
           onChanged: (String? newValue) {
             setState(() {
-              selectedValue = newValue; // Update the selected value
+              selectedValue = newValue;
             });
-          },
+            int categoryId = _getCategoryId(newValue!);
+            widget.onSelected(categoryId);
+          }, // Use widget.onChanged
           items: items.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(
               value: value,
               child: Text(
                 value,
-                style: const TextStyle(
-                  fontSize: 16,
-                ),
+                style: const TextStyle(fontSize: 16),
               ),
             );
           }).toList(),
-          // Background color of the dropdown menu
-          // Maximum height of the dropdown menu
         ),
       ),
     );

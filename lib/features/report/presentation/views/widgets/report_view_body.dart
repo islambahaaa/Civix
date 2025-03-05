@@ -1,48 +1,87 @@
+import 'dart:ffi';
+
 import 'package:civix_app/core/widgets/custom_button.dart';
+import 'package:civix_app/features/report/data/models/report_model.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/report_fields.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ReportViewBody extends StatelessWidget {
+class ReportViewBody extends StatefulWidget {
   const ReportViewBody({
     super.key,
   });
 
   @override
+  State<ReportViewBody> createState() => _ReportViewBodyState();
+}
+
+class _ReportViewBodyState extends State<ReportViewBody> {
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+  late String title, description;
+  int? category;
+  @override
   Widget build(BuildContext context) {
     return Form(
+        key: formKey,
+        autovalidateMode: autovalidateMode,
         child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-      child: SingleChildScrollView(
-        reverse: true,
-        child: Column(children: [
-          MultiImagePickerScreen(
-            onImagePicked: (images) {
-              BlocProvider.of<ReportCubit>(context).addImages(images);
-            },
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(children: [
+              MultiImagePickerScreen(
+                onImagePicked: (images) {
+                  BlocProvider.of<ReportCubit>(context).addImages(images);
+                },
+              ),
+              const SizedBox(height: 20),
+              DropdownMenuExample(
+                onSelected: (value) {
+                  setState(() {
+                    category = value;
+                  });
+                },
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTitleField(
+                onSaved: (value) {
+                  title = value!;
+                },
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              CustomDescriptionField(
+                onSaved: (value) {
+                  description = value!;
+                },
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              CustomButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate() && category != null) {
+                      formKey.currentState!.save();
+                      context.read<ReportCubit>().submitReport(
+                            title,
+                            description,
+                            category!,
+                          );
+                    } else {
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.always;
+                      });
+                    }
+                  },
+                  text: 'Submit')
+            ]),
           ),
-          const SizedBox(height: 20),
-          const DropdownMenuExample(),
-          const SizedBox(
-            height: 20,
-          ),
-          const CustomTitleField(),
-          const SizedBox(
-            height: 12,
-          ),
-          const CustomDescriptionField(),
-          const SizedBox(
-            height: 16,
-          ),
-          CustomButton(
-              onPressed: () async {
-                await BlocProvider.of<ReportCubit>(context).submitReport();
-              },
-              text: 'Submit')
-        ]),
-      ),
-    ));
+        ));
   }
 }

@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
+import 'package:civix_app/core/repos/report_repo.dart';
+import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
@@ -27,7 +29,9 @@ class ReportView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ReportCubit(),
+      create: (context) => ReportCubit(
+        getIt.get<ReportRepo>(),
+      ),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.lightprimaryColor,
