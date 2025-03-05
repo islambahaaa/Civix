@@ -39,39 +39,30 @@ class ServerFailure extends Failure {
     if (statusCode == 400 || statusCode == 401 || statusCode == 403) {
       if (response is String) {
         return ServerFailure(response);
-      } else if (response is Map<String, dynamic>) {
-        if (response.containsKey('errors')) {
-          if (response['errors'] is Map<String, dynamic>) {
-            Map<String, dynamic> errors = response['errors'];
-            if (errors.containsKey('NewPassword')) {
-              List<dynamic> errors = response['errors']['NewPassword'];
-              String errmsg = errors.join(', ');
-              return ServerFailure(errmsg);
+      } else if (response is Map<String, dynamic> &&
+          response.containsKey('errors')) {
+        var errors = response['errors'];
+
+        if (errors is Map<String, dynamic>) {
+          // Extract the first available error message dynamically
+          for (var key in errors.keys) {
+            if (errors[key] is List) {
+              return ServerFailure((errors[key] as List).join(', '));
             }
-            if (errors.containsKey('Email')) {
-              List<dynamic> errors = response['errors']['Email'];
-              String errmsg = errors.join(', ');
-              return ServerFailure(errmsg);
-            }
-            if (errors.containsKey('ConfirmedPassword')) {
-              List<dynamic> errors = response['errors']['ConfirmedPassword'];
-              String errmsg = errors.join(', ');
-              return ServerFailure(errmsg);
-            }
-            if (errors.containsKey('InputOtp')) {
-              List<dynamic> errors = response['errors']['ConfirmedPassword'];
-              String errmsg = errors.join(', ');
-              return ServerFailure(errmsg);
-            }
-            return ServerFailure(response.toString());
+          }
+        } else if (errors is List &&
+            errors.isNotEmpty &&
+            errors[0] is Map<String, dynamic>) {
+          // Handle list of errors, get the 'description' field if present
+          var listedErrors = errors[0];
+          if (listedErrors.containsKey('description')) {
+            return ServerFailure(listedErrors['description']);
           }
         }
-        Map<String, dynamic> listedErrors = response['errors'][0];
 
-        if (listedErrors.containsKey('description')) {
-          return ServerFailure(listedErrors['description']);
-        }
+        return ServerFailure(errors.toString());
       }
+
       return ServerFailure(response.toString());
     } else if (statusCode == 404) {
       return ServerFailure('Your request not found. Please try again!');
