@@ -24,6 +24,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      themeMode: ThemeMode.dark,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'inter',

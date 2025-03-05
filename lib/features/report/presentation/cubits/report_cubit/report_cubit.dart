@@ -81,9 +81,6 @@ class ReportCubit extends Cubit<ReportState> {
     String description,
     int category,
   ) async {
-    log(title);
-    log(description);
-    log(category.toString());
     if (await Gal.requestAccess()) {
       if (images.isNotEmpty) {
         for (var image in images) {

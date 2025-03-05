@@ -27,7 +27,10 @@ class CustomHomeAppBar extends StatelessWidget {
         subtitle: Text(
           "$fname $lname",
         ),
-        trailing: const LogOutWidget(),
+        trailing: NotificationItem(
+          notificationCount: 5,
+          onTap: () {},
+        ),
       ),
     );
   }

@@ -58,6 +58,10 @@ class Assets {
   /// assets/icon/icon.jpg
   static const String iconIcon = "assets/icon/icon.jpg";
 
+  /// Assets for imagesAvatar1
+  /// assets/images/avatar1.webp
+  static const String imagesAvatar1 = "assets/images/avatar1.webp";
+
   /// Assets for imagesBrokenStreet
   /// assets/images/broken_street.svg
   static const String imagesBrokenStreet = "assets/images/broken_street.svg";
@@ -89,6 +93,10 @@ class Assets {
   /// Assets for imagesNotification
   /// assets/images/notification.svg
   static const String imagesNotification = "assets/images/notification.svg";
+
+  /// Assets for imagesNotificationBellSvgrepoCom
+  /// assets/images/notification-bell-svgrepo-com.svg
+  static const String imagesNotificationBellSvgrepoCom = "assets/images/notification-bell-svgrepo-com.svg";
 
   /// Assets for imagesOldLogo
   /// assets/images/old_logo.png

@@ -29,43 +29,70 @@ class LogOutWidget extends StatelessWidget {
           shape: BoxShape.circle,
           color: AppColors.lightprimaryColor2,
         ),
-        child: SvgPicture.asset(Assets.imagesLogout),
+        child: SvgPicture.asset(
+          Assets.imagesNotification,
+          width: 24,
+        ),
       ),
     );
   }
 }
 
-Future<void> showConfirmDialog(BuildContext context) async {
-  bool? result = await showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Are you sure?'),
-        content: const Text('Do you really want to perform this action?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false); // Return false
-            },
-            child: const Text('Cancel'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop(true); // Return true
-            },
-            child: const Text('Confirm'),
-          ),
-        ],
-      );
-    },
-  );
+class NotificationItem extends StatelessWidget {
+  final int notificationCount;
+  final VoidCallback onTap;
 
-  // Handle the result after dialog is dismissed
-  if (result == true) {
-    // User confirmed the action
-    print('Action confirmed!');
-  } else {
-    // User canceled the action
-    print('Action canceled!');
+  const NotificationItem({
+    super.key,
+    required this.notificationCount,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        GestureDetector(
+          onTap: onTap,
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.lightprimaryColor2, // Light primary color
+            ),
+            child: SvgPicture.asset(
+              Assets.imagesNotification,
+              width: 26,
+            ),
+          ),
+        ),
+        if (notificationCount > 0)
+          Positioned(
+            left: 0,
+            top: -2,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+              decoration: BoxDecoration(
+                color: AppColors.primaryColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              constraints: const BoxConstraints(
+                minWidth: 18,
+                minHeight: 18,
+              ),
+              child: Text(
+                notificationCount > 99 ? '99+' : notificationCount.toString(),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+      ],
+    );
   }
 }
