@@ -151,7 +151,11 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           iconSize: 32,
           elevation: 16,
 
-          style: const TextStyle(fontSize: 16),
+          style: TextStyle(
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
+              fontSize: 16),
           onChanged: (String? newValue) {
             setState(() {
               selectedValue = newValue;

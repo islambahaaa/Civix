@@ -9,7 +9,12 @@ void buildSnackBar(BuildContext context, String message) {
       behavior: SnackBarBehavior.floating,
       duration: const Duration(seconds: 1),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      content: Text(message),
+      content: Text(
+        message,
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
     ),
   );
 }

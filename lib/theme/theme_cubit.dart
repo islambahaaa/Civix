@@ -24,7 +24,8 @@ class ThemeCubit extends Cubit<ThemeMode> with WidgetsBindingObserver {
   void followSystemTheme() async {
     _isManualSelection = false;
     await Prefs.setString('themeMode', 'system');
-    _updateThemeMode();
+    emit(ThemeMode.system);
+    // _updateThemeMode();
   }
 
   void _loadThemePreference() async {
@@ -38,7 +39,8 @@ class ThemeCubit extends Cubit<ThemeMode> with WidgetsBindingObserver {
       emit(ThemeMode.light);
     } else {
       _isManualSelection = false;
-      _updateThemeMode();
+      emit(ThemeMode.system);
+      //_updateThemeMode();
     }
   }
 

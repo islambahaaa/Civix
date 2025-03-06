@@ -46,7 +46,7 @@ class CustomNavigationBar extends StatelessWidget {
                         height: 40,
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? AppColors.lightprimaryColor.withOpacity(0.3)
+                              ? Theme.of(context).cardTheme.color
                               : null,
                           borderRadius: BorderRadius.circular(16),
                         ),

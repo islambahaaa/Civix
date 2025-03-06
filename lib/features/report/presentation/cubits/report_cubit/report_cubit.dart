@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/repos/report_repo.dart';
 import 'package:civix_app/core/services/api_report_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
@@ -23,7 +24,9 @@ class ReportCubit extends Cubit<ReportState> {
   double? longitude;
 
   Future<void> addImages(List<XFile> pickedImages) async {
+    images.clear();
     for (var image in pickedImages) {
+      log(image.path);
       images.add(File(image.path));
     }
   }

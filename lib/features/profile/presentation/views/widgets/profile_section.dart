@@ -11,7 +11,9 @@ class ProfileSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).brightness == Brightness.light
+              ? Colors.white
+              : Theme.of(context).cardTheme.color,
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(

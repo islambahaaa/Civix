@@ -34,7 +34,7 @@ class ReportView extends StatelessWidget {
       ),
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.lightprimaryColor,
+          backgroundColor: AppColors.primaryColor.withOpacity(0.8),
           centerTitle: true,
           title: const Text('Report'),
         ),

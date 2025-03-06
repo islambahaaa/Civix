@@ -1,7 +1,10 @@
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
+import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_list_tile.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_section.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/switch_widget.dart';
@@ -72,17 +75,13 @@ class ProfileViewBody extends StatelessWidget {
                 icon: Icons.language_outlined,
                 text: 'Language',
               ),
-              ProfileListTile(
-                  icon: Icons.dark_mode_outlined,
-                  text: 'Dark Mode',
-                  trailing: Switch(
-                    inactiveTrackColor: Colors.white,
-                    activeTrackColor: AppColors.primaryColor,
-                    activeColor: Colors.white,
-                    value: isDarkMode,
-                    onChanged: (value) {
-                      themeCubit.toggleTheme(value);
-                    },
+              GestureDetector(
+                  onTap: () {
+                    _showThemeDialog(context);
+                  },
+                  child: const ProfileListTile(
+                    icon: Icons.dark_mode_outlined,
+                    text: 'Theme',
                   )),
             ]),
             const SizedBox(
@@ -97,8 +96,17 @@ class ProfileViewBody extends StatelessWidget {
             const SizedBox(
               height: 25,
             ),
-            const ProfileSection(children: [
-              ProfileListTile(icon: Icons.logout_outlined, text: 'Logout')
+            ProfileSection(children: [
+              GestureDetector(
+                  onTap: () {
+                    showAreYouSureDialog(context, () {
+                      BlocProvider.of<UserCubit>(context).logout();
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          SigninView.routeName, (route) => false);
+                    });
+                  },
+                  child: const ProfileListTile(
+                      icon: Icons.logout_outlined, text: 'Logout'))
             ]),
             const SizedBox(
               height: 25,
@@ -108,4 +116,48 @@ class ProfileViewBody extends StatelessWidget {
       ),
     );
   }
+}
+
+void _showThemeDialog(BuildContext context) {
+  final cubit = context.read<ThemeCubit>();
+  ThemeMode currentMode = cubit.state; // Get current theme
+
+  showDialog(
+    context: context,
+    builder: (BuildContext dialogContext) {
+      return AlertDialog(
+        title: const Text("Select Theme"),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            _buildRadioTile(
+                context, "System Default", ThemeMode.system, currentMode),
+            _buildRadioTile(
+                context, "Light Mode", ThemeMode.light, currentMode),
+            _buildRadioTile(context, "Dark Mode", ThemeMode.dark, currentMode),
+          ],
+        ),
+      );
+    },
+  );
+}
+
+Widget _buildRadioTile(
+    BuildContext context, String title, ThemeMode mode, ThemeMode currentMode) {
+  return RadioListTile<ThemeMode>(
+    activeColor: AppColors.primaryColor,
+    title: Text(title),
+    value: mode,
+    groupValue: currentMode, // Checks the selected option
+    onChanged: (newMode) {
+      if (newMode == ThemeMode.system) {
+        context.read<ThemeCubit>().followSystemTheme();
+      } else if (newMode == ThemeMode.dark) {
+        context.read<ThemeCubit>().toggleTheme(true);
+      } else {
+        context.read<ThemeCubit>().toggleTheme(false);
+      }
+      Navigator.pop(context); // Close the dialog
+    },
+  );
 }

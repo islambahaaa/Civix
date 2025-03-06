@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppThemes {
   static ThemeData lightTheme = ThemeData(
@@ -7,8 +8,10 @@ class AppThemes {
     fontFamily: 'inter',
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      primary: Colors.white,
+      primary: AppColors.secondaryColor,
     ),
+    cardTheme: const CardTheme(color: AppColors.lightprimaryColor2),
+    // Use light icons in dark mode
   );
 
   static ThemeData darkTheme = ThemeData(
@@ -16,10 +19,12 @@ class AppThemes {
     fontFamily: 'inter',
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-      primary: Colors.grey.shade900,
+      // primary: Colors.grey.shade900,
+      primary: AppColors.secondaryColor,
       secondary: Colors.grey.shade600,
       tertiary: Colors.grey.shade400,
     ),
+    cardTheme: CardTheme(color: Colors.grey.shade900),
     //scaffoldBackgroundColor: Colors.grey.shade900,
   );
 }

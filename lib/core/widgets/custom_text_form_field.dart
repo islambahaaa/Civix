@@ -57,7 +57,9 @@ class CustomTextFormField extends StatelessWidget {
         ),
         suffixIcon: suffixIcon,
         filled: true,
-        fillColor: const Color(0xFFF9FAFA),
+        fillColor: Theme.of(context).brightness == Brightness.light
+            ? const Color(0xFFF9FAFA)
+            : Colors.transparent,
         border: buildBorder(isDone: isDone),
         enabledBorder: buildBorder(isDone: isDone),
         focusedBorder: buildBorder(),

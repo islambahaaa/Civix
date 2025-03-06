@@ -49,15 +49,13 @@ class ReportItem extends StatelessWidget {
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
                               color: report.status == 'Solved'
-                                  ? Colors.green[500]
+                                  ? Colors.green[600]
                                   : report.status == 'In Progress'
                                       ? Theme.of(context).brightness ==
                                               Brightness.dark
-                                          ? Theme.of(context)
-                                              .colorScheme
-                                              .primary
+                                          ? Theme.of(context).cardTheme.color
                                           : Colors.grey[200]
-                                      : Colors.red[500],
+                                      : Colors.red[600],
                               //color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(8)),
                           child: Text(

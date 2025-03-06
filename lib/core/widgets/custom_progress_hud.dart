@@ -13,6 +13,8 @@ class CustomProgressHud extends StatelessWidget {
         progressIndicator: const CircularProgressIndicator(
           color: AppColors.primaryColor,
         ),
+        blur: 1,
+        color: Colors.transparent,
         inAsyncCall: isLoading,
         child: child);
   }
