@@ -31,7 +31,7 @@ class CustomDescriptionField extends StatelessWidget {
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xFFF9FAFA),
+        // fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
@@ -71,7 +71,7 @@ class CustomTitleField extends StatelessWidget {
       keyboardType: TextInputType.multiline,
       decoration: InputDecoration(
         filled: true,
-        fillColor: const Color(0xFFF9FAFA),
+        // fillColor: const Color(0xFFF9FAFA),
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
@@ -134,8 +134,9 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.blue, width: 2), // Border Styling
-        color: Colors.white, // Background color
+        border: Border.all(
+            color: AppColors.primaryColor, width: 2), // Border Styling
+        // Background color
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
@@ -143,13 +144,14 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           isExpanded: true,
           hint: const Text(
             "Select Issue Type",
-            style: TextStyle(color: Colors.grey),
           ),
-          icon: const Icon(Icons.arrow_drop_down, color: Colors.blue),
+          icon:
+              const Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),
           value: selectedValue,
           iconSize: 32,
           elevation: 16,
-          style: const TextStyle(color: Colors.black, fontSize: 16),
+
+          style: const TextStyle(fontSize: 16),
           onChanged: (String? newValue) {
             setState(() {
               selectedValue = newValue;

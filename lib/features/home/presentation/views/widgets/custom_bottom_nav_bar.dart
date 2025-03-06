@@ -16,14 +16,16 @@ class CustomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.white, boxShadow: [
-        BoxShadow(
-          color: Colors.grey.withOpacity(0.5),
-          spreadRadius: 1,
-          blurRadius: 4,
-          offset: const Offset(0, 3), // changes position of shadow
-        ),
-      ]),
+      decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 4,
+              offset: const Offset(0, 3), // changes position of shadow
+            ),
+          ]),
       width: double.infinity,
       height: 80,
       child: Stack(
@@ -62,7 +64,7 @@ class CustomNavigationBar extends StatelessWidget {
                                       : Icons.person_outline_outlined,
                           color: isSelected
                               ? AppColors.primaryColor
-                              : Colors.black,
+                              : Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       Padding(

@@ -6,6 +6,8 @@ import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
+import 'package:civix_app/theme/theme.dart';
+import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,16 +25,21 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      themeMode: ThemeMode.dark,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        fontFamily: 'inter',
-        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.secondaryColor),
-        scaffoldBackgroundColor: Colors.white,
+    return BlocProvider(
+      create: (context) => ThemeCubit(),
+      child: BlocBuilder<ThemeCubit, ThemeMode>(
+        builder: (context, theme) {
+          return MaterialApp(
+            title: 'Civix',
+            theme: AppThemes.lightTheme,
+            darkTheme: AppThemes.darkTheme,
+            themeMode: theme,
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: onGenerateRoute,
+            initialRoute: SplashView.routeName,
+          );
+        },
       ),
-      onGenerateRoute: onGenerateRoute,
-      initialRoute: SplashView.routeName,
     );
   }
 }

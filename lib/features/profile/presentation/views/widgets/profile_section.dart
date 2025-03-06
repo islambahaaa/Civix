@@ -6,16 +6,18 @@ class ProfileSection extends StatelessWidget {
     super.key,
     required this.children,
   });
-  final List<ProfileListTile> children;
+  final List<Widget> children;
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.circular(16),
-          color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.grey.withOpacity(0.5) // Light mode shadow
+                  : Colors.black.withOpacity(0.5),
               spreadRadius: 1,
               blurRadius: 2,
               offset: const Offset(0, 1),

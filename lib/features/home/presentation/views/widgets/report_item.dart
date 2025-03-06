@@ -51,7 +51,12 @@ class ReportItem extends StatelessWidget {
                               color: report.status == 'Solved'
                                   ? Colors.green[500]
                                   : report.status == 'In Progress'
-                                      ? Colors.grey[200]
+                                      ? Theme.of(context).brightness ==
+                                              Brightness.dark
+                                          ? Theme.of(context)
+                                              .colorScheme
+                                              .primary
+                                          : Colors.grey[200]
                                       : Colors.red[500],
                               //color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(8)),

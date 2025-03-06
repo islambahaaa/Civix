@@ -1,5 +1,7 @@
 import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/core/utils/app_images.dart';
 import 'package:flutter/material.dart';
+import 'package:svg_flutter/svg.dart';
 
 class SwitchWidget extends StatefulWidget {
   const SwitchWidget({super.key});
@@ -13,7 +15,8 @@ class _SwitchWidgetState extends State<SwitchWidget> {
   @override
   Widget build(BuildContext context) {
     return Switch(
-        activeColor: AppColors.primaryColor,
+        activeTrackColor: AppColors.primaryColor,
+        activeColor: Colors.white,
         splashRadius: 15,
         value: switchValue,
         onChanged: (value) {

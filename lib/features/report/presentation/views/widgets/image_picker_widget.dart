@@ -151,9 +151,11 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
+                color: Theme.of(context).brightness == Brightness.light
+                    ? Colors.grey.withOpacity(0.5) // Light mode shadow
+                    : Colors.transparent,
                 spreadRadius: 2,
-                blurRadius: 5,
+                blurRadius: 2,
                 offset: const Offset(0, 3),
               ),
             ],
@@ -161,7 +163,9 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               width: 1.8,
               color: AppColors.primaryColor,
             ),
-            color: AppColors.lightprimaryColor2,
+            color: Theme.of(context).brightness == Brightness.light
+                ? AppColors.lightprimaryColor2
+                : Colors.transparent,
             borderRadius: BorderRadius.circular(12),
           ),
           height: MediaQuery.of(context).size.height * 0.3,
