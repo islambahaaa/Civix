@@ -1,4 +1,5 @@
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_colors.dart';
@@ -71,10 +72,10 @@ class CustomNavigationBar extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 4, bottom: 4),
                         child: Text(
                           index == 0
-                              ? 'Home'
+                              ? S.of(context).home
                               : index == 1
-                                  ? 'Notifications'
-                                  : 'Profile',
+                                  ? S.of(context).notifications
+                                  : S.of(context).profile,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.normal),
                         ),

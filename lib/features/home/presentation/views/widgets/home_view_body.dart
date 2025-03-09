@@ -4,6 +4,7 @@ import 'package:civix_app/features/home/presentation/views/widgets/newest_report
 import 'package:civix_app/features/home/presentation/views/widgets/newest_reports_list_view.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/report_item.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/solved_in_my_area.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/constants.dart';
@@ -42,7 +43,7 @@ class HomeViewBody extends StatelessWidget {
                     } else if (state is UserFailure) {
                       return Center(child: Text(state.message));
                     } else {
-                      return const Center(child: Text('No user data.'));
+                      return Center(child: Text(S.of(context).no_user_data));
                     }
                   },
                 ),

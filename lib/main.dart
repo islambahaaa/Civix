@@ -33,7 +33,7 @@ class MainApp extends StatelessWidget {
         builder: (context, theme) {
           return MaterialApp(
             title: 'Civix',
-            // locale: const Locale('ar'),
+            locale: const Locale('ar'),
             localizationsDelegates: const [
               S.delegate,
               GlobalMaterialLocalizations.delegate,

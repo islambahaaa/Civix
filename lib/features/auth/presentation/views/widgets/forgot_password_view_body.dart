@@ -1,6 +1,7 @@
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/features/auth/presentation/cubits/otp_cubit/otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -40,10 +41,10 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 30),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Text(
-                  'Where would you like to receive a Verification Code ?',
+                  S.of(context).verification_code,
                   style: TextStyles.bold15inter,
                   textAlign: TextAlign.center,
                 ),
@@ -56,7 +57,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                 onSaved: (value) {
                   email = value!;
                 },
-                hintText: 'Email',
+                hintText: S.of(context).email,
                 prefixIcon: Icons.email,
                 textInputType: TextInputType.emailAddress,
               ),
@@ -74,7 +75,7 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
                     });
                   }
                 },
-                text: 'Send Code',
+                text: S.of(context).send_code,
               ),
               const SizedBox(
                 height: 16,

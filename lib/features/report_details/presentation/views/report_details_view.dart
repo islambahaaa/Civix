@@ -1,5 +1,6 @@
 import 'package:civix_app/features/report/data/models/report_model.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_report_image.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ReportDetailsView extends StatelessWidget {
@@ -12,7 +13,7 @@ class ReportDetailsView extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Report Details'),
+        title: Text(S.of(context).report_details),
       ),
       body: Column(
         children: [

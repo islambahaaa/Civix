@@ -765,6 +765,36 @@ class S {
     return Intl.message('Theme', name: 'theme', desc: '', args: []);
   }
 
+  /// `Select Theme`
+  String get select_theme {
+    return Intl.message(
+      'Select Theme',
+      name: 'select_theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `System Default`
+  String get system_default {
+    return Intl.message(
+      'System Default',
+      name: 'system_default',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light Mode`
+  String get light_mode {
+    return Intl.message('Light Mode', name: 'light_mode', desc: '', args: []);
+  }
+
+  /// `Dark Mode`
+  String get dark_mode {
+    return Intl.message('Dark Mode', name: 'dark_mode', desc: '', args: []);
+  }
+
   /// `Help`
   String get help {
     return Intl.message('Help', name: 'help', desc: '', args: []);

@@ -1,3 +1,4 @@
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -21,8 +22,8 @@ class CustomHomeAppBar extends StatelessWidget {
       child: ListTile(
         contentPadding: EdgeInsets.zero,
         leading: Image.asset(Assets.imagesProfileImage),
-        title: const Text(
-          'Hello,',
+        title: Text(
+          S.of(context).hello,
         ),
         subtitle: Text(
           "$fname $lname",

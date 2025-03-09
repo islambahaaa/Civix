@@ -1,3 +1,4 @@
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:civix_app/features/auth/presentation/views/sign_up_view.dart';
@@ -14,7 +15,7 @@ class DontHaveAccount extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: 'Don\'t have an account?',
+            text: S.of(context).no_account,
             style: TextStyles.semibold16inter
                 .copyWith(color: AppColors.lightGrayColor),
           ),
@@ -26,7 +27,7 @@ class DontHaveAccount extends StatelessWidget {
               ..onTap = () {
                 Navigator.of(context).pushNamed(SignUpView.routeName);
               },
-            text: 'Create Account',
+            text: S.of(context).create_account,
             style: TextStyles.semibold16inter
                 .copyWith(color: AppColors.primaryColor),
           ),

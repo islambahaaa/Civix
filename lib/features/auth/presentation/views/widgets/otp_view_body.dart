@@ -9,6 +9,7 @@ import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/auth/presentation/cubits/otp_cubit/otp_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 height: 64,
               ),
               Text(
-                'Verify',
+                S.of(context).verify,
                 style: TextStyles.semibold28inter
                     .copyWith(color: AppColors.secondaryColor),
               ),
@@ -58,7 +59,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 height: 6,
               ),
               Text(
-                'Enter the code sent to your email',
+                S.of(context).enter_code,
                 style: TextStyles.medium16inter
                     .copyWith(color: AppColors.lightGrayColor),
               ),
@@ -79,7 +80,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 height: 64,
               ),
               Text(
-                'Did not receive the code?',
+                S.of(context).no_code,
                 style: TextStyles.medium16inter
                     .copyWith(color: AppColors.lightGrayColor),
               ),
@@ -87,8 +88,8 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 onTap: widget.countdown == 0 ? widget.resendCode : null,
                 child: Text(
                     widget.countdown > 0
-                        ? 'Resend code in ${widget.countdown} seconds'
-                        : 'Resend Code',
+                        ? S.of(context).resend_code
+                        : S.of(context).resend,
                     style: TextStyles.bold15inter),
               ),
               const SizedBox(
@@ -99,14 +100,14 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 child: CustomButton(
                     onPressed: () {
                       if (otp == null || otp!.length < 6) {
-                        buildSnackBar(context, 'Otp must be 6 digits');
+                        buildSnackBar(context, S.of(context).otp_digits);
                         return;
                       }
 
                       BlocProvider.of<OtpCubit>(context)
                           .checkOtp(widget.email, otp!);
                     },
-                    text: 'Verify'),
+                    text: S.of(context).verify),
               ),
             ],
           ),

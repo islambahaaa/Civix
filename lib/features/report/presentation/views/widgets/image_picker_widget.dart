@@ -7,6 +7,7 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/images_list_view_items.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/list_view_image_item.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -59,12 +60,12 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           final File file = File(image.path);
           final int fileSizeInBytes = await file.length();
           if (await isDuplicate(image)) {
-            buildSnackBar(context, 'You have already selected this image.');
+            buildSnackBar(context, S.of(context).image_selected);
             continue;
           }
           if (fileSizeInBytes > maxImageSizeInBytes) {
             // Show error message if the image is too large
-            buildSnackBar(context, 'Image "${image.name}" exceeds 5 MB');
+            buildSnackBar(context, S.of(context).image_exceeds);
             continue; // Skip this image
           }
 
@@ -73,13 +74,13 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               _images.add(image);
               widget.onImagePicked!(_images);
             } else {
-              buildSnackBar(context, 'Maximum number of images reached');
+              buildSnackBar(context, S.of(context).max_images);
             }
           });
         }
       }
     } catch (e) {
-      buildSnackBar(context, 'Failed to pick images: $e');
+      buildSnackBar(context, S.of(context).image_pick_fail);
     }
   }
 
@@ -96,15 +97,15 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               _images.add(selectedImage);
               widget.onImagePicked!(_images);
             } else {
-              buildSnackBar(context, 'Maximum number of images reached');
+              buildSnackBar(context, S.of(context).max_images);
             }
           });
         }
       } catch (e) {
-        buildSnackBar(context, 'Failed to pick images: $e');
+        buildSnackBar(context, S.of(context).image_pick_fail);
       }
     } else {
-      buildSnackBar(context, 'Camera permission denied');
+      buildSnackBar(context, S.of(context).camera_denied);
     }
   }
 
@@ -124,14 +125,14 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
             children: [
               ListTile(
                 leading: const Icon(Icons.camera_alt),
-                title: const Text('Take Photo'),
+                title: Text(S.of(context).take_photo),
                 onTap: () async {
                   await pickImagesFromCamera();
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.image),
-                title: const Text('Choose from Gallery'),
+                title: Text(S.of(context).choose_gallery),
                 onTap: () async {
                   await pickImagesFromGallery();
                 },
@@ -226,7 +227,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         ),
         const SizedBox(height: 16),
         Text(
-          '${_images.length} / $maxImages images selected',
+          '${_images.length} / $maxImages ${S.of(context).images_selected}',
           style: const TextStyle(fontSize: 16, color: Colors.grey),
         ),
       ],

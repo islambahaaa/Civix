@@ -8,6 +8,7 @@ import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_list_tile.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_section.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/switch_widget.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,16 +47,17 @@ class ProfileViewBody extends StatelessWidget {
             ),
             ProfileSection(
               children: [
-                const ProfileListTile(
-                    icon: Icons.notes_outlined, text: 'Edit Profile'),
-                const ProfileListTile(
+                ProfileListTile(
+                    icon: Icons.notes_outlined,
+                    text: S.of(context).edit_profile),
+                ProfileListTile(
                   icon: Icons.notifications_outlined,
-                  text: 'Notification ',
-                  trailing: SwitchWidget(),
+                  text: S.of(context).notifications,
+                  trailing: const SwitchWidget(),
                 ),
                 ProfileListTile(
                   icon: Icons.phone_outlined,
-                  text: 'Mobile Number',
+                  text: S.of(context).mobile_number,
                   trailing: Text(
                     '01090357957',
                     style: TextStyles.regular14inter.copyWith(
@@ -71,26 +73,26 @@ class ProfileViewBody extends StatelessWidget {
               height: 25,
             ),
             ProfileSection(children: [
-              const ProfileListTile(
+              ProfileListTile(
                 icon: Icons.language_outlined,
-                text: 'Language',
+                text: S.of(context).language,
               ),
               GestureDetector(
                   onTap: () {
                     _showThemeDialog(context);
                   },
-                  child: const ProfileListTile(
+                  child: ProfileListTile(
                     icon: Icons.dark_mode_outlined,
-                    text: 'Theme',
+                    text: S.of(context).theme,
                   )),
             ]),
             const SizedBox(
               height: 25,
             ),
-            const ProfileSection(children: [
+            ProfileSection(children: [
               ProfileListTile(
                 icon: Icons.help_outline_outlined,
-                text: 'Help',
+                text: S.of(context).help,
               )
             ]),
             const SizedBox(
@@ -105,8 +107,8 @@ class ProfileViewBody extends StatelessWidget {
                           SigninView.routeName, (route) => false);
                     });
                   },
-                  child: const ProfileListTile(
-                      icon: Icons.logout_outlined, text: 'Logout'))
+                  child: ProfileListTile(
+                      icon: Icons.logout_outlined, text: S.of(context).logout))
             ]),
             const SizedBox(
               height: 25,
@@ -126,15 +128,16 @@ void _showThemeDialog(BuildContext context) {
     context: context,
     builder: (BuildContext dialogContext) {
       return AlertDialog(
-        title: const Text("Select Theme"),
+        title: Text(S.of(context).select_theme),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            _buildRadioTile(context, S.of(context).system_default,
+                ThemeMode.system, currentMode),
+            _buildRadioTile(context, S.of(context).light_mode, ThemeMode.light,
+                currentMode),
             _buildRadioTile(
-                context, "System Default", ThemeMode.system, currentMode),
-            _buildRadioTile(
-                context, "Light Mode", ThemeMode.light, currentMode),
-            _buildRadioTile(context, "Dark Mode", ThemeMode.dark, currentMode),
+                context, S.of(context).dark_mode, ThemeMode.dark, currentMode),
           ],
         ),
       );

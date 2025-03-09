@@ -38,7 +38,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                 height: 30,
               ),
               Text(
-                'Create a New Password',
+                S.of(context).create_account,
                 style: TextStyles.semibold28inter
                     .copyWith(color: AppColors.secondaryColor),
               ),
@@ -55,7 +55,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                 height: 16,
               ),
               PasswordField(
-                hintText: 'Confirm Password',
+                hintText: S.of(context).confirm_password,
                 onchanged: (value) {
                   confirmpass = value!;
                 },
@@ -66,7 +66,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       if (password != confirmpass) {
-                        buildSnackBar(context, 'Password does not match');
+                        buildSnackBar(context, S.of(context).password_mismatch);
                       } else {
                         context.read<NewPasswordCubit>().newPassword(
                             widget.user.token,
@@ -80,7 +80,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                       });
                     }
                   },
-                  text: 'Verify'),
+                  text: S.of(context).verify),
             ],
           ),
         ),

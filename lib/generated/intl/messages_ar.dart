@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "انتهت مهلة الاتصال",
     ),
     "create_account": MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "date_example": MessageLookupByLibrary.simpleMessage("4 يناير 2022"),
     "date_example_2": MessageLookupByLibrary.simpleMessage("6 فبراير 2023"),
     "date_example_3": MessageLookupByLibrary.simpleMessage("12 يناير 2024"),
@@ -99,6 +100,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "issue_type": MessageLookupByLibrary.simpleMessage("أختيار نوع المشكلة"),
     "language": MessageLookupByLibrary.simpleMessage("اللغة"),
     "last_name": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
+    "light_mode": MessageLookupByLibrary.simpleMessage("وضع الإضاءة"),
     "location_error": MessageLookupByLibrary.simpleMessage(
       "فشل في جلب الموقع: \$e",
     ),
@@ -185,6 +187,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "إنشاء حي آمن ومسالم",
     ),
     "safety": MessageLookupByLibrary.simpleMessage("أمان"),
+    "select_theme": MessageLookupByLibrary.simpleMessage("اختيار المظهر"),
     "send_code": MessageLookupByLibrary.simpleMessage("إرسال الرمز"),
     "send_timeout": MessageLookupByLibrary.simpleMessage("انتهت مهلة الإرسال"),
     "server_error": MessageLookupByLibrary.simpleMessage(
@@ -202,6 +205,9 @@ class MessageLookup extends MessageLookupByLibrary {
     "street_light": MessageLookupByLibrary.simpleMessage("مشكلة في الإنارة"),
     "submit": MessageLookupByLibrary.simpleMessage("إرسال"),
     "success": MessageLookupByLibrary.simpleMessage("نجاح!"),
+    "system_default": MessageLookupByLibrary.simpleMessage(
+      "الإعدادات الافتراضية للنظام",
+    ),
     "take_photo": MessageLookupByLibrary.simpleMessage("التقاط صورة"),
     "terms": MessageLookupByLibrary.simpleMessage("الشروط"),
     "theme": MessageLookupByLibrary.simpleMessage("المظهر"),

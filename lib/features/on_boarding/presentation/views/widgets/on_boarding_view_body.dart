@@ -6,6 +6,7 @@ import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/widgets/on_boarding_page_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -58,7 +59,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Skip',
+                    S.of(context).skip,
                     style: TextStyles.regular17inter
                         .copyWith(color: AppColors.secondaryColor),
                   ),
@@ -88,7 +89,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           padding: const EdgeInsets.symmetric(horizontal: 116),
           child: currentPage == 2
               ? CustomButton(
-                  text: 'Done',
+                  text: S.of(context).done,
                   onPressed: () {
                     Prefs.setBool(kIsOnBoardingSeen, true);
                     Navigator.of(context)
@@ -96,7 +97,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   },
                 )
               : CustomButton(
-                  text: 'Next',
+                  text: S.of(context).next,
                   onPressed: () {
                     pageController.nextPage(
                       duration: const Duration(milliseconds: 300),

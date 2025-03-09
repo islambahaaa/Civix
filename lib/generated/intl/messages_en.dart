@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Connection Timeout",
     ),
     "create_account": MessageLookupByLibrary.simpleMessage("Create Account"),
+    "dark_mode": MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "date_example": MessageLookupByLibrary.simpleMessage("Jan 4,2022"),
     "date_example_2": MessageLookupByLibrary.simpleMessage("Feb 6,2023"),
     "date_example_3": MessageLookupByLibrary.simpleMessage("Jan 12,2024"),
@@ -111,6 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "issue_type": MessageLookupByLibrary.simpleMessage("Select Issue Type"),
     "language": MessageLookupByLibrary.simpleMessage("Language"),
     "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
+    "light_mode": MessageLookupByLibrary.simpleMessage("Light Mode"),
     "location_error": MessageLookupByLibrary.simpleMessage(
       "Failed to fetch location: \$e",
     ),
@@ -199,6 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Create a safe and peaceful neighborhood",
     ),
     "safety": MessageLookupByLibrary.simpleMessage("SAFETY"),
+    "select_theme": MessageLookupByLibrary.simpleMessage("Select Theme"),
     "send_code": MessageLookupByLibrary.simpleMessage("Send Code"),
     "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
     "server_error": MessageLookupByLibrary.simpleMessage(
@@ -218,6 +221,7 @@ class MessageLookup extends MessageLookupByLibrary {
     ),
     "submit": MessageLookupByLibrary.simpleMessage("Submit"),
     "success": MessageLookupByLibrary.simpleMessage("Success!"),
+    "system_default": MessageLookupByLibrary.simpleMessage("System Default"),
     "take_photo": MessageLookupByLibrary.simpleMessage("Take Photo"),
     "terms": MessageLookupByLibrary.simpleMessage("Terms"),
     "theme": MessageLookupByLibrary.simpleMessage("Theme"),

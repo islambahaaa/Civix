@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class CustomDescriptionField extends StatelessWidget {
@@ -24,7 +25,7 @@ class CustomDescriptionField extends StatelessWidget {
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'This Field is required';
+          return S.of(context).required_field;
         }
         return null;
       },
@@ -35,7 +36,7 @@ class CustomDescriptionField extends StatelessWidget {
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
-        hintText: 'Description',
+        hintText: S.of(context).description,
         hintStyle: TextStyles.medium16inter.copyWith(
           color: AppColors.lightGrayColor,
         ),
@@ -64,7 +65,7 @@ class CustomTitleField extends StatelessWidget {
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'This Field is required';
+          return S.of(context).required_field;
         }
         return null;
       },
@@ -75,7 +76,7 @@ class CustomTitleField extends StatelessWidget {
         border: buildBorder(),
         enabledBorder: buildBorder(),
         focusedBorder: buildBorder(),
-        hintText: 'Title',
+        hintText: S.of(context).title,
         hintStyle: TextStyles.medium16inter.copyWith(
           color: AppColors.lightGrayColor,
         ),
@@ -99,33 +100,26 @@ class DropdownMenuExample extends StatefulWidget {
 class _DropdownMenuExampleState extends State<DropdownMenuExample> {
   String? selectedValue;
   final List<String> items = [
-    'Pothole',
-    'Garbage',
-    'Broken Streetlight',
-    'Manhole',
-    'Flooding',
-    'Grafitti',
-    'Other'
+    S.current.pothole,
+    S.current.garbage,
+    S.current.broken_streetlight,
+    S.current.manhole,
+    S.current.flooding,
+    S.current.graffiti,
+    S.current.other,
   ];
+
+  Map<String, int> categoryMap = {
+    S.current.pothole: 1,
+    S.current.broken_streetlight: 2,
+    S.current.garbage: 3,
+    S.current.manhole: 4,
+    S.current.graffiti: 5, // Fixed spelling
+    S.current.flooding: 6,
+    S.current.other: 7,
+  };
   int _getCategoryId(String category) {
-    switch (category) {
-      case 'Pothole':
-        return 1;
-      case 'Broken Streetlight':
-        return 2;
-      case 'Garbage':
-        return 3;
-      case 'Manhole':
-        return 4;
-      case 'Grafitti':
-        return 5;
-      case 'Flooding':
-        return 6;
-      case 'Other':
-        return 7;
-      default:
-        return 0; // Fallback value
-    }
+    return categoryMap[category] ?? 0; // Returns 0 if category is not found
   }
 
   @override
@@ -142,8 +136,8 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
         child: DropdownButton<String>(
           padding: const EdgeInsets.all(4),
           isExpanded: true,
-          hint: const Text(
-            "Select Issue Type",
+          hint: Text(
+            S.of(context).issue_type,
           ),
           icon:
               const Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),

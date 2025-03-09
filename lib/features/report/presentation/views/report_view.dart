@@ -12,6 +12,7 @@ import 'package:civix_app/features/report/presentation/views/widgets/image_picke
 import 'package:civix_app/features/report/presentation/views/widgets/report_fields.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/report_view_bloc_consumer.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/report_view_body.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,7 +37,7 @@ class ReportView extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor.withOpacity(0.8),
           centerTitle: true,
-          title: const Text('Report'),
+          title: Text(S.of(context).report),
         ),
         body: const ReportViewBodyBlocConsumer(),
       ),

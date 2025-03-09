@@ -8,6 +8,7 @@ import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/repos/report_repo.dart';
 import 'package:civix_app/core/services/api_report_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:gal/gal.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image_picker/image_picker.dart';
@@ -39,16 +40,14 @@ class ReportCubit extends Cubit<ReportState> {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        emit(ReportFailure(
-            'Location permission is required to access your location.'));
+        emit(ReportFailure(S.current.location_permission));
 
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      emit(ReportFailure(
-          'Location permission is required to access your location.'));
+      emit(ReportFailure(S.current.location_permission));
 
       await Geolocator.openAppSettings();
       return;
@@ -60,15 +59,14 @@ class ReportCubit extends Cubit<ReportState> {
       latitude = position.latitude;
       longitude = position.longitude;
     } catch (e) {
-      emit(ReportFailure('Failed to fetch location: $e'));
+      emit(ReportFailure(S.current.location_error));
     }
   }
 
   Future<void> checkAndGetLocation() async {
     bool isLocationServiceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!isLocationServiceEnabled) {
-      emit(ReportFailure(
-          'GPS is disabled. Please enable it to fetch your location.'));
+      emit(ReportFailure(S.current.gps_disabled));
       Future.delayed(const Duration(seconds: 1));
       await Geolocator.openLocationSettings();
       return;
@@ -91,19 +89,19 @@ class ReportCubit extends Cubit<ReportState> {
           await Gal.putImage(image.path, album: 'Civix');
         }
       } else {
-        emit(ReportFailure('Please provide images'));
+        emit(ReportFailure(S.current.provide_images));
 
         return;
       }
     } else {
-      emit(ReportFailure('Gallery permission denied'));
+      emit(ReportFailure(S.current.gallery_denied));
       return;
     }
     await checkAndGetLocation();
     String token = await getToken();
     if (token.isEmpty) return;
     if (latitude == null || longitude == null) {
-      emit(ReportFailure('Failed to get location. Please try again.'));
+      emit(ReportFailure(S.current.location_fail));
       return;
     }
     await createIssue(
@@ -117,7 +115,7 @@ class ReportCubit extends Cubit<ReportState> {
         Map<String, dynamic> userMap = jsonDecode(user);
         return userMap['token'] ?? '';
       } else {
-        emit(ReportFailure('Please Login First'));
+        emit(ReportFailure(S.current.login_first));
         return '';
       }
     } catch (e) {

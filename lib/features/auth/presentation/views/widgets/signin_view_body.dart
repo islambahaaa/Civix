@@ -48,7 +48,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 onSaved: (value) {
                   email = value!;
                 },
-                hintText: 'Email',
+                hintText: S.of(context).email,
                 prefixIcon: Icons.email,
                 textInputType: TextInputType.emailAddress,
               ),
@@ -73,7 +73,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                           .pushNamed(ForgotPasswordView.routeName);
                     },
                     child: Text(
-                      'Forgot your password?',
+                      S.of(context).forgot_pass,
                       style: TextStyles.semibold16inter
                           .copyWith(color: AppColors.primaryColor),
                     ),
@@ -96,7 +96,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                     });
                   }
                 },
-                text: 'Log In',
+                text: S.of(context).login,
               ),
               const SizedBox(
                 height: 16,

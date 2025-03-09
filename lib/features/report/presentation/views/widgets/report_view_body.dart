@@ -6,6 +6,7 @@ import 'package:civix_app/features/report/data/models/report_model.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/report_fields.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -75,13 +76,13 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                             category!,
                           );
                     } else {
-                      buildSnackBar(context, 'Please fill all fields');
+                      buildSnackBar(context, S.of(context).fill_fields);
                       setState(() {
                         autovalidateMode = AutovalidateMode.always;
                       });
                     }
                   },
-                  text: 'Submit')
+                  text: S.of(context).submit)
             ]),
           ),
         ));

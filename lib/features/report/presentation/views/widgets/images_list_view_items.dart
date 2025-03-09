@@ -1,6 +1,7 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/list_view_image_item.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -72,8 +73,8 @@ class ImageWidgetPlaceHolder extends StatelessWidget {
           width: 45,
           height: 45,
         ),
-        const Text(
-          'Image size must be less than 5 MB',
+        Text(
+          S.of(context).image_size_limit,
         ),
       ],
     ));

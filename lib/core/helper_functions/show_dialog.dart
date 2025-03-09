@@ -23,8 +23,8 @@ void showCustomDialog(BuildContext context, String text) {
                 const Icon(Icons.check_circle,
                     color: AppColors.primaryColor, size: 100),
                 const SizedBox(height: 16),
-                const Text(
-                  'Success!',
+                Text(
+                  S.of(context).success,
                   style: TextStyles.semibold24inter,
                   textAlign: TextAlign.center,
                 ),
@@ -63,15 +63,15 @@ void showCongratulationsDialog(BuildContext context) {
                   SvgPicture.asset(Assets.imagesBubbles),
                 ]),
                 const SizedBox(height: 20),
-                const Text(
-                  'Congratulations!',
+                Text(
+                  S.of(context).congrats,
                   style: TextStyles.semibold24inter,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Password Reset Successful\nYou’ll be redirected to the login screen now',
-                  style: TextStyle(
+                Text(
+                  S.of(context).password_reset,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),

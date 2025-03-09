@@ -4,6 +4,7 @@ import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubi
 import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/home_view_body.dart';
@@ -57,7 +58,7 @@ class _HomeViewState extends State<HomeView> {
             ? null
             : FloatingActionButton.extended(
                 label: Text(
-                  'Report',
+                  S.of(context).report,
                   style:
                       TextStyles.regular14inter.copyWith(color: Colors.white),
                 ),
@@ -86,8 +87,8 @@ class _HomeViewState extends State<HomeView> {
                       curve: Curves.easeInOutExpo);
                 },
               ),
-              const Center(
-                child: Text('Solved Issues'),
+              Center(
+                child: Text(S.of(context).solved_issues),
               ),
               const ProfileView(),
             ],

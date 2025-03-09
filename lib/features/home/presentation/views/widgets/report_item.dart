@@ -4,6 +4,7 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_report_image.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class ReportItem extends StatelessWidget {
@@ -48,9 +49,9 @@ class ReportItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: report.status == 'Solved'
+                              color: report.status == S.of(context).solved
                                   ? Colors.green[600]
-                                  : report.status == 'In Progress'
+                                  : report.status == S.of(context).in_progress
                                       ? Theme.of(context).brightness ==
                                               Brightness.dark
                                           ? Theme.of(context).cardTheme.color

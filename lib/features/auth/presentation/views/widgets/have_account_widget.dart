@@ -1,3 +1,4 @@
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class HaveAccountWidget extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(
-            text: 'Already Have an Account?',
+            text: S.of(context).have_account,
             style: TextStyles.semibold16inter
                 .copyWith(color: AppColors.lightGrayColor),
           ),
@@ -25,7 +26,7 @@ class HaveAccountWidget extends StatelessWidget {
               ..onTap = () {
                 Navigator.of(context).pop();
               },
-            text: 'Log In',
+            text: S.of(context).login,
             style: TextStyles.semibold16inter
                 .copyWith(color: AppColors.primaryColor),
           ),
