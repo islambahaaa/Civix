@@ -665,6 +665,16 @@ class S {
     );
   }
 
+  /// `Solved In My Area`
+  String get solved_area_ab {
+    return Intl.message(
+      'Solved In My Area',
+      name: 'solved_area_ab',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report your issues from the comfort of your own house`
   String get report_from_home {
     return Intl.message(

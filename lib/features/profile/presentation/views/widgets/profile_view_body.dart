@@ -5,9 +5,11 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
+import 'package:civix_app/features/profile/presentation/views/widgets/language_dialog.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_list_tile.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_section.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/switch_widget.dart';
+import 'package:civix_app/features/profile/presentation/views/widgets/theme_dialog.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
@@ -73,13 +75,18 @@ class ProfileViewBody extends StatelessWidget {
               height: 25,
             ),
             ProfileSection(children: [
-              ProfileListTile(
-                icon: Icons.language_outlined,
-                text: S.of(context).language,
+              GestureDetector(
+                onTap: () {
+                  showLanguageDialog(context);
+                },
+                child: ProfileListTile(
+                  icon: Icons.language_outlined,
+                  text: S.of(context).language,
+                ),
               ),
               GestureDetector(
                   onTap: () {
-                    _showThemeDialog(context);
+                    showThemeDialog(context);
                   },
                   child: ProfileListTile(
                     icon: Icons.dark_mode_outlined,
@@ -118,49 +125,4 @@ class ProfileViewBody extends StatelessWidget {
       ),
     );
   }
-}
-
-void _showThemeDialog(BuildContext context) {
-  final cubit = context.read<ThemeCubit>();
-  ThemeMode currentMode = cubit.state; // Get current theme
-
-  showDialog(
-    context: context,
-    builder: (BuildContext dialogContext) {
-      return AlertDialog(
-        title: Text(S.of(context).select_theme),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _buildRadioTile(context, S.of(context).system_default,
-                ThemeMode.system, currentMode),
-            _buildRadioTile(context, S.of(context).light_mode, ThemeMode.light,
-                currentMode),
-            _buildRadioTile(
-                context, S.of(context).dark_mode, ThemeMode.dark, currentMode),
-          ],
-        ),
-      );
-    },
-  );
-}
-
-Widget _buildRadioTile(
-    BuildContext context, String title, ThemeMode mode, ThemeMode currentMode) {
-  return RadioListTile<ThemeMode>(
-    activeColor: AppColors.primaryColor,
-    title: Text(title),
-    value: mode,
-    groupValue: currentMode, // Checks the selected option
-    onChanged: (newMode) {
-      if (newMode == ThemeMode.system) {
-        context.read<ThemeCubit>().followSystemTheme();
-      } else if (newMode == ThemeMode.dark) {
-        context.read<ThemeCubit>().toggleTheme(true);
-      } else {
-        context.read<ThemeCubit>().toggleTheme(false);
-      }
-      Navigator.pop(context); // Close the dialog
-    },
-  );
 }

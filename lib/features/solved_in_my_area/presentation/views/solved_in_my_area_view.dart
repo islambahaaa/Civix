@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/newest_reports_header.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class SolvedInMyAreaView extends StatelessWidget {
@@ -10,35 +11,35 @@ class SolvedInMyAreaView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primaryColor.withOpacity(0.8),
-        title: const Text('Solved In My Area'),
+        title: Text(S.of(context).solved_area_ab),
         centerTitle: true,
       ),
-      body: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextField(
                 decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              labelText: 'City',
-              border: OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.search),
+              labelText: S.of(context).city,
+              border: const OutlineInputBorder(),
             )),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             TextField(
                 decoration: InputDecoration(
-              prefixIcon: Icon(Icons.search),
-              labelText: 'Region',
-              border: OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.search),
+              labelText: S.of(context).region,
+              border: const OutlineInputBorder(),
             )),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            NewestReportsHeader(),
+            const NewestReportsHeader(),
           ],
         ),
       ),

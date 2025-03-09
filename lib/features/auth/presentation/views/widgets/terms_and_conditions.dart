@@ -1,4 +1,5 @@
 import 'package:civix_app/features/auth/presentation/views/widgets/custom_check_box.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -40,12 +41,12 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
               TextSpan(
                 children: [
                   TextSpan(
-                    text: 'By clicking Sign up, you Agree to our ',
+                    text: S.of(context).agree_terms,
                     style: TextStyles.regular14inter
                         .copyWith(color: AppColors.lightGrayColor),
                   ),
                   TextSpan(
-                    text: 'Terms',
+                    text: S.of(context).terms,
                     style: TextStyles.regular14inter
                         .copyWith(color: AppColors.secondaryColor),
                   ),
@@ -53,7 +54,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                     text: ' ',
                   ),
                   TextSpan(
-                    text: 'and',
+                    text: S.of(context).and,
                     style: TextStyles.regular14inter
                         .copyWith(color: AppColors.secondaryColor),
                   ),
@@ -61,7 +62,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                     text: ' ',
                   ),
                   TextSpan(
-                    text: 'Conditions',
+                    text: S.of(context).conditions,
                     style: TextStyles.regular14inter
                         .copyWith(color: AppColors.secondaryColor),
                   ),

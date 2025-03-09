@@ -1,4 +1,5 @@
 import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pw_validator/Resource/Strings.dart';
 import 'package:flutter_pw_validator/flutter_pw_validator.dart';
@@ -34,17 +35,17 @@ class PasswordValidator extends StatelessWidget {
 
 class FrenchStrings implements FlutterPwValidatorStrings {
   @override
-  final String atLeast = 'At least 8 character';
+  final String atLeast = S.current.min_chars;
   @override
-  final String uppercaseLetters = '1 Uppercase letter';
+  final String uppercaseLetters = S.current.uppercase;
   @override
-  final String numericCharacters = '1 Numeric character';
+  final String numericCharacters = S.current.numeric;
   @override
-  final String specialCharacters = '1 Special character';
+  final String specialCharacters = S.current.special_char;
 
   @override
-  final String lowercaseLetters = 'Lower Case';
+  final String lowercaseLetters = S.current.lowercase;
 
   @override
-  final String normalLetters = 'Normal Letters';
+  final String normalLetters = S.current.normal_letters;
 }

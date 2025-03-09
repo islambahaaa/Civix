@@ -7,6 +7,7 @@ import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:civix_app/generated/l10n.dart';
+import 'package:civix_app/language/lang_cubit.dart';
 import 'package:civix_app/theme/theme.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
@@ -27,26 +28,35 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ThemeCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ThemeCubit(),
+        ),
+        BlocProvider(create: (context) => LanguageCubit()..loadSavedLanguage()),
+      ],
       child: BlocBuilder<ThemeCubit, ThemeMode>(
         builder: (context, theme) {
-          return MaterialApp(
-            title: 'Civix',
-            locale: const Locale('ar'),
-            localizationsDelegates: const [
-              S.delegate,
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-            supportedLocales: S.delegate.supportedLocales,
-            theme: AppThemes.lightTheme,
-            darkTheme: AppThemes.darkTheme,
-            themeMode: theme,
-            debugShowCheckedModeBanner: false,
-            onGenerateRoute: onGenerateRoute,
-            initialRoute: SplashView.routeName,
+          return BlocBuilder<LanguageCubit, Locale>(
+            builder: (context, locale) {
+              return MaterialApp(
+                title: 'Civix',
+                locale: locale,
+                localizationsDelegates: const [
+                  S.delegate,
+                  GlobalMaterialLocalizations.delegate,
+                  GlobalWidgetsLocalizations.delegate,
+                  GlobalCupertinoLocalizations.delegate,
+                ],
+                supportedLocales: S.delegate.supportedLocales,
+                theme: AppThemes.lightTheme,
+                darkTheme: AppThemes.darkTheme,
+                themeMode: theme,
+                debugShowCheckedModeBanner: false,
+                onGenerateRoute: onGenerateRoute,
+                initialRoute: SplashView.routeName,
+              );
+            },
           );
         },
       ),

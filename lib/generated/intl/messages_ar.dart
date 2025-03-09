@@ -26,7 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "يرجى قبول الشروط والأحكام",
     ),
     "agree_terms": MessageLookupByLibrary.simpleMessage(
-      "بالنقر على تسجيل، فإنك توافق على",
+      "بالنقر على تسجيل، فإنك توافق على ",
     ),
     "al_shorouk": MessageLookupByLibrary.simpleMessage("الشروق"),
     "alexandria": MessageLookupByLibrary.simpleMessage("الإسكندرية"),
@@ -197,6 +197,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "skip": MessageLookupByLibrary.simpleMessage("تخطي"),
     "solved": MessageLookupByLibrary.simpleMessage("تم الحل"),
     "solved_area": MessageLookupByLibrary.simpleMessage("تم الحل\nفي منطقتي"),
+    "solved_area_ab": MessageLookupByLibrary.simpleMessage("تم الحل في منطقتي"),
     "solved_issues": MessageLookupByLibrary.simpleMessage("المشاكل المحلولة"),
     "something_wrong": MessageLookupByLibrary.simpleMessage(
       "حدث خطأ ما، يرجى المحاولة مرة أخرى!",
