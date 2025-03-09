@@ -6,6 +6,7 @@ import 'package:civix_app/features/profile/presentation/views/profile_view.dart'
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,45 +54,54 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => UserCubit()..fetchUser(),
-      child: Scaffold(
-        floatingActionButton: currentIndex != 0
-            ? null
-            : FloatingActionButton.extended(
-                label: Text(
-                  S.of(context).report,
-                  style:
-                      TextStyles.regular14inter.copyWith(color: Colors.white),
-                ),
-                icon: const Icon(Icons.add, color: Colors.white, size: 24),
-                splashColor: AppColors.primaryColor,
-                backgroundColor: AppColors.secondaryColor,
-                onPressed: () {
-                  Navigator.pushNamed(context, ReportView.routeName);
-                },
-              ),
-        bottomNavigationBar: CustomNavigationBar(
-          selectedIndex: currentIndex,
-          onItemSelected: (index) {
-            _onNavItemTapped(index);
-          },
+      child: AnnotatedRegion(
+        value: SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Brightness.light
+                  : Brightness.dark,
         ),
-        body: SafeArea(
-          child: PageView(
-            controller: pageController,
-            onPageChanged: _onPageChanged,
-            children: [
-              HomeViewBody(
-                onNameTap: () {
-                  pageController.animateToPage(2,
-                      duration: const Duration(milliseconds: 500),
-                      curve: Curves.easeInOutExpo);
-                },
-              ),
-              Center(
-                child: Text(S.of(context).solved_issues),
-              ),
-              const ProfileView(),
-            ],
+        child: Scaffold(
+          floatingActionButton: currentIndex != 0
+              ? null
+              : FloatingActionButton.extended(
+                  label: Text(
+                    S.of(context).report,
+                    style:
+                        TextStyles.regular14inter.copyWith(color: Colors.white),
+                  ),
+                  icon: const Icon(Icons.add, color: Colors.white, size: 24),
+                  splashColor: AppColors.primaryColor,
+                  backgroundColor: AppColors.secondaryColor,
+                  onPressed: () {
+                    Navigator.pushNamed(context, ReportView.routeName);
+                  },
+                ),
+          bottomNavigationBar: CustomNavigationBar(
+            selectedIndex: currentIndex,
+            onItemSelected: (index) {
+              _onNavItemTapped(index);
+            },
+          ),
+          body: SafeArea(
+            child: PageView(
+              controller: pageController,
+              onPageChanged: _onPageChanged,
+              children: [
+                HomeViewBody(
+                  onNameTap: () {
+                    pageController.animateToPage(2,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOutExpo);
+                  },
+                ),
+                Center(
+                  child: Text(S.of(context).solved_issues),
+                ),
+                const ProfileView(),
+              ],
+            ),
           ),
         ),
       ),

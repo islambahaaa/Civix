@@ -25,6 +25,13 @@ class AppThemes {
       tertiary: Colors.grey.shade400,
     ),
     cardTheme: CardTheme(color: Colors.grey.shade900),
+    appBarTheme: const AppBarTheme(
+      systemOverlayStyle: SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness:
+            Brightness.light, // Use light icons in dark mode
+      ),
+    ),
     //scaffoldBackgroundColor: Colors.grey.shade900,
   );
 }

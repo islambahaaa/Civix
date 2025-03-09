@@ -210,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
     "skip": MessageLookupByLibrary.simpleMessage("Skip"),
     "solved": MessageLookupByLibrary.simpleMessage("Solved"),
-    "solved_area": MessageLookupByLibrary.simpleMessage("Solved\\nIn My Area"),
+    "solved_area": MessageLookupByLibrary.simpleMessage("Solved\nIn My Area"),
     "solved_area_ab": MessageLookupByLibrary.simpleMessage("Solved In My Area"),
     "solved_issues": MessageLookupByLibrary.simpleMessage("Solved Issues"),
     "something_wrong": MessageLookupByLibrary.simpleMessage(

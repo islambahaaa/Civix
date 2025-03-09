@@ -658,7 +658,7 @@ class S {
   /// `Solved\nIn My Area`
   String get solved_area {
     return Intl.message(
-      'Solved\\nIn My Area',
+      'Solved\nIn My Area',
       name: 'solved_area',
       desc: '',
       args: [],

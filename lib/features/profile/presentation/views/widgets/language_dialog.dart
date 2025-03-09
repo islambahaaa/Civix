@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/language/lang_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,14 +29,14 @@ void showLanguageDialog(BuildContext context) {
 
 Widget _languageOption(BuildContext context, String language, Locale locale,
     Locale currentLocale) {
-  return ListTile(
+  return RadioListTile<Locale>(
+    activeColor: AppColors.primaryColor,
+    groupValue: currentLocale,
     title: Text(language),
-    trailing: currentLocale == locale
-        ? const Icon(Icons.check, color: Colors.blue)
-        : null,
-    onTap: () {
+    value: locale,
+    onChanged: (value) {
       context.read<LanguageCubit>().changeLanguage(locale);
-      Navigator.pop(context); // Close dialog after selection
+      Navigator.pop(context);
     },
   );
 }
