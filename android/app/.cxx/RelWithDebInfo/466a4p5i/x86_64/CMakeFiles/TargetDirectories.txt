@@ -1,0 +1,2 @@
+D:/Flutter projects/civix_app/android/app/.cxx/RelWithDebInfo/466a4p5i/x86_64/CMakeFiles/edit_cache.dir
+D:/Flutter projects/civix_app/android/app/.cxx/RelWithDebInfo/466a4p5i/x86_64/CMakeFiles/rebuild_cache.dir

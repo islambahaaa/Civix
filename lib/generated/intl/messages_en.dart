@@ -95,11 +95,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello": MessageLookupByLibrary.simpleMessage("Hello,"),
     "help": MessageLookupByLibrary.simpleMessage("Help"),
     "home": MessageLookupByLibrary.simpleMessage("Home"),
-    "image_exceeds": MessageLookupByLibrary.simpleMessage(
-      "Image \"\${image.name}\" exceeds 5 MB",
-    ),
+    "image": MessageLookupByLibrary.simpleMessage("Image"),
+    "image_exceeds": MessageLookupByLibrary.simpleMessage("exceeds 5 MB"),
     "image_pick_fail": MessageLookupByLibrary.simpleMessage(
-      "Failed to pick images: \$e",
+      "Failed to pick images: ",
     ),
     "image_selected": MessageLookupByLibrary.simpleMessage(
       "You have already selected this image.",
@@ -114,7 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
     "light_mode": MessageLookupByLibrary.simpleMessage("Light Mode"),
     "location_error": MessageLookupByLibrary.simpleMessage(
-      "Failed to fetch location: \$e",
+      "Failed to fetch location: ",
     ),
     "location_fail": MessageLookupByLibrary.simpleMessage(
       "Failed to get location. Please try again.",
@@ -167,7 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
       "Password does not match",
     ),
     "password_reset": MessageLookupByLibrary.simpleMessage(
-      "Password Reset Successful\\nYou’ll be redirected to the login screen now",
+      "Password Reset Successful\nYou’ll be redirected to the login screen now",
     ),
     "pothole": MessageLookupByLibrary.simpleMessage("Pothole"),
     "pothole_example": MessageLookupByLibrary.simpleMessage(

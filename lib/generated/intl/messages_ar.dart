@@ -83,11 +83,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "hello": MessageLookupByLibrary.simpleMessage("مرحبًا،"),
     "help": MessageLookupByLibrary.simpleMessage("مساعدة"),
     "home": MessageLookupByLibrary.simpleMessage("الرئيسية"),
-    "image_exceeds": MessageLookupByLibrary.simpleMessage(
-      "الصورة \"\${image.name}\" تتجاوز 5 ميجابايت",
-    ),
+    "image": MessageLookupByLibrary.simpleMessage("الصورة"),
+    "image_exceeds": MessageLookupByLibrary.simpleMessage("تتجاوز 5 ميجابايت"),
     "image_pick_fail": MessageLookupByLibrary.simpleMessage(
-      "فشل في اختيار الصور: \$e",
+      "فشل في اختيار الصور: ",
     ),
     "image_selected": MessageLookupByLibrary.simpleMessage(
       "لقد اخترت هذه الصورة بالفعل.",
@@ -102,7 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "last_name": MessageLookupByLibrary.simpleMessage("الاسم الأخير"),
     "light_mode": MessageLookupByLibrary.simpleMessage("وضع الإضاءة"),
     "location_error": MessageLookupByLibrary.simpleMessage(
-      "فشل في جلب الموقع: \$e",
+      "فشل في جلب الموقع: ",
     ),
     "location_fail": MessageLookupByLibrary.simpleMessage(
       "فشل في جلب الموقع. يرجى المحاولة مرة أخرى.",

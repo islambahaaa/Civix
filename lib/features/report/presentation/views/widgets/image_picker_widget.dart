@@ -65,7 +65,8 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           }
           if (fileSizeInBytes > maxImageSizeInBytes) {
             // Show error message if the image is too large
-            buildSnackBar(context, S.of(context).image_exceeds);
+            buildSnackBar(context,
+                "${S.of(context).image}${image.name}${S.of(context).image_exceeds}");
             continue; // Skip this image
           }
 
@@ -80,7 +81,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         }
       }
     } catch (e) {
-      buildSnackBar(context, S.of(context).image_pick_fail);
+      buildSnackBar(context, '${S.of(context).image_pick_fail}${e.toString()}');
     }
   }
 
@@ -102,7 +103,8 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
           });
         }
       } catch (e) {
-        buildSnackBar(context, S.of(context).image_pick_fail);
+        buildSnackBar(
+            context, '${S.of(context).image_pick_fail}${e.toString()}');
       }
     } else {
       buildSnackBar(context, S.of(context).camera_denied);
@@ -202,6 +204,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                           onPressed: () {
                             setState(() {
                               _images.remove(image);
+                              widget.onImagePicked!(_images);
                             });
                           },
                         );

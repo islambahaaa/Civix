@@ -59,7 +59,7 @@ class ReportCubit extends Cubit<ReportState> {
       latitude = position.latitude;
       longitude = position.longitude;
     } catch (e) {
-      emit(ReportFailure(S.current.location_error));
+      emit(ReportFailure("${S.current.location_error}${e.toString()}"));
     }
   }
 

@@ -163,7 +163,7 @@ class S {
   /// `Password Reset Successful\nYou’ll be redirected to the login screen now`
   String get password_reset {
     return Intl.message(
-      'Password Reset Successful\\nYou’ll be redirected to the login screen now',
+      'Password Reset Successful\nYou’ll be redirected to the login screen now',
       name: 'password_reset',
       desc: '',
       args: [],
@@ -820,10 +820,10 @@ class S {
     );
   }
 
-  /// `Failed to fetch location: $e`
+  /// `Failed to fetch location: `
   String get location_error {
     return Intl.message(
-      'Failed to fetch location: \$e',
+      'Failed to fetch location: ',
       name: 'location_error',
       desc: '',
       args: [],
@@ -900,14 +900,19 @@ class S {
     );
   }
 
-  /// `Image "${image.name}" exceeds 5 MB`
+  /// `exceeds 5 MB`
   String get image_exceeds {
     return Intl.message(
-      'Image "\${image.name}" exceeds 5 MB',
+      'exceeds 5 MB',
       name: 'image_exceeds',
       desc: '',
       args: [],
     );
+  }
+
+  /// `Image`
+  String get image {
+    return Intl.message('Image', name: 'image', desc: '', args: []);
   }
 
   /// `Maximum number of images reached`
@@ -920,10 +925,10 @@ class S {
     );
   }
 
-  /// `Failed to pick images: $e`
+  /// `Failed to pick images: `
   String get image_pick_fail {
     return Intl.message(
-      'Failed to pick images: \$e',
+      'Failed to pick images: ',
       name: 'image_pick_fail',
       desc: '',
       args: [],
