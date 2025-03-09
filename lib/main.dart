@@ -6,10 +6,12 @@ import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/theme/theme.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,6 +33,14 @@ class MainApp extends StatelessWidget {
         builder: (context, theme) {
           return MaterialApp(
             title: 'Civix',
+            // locale: const Locale('ar'),
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: S.delegate.supportedLocales,
             theme: AppThemes.lightTheme,
             darkTheme: AppThemes.darkTheme,
             themeMode: theme,

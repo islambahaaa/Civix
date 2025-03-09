@@ -30,6 +30,8 @@ dependencies:
   skeletonizer: ^1.4.3
   smooth_page_indicator: ^1.2.0+3
   svg_flutter: ^0.0.1
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_launcher_icons: ^0.14.2

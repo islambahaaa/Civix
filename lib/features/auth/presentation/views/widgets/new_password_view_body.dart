@@ -6,6 +6,7 @@ import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/password_field.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/cubits/new_password/new_password_cubit.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:svg_flutter/svg_flutter.dart';
@@ -48,6 +49,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                 onchanged: (value) {
                   password = value!;
                 },
+                hintText: S.of(context).password,
               ),
               const SizedBox(
                 height: 16,

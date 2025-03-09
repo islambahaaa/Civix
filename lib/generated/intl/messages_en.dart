@@ -1,0 +1,243 @@
+// DO NOT EDIT. This is code generated via package:intl/generate_localized.dart
+// This is a library that provides messages for a en locale. All the
+// messages from the main program should be duplicated here with the same
+// function name.
+
+// Ignore issues from commonly used lints in this file.
+// ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
+// ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
+// ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
+// ignore_for_file:unnecessary_string_interpolations, unnecessary_string_escapes
+
+import 'package:intl/intl.dart';
+import 'package:intl/message_lookup_by_library.dart';
+
+final messages = new MessageLookup();
+
+typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
+
+class MessageLookup extends MessageLookupByLibrary {
+  String get localeName => 'en';
+
+  final messages = _notInlinedMessages(_notInlinedMessages);
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+    "accept_terms": MessageLookupByLibrary.simpleMessage(
+      "Please accept terms and conditions",
+    ),
+    "agree_terms": MessageLookupByLibrary.simpleMessage(
+      "By clicking Sign up, you Agree to our ",
+    ),
+    "al_shorouk": MessageLookupByLibrary.simpleMessage("Al Shorouk"),
+    "alexandria": MessageLookupByLibrary.simpleMessage("Alexandria"),
+    "and": MessageLookupByLibrary.simpleMessage("and"),
+    "are_you_sure": MessageLookupByLibrary.simpleMessage("Are You Sure!"),
+    "broken_street": MessageLookupByLibrary.simpleMessage("A broken Street"),
+    "broken_streetlight": MessageLookupByLibrary.simpleMessage(
+      "Broken Streetlight",
+    ),
+    "camera_denied": MessageLookupByLibrary.simpleMessage(
+      "Camera permission denied",
+    ),
+    "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+    "choose_gallery": MessageLookupByLibrary.simpleMessage(
+      "Choose from Gallery",
+    ),
+    "city": MessageLookupByLibrary.simpleMessage("City"),
+    "comfort": MessageLookupByLibrary.simpleMessage("COMFORT"),
+    "conditions": MessageLookupByLibrary.simpleMessage("Conditions"),
+    "confirm_password": MessageLookupByLibrary.simpleMessage(
+      "Confirm Password",
+    ),
+    "congrats": MessageLookupByLibrary.simpleMessage("Congratulations!"),
+    "connection_cancelled": MessageLookupByLibrary.simpleMessage(
+      "Connection Cancelled",
+    ),
+    "connection_timeout": MessageLookupByLibrary.simpleMessage(
+      "Connection Timeout",
+    ),
+    "create_account": MessageLookupByLibrary.simpleMessage("Create Account"),
+    "date_example": MessageLookupByLibrary.simpleMessage("Jan 4,2022"),
+    "date_example_2": MessageLookupByLibrary.simpleMessage("Feb 6,2023"),
+    "date_example_3": MessageLookupByLibrary.simpleMessage("Jan 12,2024"),
+    "denied": MessageLookupByLibrary.simpleMessage("Denied"),
+    "description": MessageLookupByLibrary.simpleMessage("Description"),
+    "done": MessageLookupByLibrary.simpleMessage("Done"),
+    "edit_profile": MessageLookupByLibrary.simpleMessage("Edit Profile"),
+    "email": MessageLookupByLibrary.simpleMessage("Email"),
+    "enter_code": MessageLookupByLibrary.simpleMessage(
+      "Enter the code sent to your email",
+    ),
+    "fill_fields": MessageLookupByLibrary.simpleMessage(
+      "Please fill all fields",
+    ),
+    "first_name": MessageLookupByLibrary.simpleMessage("First Name"),
+    "flooding": MessageLookupByLibrary.simpleMessage("Flooding"),
+    "forgot_pass": MessageLookupByLibrary.simpleMessage(
+      "Forgot your password?",
+    ),
+    "forgot_password": MessageLookupByLibrary.simpleMessage(
+      "Forgot Password ?",
+    ),
+    "gallery_denied": MessageLookupByLibrary.simpleMessage(
+      "Gallery permission denied",
+    ),
+    "garbage": MessageLookupByLibrary.simpleMessage("Garbage"),
+    "giza": MessageLookupByLibrary.simpleMessage("Giza"),
+    "gps_disabled": MessageLookupByLibrary.simpleMessage(
+      "GPS is disabled. Please enable it to fetch your location.",
+    ),
+    "graffiti": MessageLookupByLibrary.simpleMessage("Grafitti"),
+    "have_account": MessageLookupByLibrary.simpleMessage(
+      "Already Have an Account?",
+    ),
+    "hello": MessageLookupByLibrary.simpleMessage("Hello,"),
+    "help": MessageLookupByLibrary.simpleMessage("Help"),
+    "home": MessageLookupByLibrary.simpleMessage("Home"),
+    "image_exceeds": MessageLookupByLibrary.simpleMessage(
+      "Image \"\${image.name}\" exceeds 5 MB",
+    ),
+    "image_pick_fail": MessageLookupByLibrary.simpleMessage(
+      "Failed to pick images: \$e",
+    ),
+    "image_selected": MessageLookupByLibrary.simpleMessage(
+      "You have already selected this image.",
+    ),
+    "image_size_limit": MessageLookupByLibrary.simpleMessage(
+      "Image size must be less than 5 MB",
+    ),
+    "images_selected": MessageLookupByLibrary.simpleMessage("images selected"),
+    "in_progress": MessageLookupByLibrary.simpleMessage("In Progress"),
+    "issue_type": MessageLookupByLibrary.simpleMessage("Select Issue Type"),
+    "language": MessageLookupByLibrary.simpleMessage("Language"),
+    "last_name": MessageLookupByLibrary.simpleMessage("Last Name"),
+    "location_error": MessageLookupByLibrary.simpleMessage(
+      "Failed to fetch location: \$e",
+    ),
+    "location_fail": MessageLookupByLibrary.simpleMessage(
+      "Failed to get location. Please try again.",
+    ),
+    "location_permission": MessageLookupByLibrary.simpleMessage(
+      "Location permission is required to access your location.",
+    ),
+    "login": MessageLookupByLibrary.simpleMessage("Log In"),
+    "login_first": MessageLookupByLibrary.simpleMessage("Please Login First"),
+    "logout": MessageLookupByLibrary.simpleMessage("Log Out"),
+    "logout_confirm": MessageLookupByLibrary.simpleMessage(
+      "Are you sure you want to logout?",
+    ),
+    "lowercase": MessageLookupByLibrary.simpleMessage("Lower Case"),
+    "maadi": MessageLookupByLibrary.simpleMessage("Maadi"),
+    "manhole": MessageLookupByLibrary.simpleMessage("Manhole"),
+    "max_images": MessageLookupByLibrary.simpleMessage(
+      "Maximum number of images reached",
+    ),
+    "min_chars": MessageLookupByLibrary.simpleMessage("At least 8 character"),
+    "mobile_number": MessageLookupByLibrary.simpleMessage("Mobile Number"),
+    "new_cairo": MessageLookupByLibrary.simpleMessage("New Cairo"),
+    "new_password": MessageLookupByLibrary.simpleMessage(
+      "Create a New Password",
+    ),
+    "next": MessageLookupByLibrary.simpleMessage("Next"),
+    "no_account": MessageLookupByLibrary.simpleMessage(
+      "Don\\\'t have an account?",
+    ),
+    "no_code": MessageLookupByLibrary.simpleMessage(
+      "Did not receive the code?",
+    ),
+    "no_internet": MessageLookupByLibrary.simpleMessage(
+      "NO INTERNET CONNECTION",
+    ),
+    "no_user_data": MessageLookupByLibrary.simpleMessage("No user data."),
+    "normal_letters": MessageLookupByLibrary.simpleMessage("Normal Letters"),
+    "not_found": MessageLookupByLibrary.simpleMessage(
+      "Your request not found. Please try again!",
+    ),
+    "notification_settings": MessageLookupByLibrary.simpleMessage(
+      "Notification ",
+    ),
+    "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
+    "numeric": MessageLookupByLibrary.simpleMessage("1 Numeric character"),
+    "other": MessageLookupByLibrary.simpleMessage("Other"),
+    "otp_digits": MessageLookupByLibrary.simpleMessage("Otp must be 6 digits"),
+    "password": MessageLookupByLibrary.simpleMessage("Password"),
+    "password_mismatch": MessageLookupByLibrary.simpleMessage(
+      "Password does not match",
+    ),
+    "password_reset": MessageLookupByLibrary.simpleMessage(
+      "Password Reset Successful\\nYou’ll be redirected to the login screen now",
+    ),
+    "pothole": MessageLookupByLibrary.simpleMessage("Pothole"),
+    "pothole_example": MessageLookupByLibrary.simpleMessage(
+      "a pothole in the main street",
+    ),
+    "prev_submissions": MessageLookupByLibrary.simpleMessage(
+      "Previous Submissions",
+    ),
+    "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+    "provide_images": MessageLookupByLibrary.simpleMessage(
+      "Please provide images",
+    ),
+    "receive_timeout": MessageLookupByLibrary.simpleMessage("Receive Timeout"),
+    "region": MessageLookupByLibrary.simpleMessage("Region"),
+    "report": MessageLookupByLibrary.simpleMessage("Report"),
+    "report_details": MessageLookupByLibrary.simpleMessage("Report Details"),
+    "report_from_home": MessageLookupByLibrary.simpleMessage(
+      "Report your issues from the comfort of your own house",
+    ),
+    "report_submitted": MessageLookupByLibrary.simpleMessage(
+      "Report submitted successfully.",
+    ),
+    "required_field": MessageLookupByLibrary.simpleMessage(
+      "This Field is required",
+    ),
+    "resend": MessageLookupByLibrary.simpleMessage("Resend Code"),
+    "resend_code": MessageLookupByLibrary.simpleMessage(
+      "Resend code in \${widget.countdown} seconds",
+    ),
+    "safe_neighborhood": MessageLookupByLibrary.simpleMessage(
+      "Create a safe and peaceful neighborhood",
+    ),
+    "safety": MessageLookupByLibrary.simpleMessage("SAFETY"),
+    "send_code": MessageLookupByLibrary.simpleMessage("Send Code"),
+    "send_timeout": MessageLookupByLibrary.simpleMessage("Send Timeout"),
+    "server_error": MessageLookupByLibrary.simpleMessage(
+      "Internal Server Error. Please try again!",
+    ),
+    "signup": MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "skip": MessageLookupByLibrary.simpleMessage("Skip"),
+    "solved": MessageLookupByLibrary.simpleMessage("Solved"),
+    "solved_area": MessageLookupByLibrary.simpleMessage("Solved\\nIn My Area"),
+    "solved_issues": MessageLookupByLibrary.simpleMessage("Solved Issues"),
+    "something_wrong": MessageLookupByLibrary.simpleMessage(
+      "Something went wrong. Please try again!",
+    ),
+    "special_char": MessageLookupByLibrary.simpleMessage("1 Special character"),
+    "street_light": MessageLookupByLibrary.simpleMessage(
+      "street light problem",
+    ),
+    "submit": MessageLookupByLibrary.simpleMessage("Submit"),
+    "success": MessageLookupByLibrary.simpleMessage("Success!"),
+    "take_photo": MessageLookupByLibrary.simpleMessage("Take Photo"),
+    "terms": MessageLookupByLibrary.simpleMessage("Terms"),
+    "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+    "title": MessageLookupByLibrary.simpleMessage("Title"),
+    "trust": MessageLookupByLibrary.simpleMessage("TRUST"),
+    "trusted_fix": MessageLookupByLibrary.simpleMessage(
+      "Providing you with the trusted authorities to fix your issues ",
+    ),
+    "unexpected_error": MessageLookupByLibrary.simpleMessage(
+      "Unexpected Error, Please try again!",
+    ),
+    "uppercase": MessageLookupByLibrary.simpleMessage("1 Uppercase letter"),
+    "valid_email": MessageLookupByLibrary.simpleMessage("Enter a valid email"),
+    "verification_code": MessageLookupByLibrary.simpleMessage(
+      "Where would you like to receive a Verification Code ?",
+    ),
+    "verify": MessageLookupByLibrary.simpleMessage("Verify"),
+    "water_leak": MessageLookupByLibrary.simpleMessage("Water leak"),
+    "weak_password": MessageLookupByLibrary.simpleMessage(
+      "Password is not strong enough",
+    ),
+  };
+}

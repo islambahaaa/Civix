@@ -1,6 +1,7 @@
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
@@ -41,10 +42,10 @@ class CustomTextFormField extends StatelessWidget {
       onChanged: onChanged,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'This Field is required';
+          return S.of(context).required_field;
         } else if (isEmailform) {
           if (!EmailValidator.validate(value)) {
-            return 'Enter a valid email';
+            return S.of(context).valid_email;
           }
         }
         return null;

@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:civix_app/core/widgets/password_validator.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:civix_app/constants.dart';
@@ -47,7 +48,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       onSaved: (value) {
                         fname = value!.trim();
                       },
-                      hintText: 'First Name',
+                      hintText: S.of(context).first_name,
                       prefixIcon: Icons.person,
                       textInputType: TextInputType.name),
                 ),
@@ -57,7 +58,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       onSaved: (value) {
                         lname = value!.trim();
                       },
-                      hintText: 'Last Name',
+                      hintText: S.of(context).last_name,
                       prefixIcon: Icons.person,
                       textInputType: TextInputType.name),
                 ),
@@ -69,7 +70,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onSaved: (value) {
                   email = value!.trim();
                 },
-                hintText: 'Email',
+                hintText: S.of(context).email,
                 prefixIcon: Icons.email,
                 textInputType: TextInputType.emailAddress,
                 isEmailform: true,
@@ -82,6 +83,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onchanged: (value) {
                   password = value!;
                 },
+                hintText: S.of(context).password,
               ),
               const SizedBox(
                 height: 8,
@@ -99,7 +101,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onchanged: (value) {
                   confirmpass = value!;
                 },
-                hintText: 'Confirm Password',
+                hintText: S.of(context).confirm_password,
               ),
               const SizedBox(
                 height: 16,
@@ -117,17 +119,16 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
                       if (isPasswordValid == false) {
-                        buildSnackBar(context, 'Password is not strong enough');
+                        buildSnackBar(context, S.of(context).weak_password);
                       } else if (password != confirmpass) {
-                        buildSnackBar(context, 'Password does not match');
+                        buildSnackBar(context, S.of(context).password_mismatch);
                       } else if (isTermsAccepted) {
                         context
                             .read<SignupCubit>()
                             .createUserWithEmailAndPassword(
                                 fname, lname, email, password, confirmpass);
                       } else {
-                        buildSnackBar(
-                            context, 'Please accept terms and conditions');
+                        buildSnackBar(context, S.of(context).accept_terms);
                       }
                     } else {
                       setState(() {
@@ -135,7 +136,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       });
                     }
                   },
-                  text: 'Sign Up'),
+                  text: S.of(context).signup),
               const SizedBox(
                 height: 26,
               ),

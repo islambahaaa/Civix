@@ -2,6 +2,7 @@ import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -96,15 +97,15 @@ void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
-                  'Are You Sure!',
+                Text(
+                  S.of(context).are_you_sure,
                   style: TextStyles.semibold24inter,
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  'Are you sure you want to logout?',
-                  style: TextStyle(
+                Text(
+                  S.of(context).logout_confirm,
+                  style: const TextStyle(
                     fontSize: 16,
                     color: Colors.grey,
                   ),
@@ -127,7 +128,7 @@ void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
                           onPressed: () {
                             Navigator.pop(context);
                           },
-                          child: Text('Cancel',
+                          child: Text(S.of(context).cancel,
                               style: TextStyles.semibold16inter.copyWith(
                                 color: Colors.black,
                               )),
@@ -137,7 +138,7 @@ void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
                     const SizedBox(width: 10),
                     Expanded(
                       child: CustomButton(
-                        text: 'Log Out',
+                        text: S.of(context).logout,
                         onPressed: onYesPressed,
                       ),
                     ),

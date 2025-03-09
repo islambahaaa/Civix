@@ -51,6 +51,10 @@
 	<string>App needs access to your photo library to pick images.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>App needs permission to save images.</string>
-
+	<key>CFBundleLocalizations</key>
+	<array>
+    <string>en</string>
+    <string>ar</string>
+	</array>
 </dict>
 </plist>

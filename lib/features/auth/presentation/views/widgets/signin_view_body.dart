@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,6 +59,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 onSaved: (value) {
                   password = value!;
                 },
+                hintText: S.of(context).password,
               ),
               const SizedBox(
                 height: 16,

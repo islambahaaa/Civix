@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,7 +20,7 @@ class SignUpBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupSuccess) {
-          buildSnackBar(context, 'Success');
+          buildSnackBar(context, S.of(context).success);
           Navigator.of(context).pop();
         }
         if (state is SignupFailure) {

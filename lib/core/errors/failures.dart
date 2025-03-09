@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:civix_app/generated/l10n.dart';
 import 'package:dio/dio.dart';
 
 abstract class Failure {
@@ -13,26 +14,26 @@ class ServerFailure extends Failure {
   factory ServerFailure.fromDioError(DioException dioerror) {
     switch (dioerror.type) {
       case DioExceptionType.connectionTimeout:
-        return ServerFailure('Connection Timeout');
+        return ServerFailure(S.current.connection_timeout);
       case DioExceptionType.sendTimeout:
-        return ServerFailure('Send Timeout');
+        return ServerFailure(S.current.send_timeout);
       case DioExceptionType.receiveTimeout:
-        return ServerFailure('Receive Timeout');
+        return ServerFailure(S.current.receive_timeout);
       case DioExceptionType.badResponse:
         return ServerFailure.fromResponse(
             dioerror.response!.statusCode!, dioerror.response!.data);
       case DioExceptionType.cancel:
-        return ServerFailure('Connection Cancelled');
+        return ServerFailure(S.current.connection_cancelled);
       case DioExceptionType.connectionError:
-        return ServerFailure('NO INTERNET CONNECTION');
+        return ServerFailure(S.current.no_internet);
       case DioExceptionType.unknown:
         if (dioerror.message != null &&
             dioerror.message!.contains('SocketException')) {
-          return ServerFailure('NO INTERNET CONNECTION');
+          return ServerFailure(S.current.no_internet);
         }
-        return ServerFailure('Unexpected Error, Please try again!');
+        return ServerFailure(S.current.unexpected_error);
       default:
-        return ServerFailure('Something went wrong. Please try again!');
+        return ServerFailure(S.current.something_wrong);
     }
   }
   factory ServerFailure.fromResponse(int statusCode, dynamic response) {
@@ -65,11 +66,11 @@ class ServerFailure extends Failure {
 
       return ServerFailure(response.toString());
     } else if (statusCode == 404) {
-      return ServerFailure('Your request not found. Please try again!');
+      return ServerFailure(S.current.not_found);
     } else if (statusCode == 500) {
-      return ServerFailure('Internal Server Error. Please try again!');
+      return ServerFailure(S.current.server_error);
     } else {
-      return ServerFailure('Something went wrong. Please try again!');
+      return ServerFailure(S.current.something_wrong);
     }
   }
 }

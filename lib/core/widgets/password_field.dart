@@ -7,7 +7,7 @@ class PasswordField extends StatefulWidget {
     super.key,
     this.onSaved,
     this.onchanged,
-    this.hintText = 'Password',
+    required this.hintText,
     this.controller,
   });
   final void Function(String?)? onSaved;
