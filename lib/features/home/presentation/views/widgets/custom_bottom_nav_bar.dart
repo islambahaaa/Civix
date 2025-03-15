@@ -34,7 +34,7 @@ class CustomNavigationBar extends StatelessWidget {
           Positioned.fill(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: List.generate(3, (index) {
+              children: List.generate(2, (index) {
                 final isSelected = selectedIndex == index;
                 return GestureDetector(
                   onTap: () => onItemSelected(index),
@@ -56,13 +56,9 @@ class CustomNavigationBar extends StatelessWidget {
                               ? isSelected
                                   ? Icons.home
                                   : Icons.home_outlined
-                              : index == 1
-                                  ? isSelected
-                                      ? Icons.notifications
-                                      : Icons.notifications_none_outlined
-                                  : isSelected
-                                      ? Icons.person
-                                      : Icons.person_outline_outlined,
+                              : isSelected
+                                  ? Icons.person
+                                  : Icons.person_outline_outlined,
                           color: isSelected
                               ? AppColors.primaryColor
                               : Theme.of(context).colorScheme.onSurface,
@@ -73,9 +69,7 @@ class CustomNavigationBar extends StatelessWidget {
                         child: Text(
                           index == 0
                               ? S.of(context).home
-                              : index == 1
-                                  ? S.of(context).notifications
-                                  : S.of(context).profile,
+                              : S.of(context).profile,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.normal),
                         ),
