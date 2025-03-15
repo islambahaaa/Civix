@@ -23,6 +23,9 @@ class ReportCubit extends Cubit<ReportState> {
   final List<File> images = [];
   double? latitude;
   double? longitude;
+  String? title;
+  String? description;
+  int? category;
 
   Future<void> addImages(List<XFile> pickedImages) async {
     images.clear();
@@ -77,7 +80,7 @@ class ReportCubit extends Cubit<ReportState> {
   }
 
 //
-  Future<void> submitReport(
+  Future<void> submitReportFromCamera(
     String title,
     String description,
     int category,
@@ -90,7 +93,6 @@ class ReportCubit extends Cubit<ReportState> {
         }
       } else {
         emit(ReportFailure(S.current.provide_images));
-
         return;
       }
     } else {
@@ -106,6 +108,42 @@ class ReportCubit extends Cubit<ReportState> {
     }
     await createIssue(
         title, description, latitude!, longitude!, category, images, token);
+  }
+
+  void saveFieldsInCubit(
+    String title,
+    String description,
+    int category,
+  ) {
+    this.title = title;
+    this.description = description;
+    this.category = category;
+  }
+
+  Future<void> submitReportFromGallery(
+    double lat,
+    double long,
+  ) async {
+    if (await Gal.requestAccess()) {
+      if (images.isNotEmpty) {
+        for (var image in images) {
+          emit(ReportLoading());
+          await Gal.putImage(image.path, album: 'Civix');
+        }
+      } else {
+        emit(ReportFailure(S.current.provide_images));
+        return;
+      }
+    } else {
+      emit(ReportFailure(S.current.gallery_denied));
+      return;
+    }
+    String token = await getToken();
+    if (token.isEmpty) return;
+
+    log(token);
+    await createIssue(
+        title!, description!, lat, long, category!, images, token);
   }
 
   Future<String> getToken() async {

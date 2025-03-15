@@ -10,6 +10,8 @@ import 'package:civix_app/features/auth/presentation/views/sign_up_view.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
+import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
 import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
@@ -52,6 +54,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
               ));
     case OnBoardingView.routeName:
       return MaterialPageRoute(builder: (context) => const OnBoardingView());
+    case LocationPick.routeName:
+      final ReportCubit reportCubit = settings.arguments as ReportCubit;
+      return MaterialPageRoute(
+          builder: (context) => LocationPick(
+                reportCubit: reportCubit,
+              ));
     case ProfileView.routeName:
       return MaterialPageRoute(builder: (context) => const ProfileView());
     case HomeView.routeName:

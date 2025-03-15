@@ -1,16 +1,15 @@
+import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'dart:developer';
-
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/widgets/custom_progress_hud.dart';
-import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
-import 'package:civix_app/features/report/presentation/views/widgets/report_view_body.dart';
+import 'package:civix_app/features/report/presentation/views/widgets/map_picker_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ReportViewBodyBlocConsumer extends StatelessWidget {
-  const ReportViewBodyBlocConsumer({
+class MapPickerBlocConsumer extends StatelessWidget {
+  const MapPickerBlocConsumer({
     super.key,
   });
 
@@ -42,7 +41,7 @@ class ReportViewBodyBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return CustomProgressHud(
           isLoading: state is ReportLoading,
-          child: const ReportViewBody(),
+          child: const MapPickerScreen(),
         );
       },
     );

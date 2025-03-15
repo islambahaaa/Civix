@@ -1,9 +1,11 @@
+import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/report/data/models/report_model.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
+import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/report_fields.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -24,6 +26,7 @@ class _ReportViewBodyState extends State<ReportViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String title, description;
   int? category;
+  bool hasCameraImage = false;
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -36,7 +39,12 @@ class _ReportViewBodyState extends State<ReportViewBody> {
             child: Column(children: [
               MultiImagePickerScreen(
                 onImagePicked: (images) {
+                  log(images.length.toString());
                   BlocProvider.of<ReportCubit>(context).addImages(images);
+                },
+                indicateCameraPicture: (flagedimages) {
+                  hasCameraImage =
+                      flagedimages.any((image) => image['isCamera'] == true);
                 },
               ),
               const SizedBox(height: 20),
@@ -70,11 +78,20 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                   onPressed: () {
                     if (formKey.currentState!.validate() && category != null) {
                       formKey.currentState!.save();
-                      context.read<ReportCubit>().submitReport(
-                            title,
-                            description,
-                            category!,
-                          );
+
+                      if (hasCameraImage) {
+                        context.read<ReportCubit>().submitReportFromCamera(
+                              title,
+                              description,
+                              category!,
+                            );
+                      } else {
+                        context
+                            .read<ReportCubit>()
+                            .saveFieldsInCubit(title, description, category!);
+                        Navigator.of(context).pushNamed(LocationPick.routeName,
+                            arguments: BlocProvider.of<ReportCubit>(context));
+                      }
                     } else {
                       buildSnackBar(context, S.of(context).fill_fields);
                       setState(() {

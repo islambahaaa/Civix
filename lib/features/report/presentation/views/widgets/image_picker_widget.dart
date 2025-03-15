@@ -15,15 +15,17 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 class MultiImagePickerScreen extends StatefulWidget {
-  const MultiImagePickerScreen({super.key, this.onImagePicked});
+  const MultiImagePickerScreen(
+      {super.key, this.onImagePicked, this.indicateCameraPicture});
   final Function(List<XFile>)? onImagePicked;
+  final Function(List<Map<String, dynamic>>)? indicateCameraPicture;
   @override
   _MultiImagePickerScreenState createState() => _MultiImagePickerScreenState();
 }
 
 class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
   final ImagePicker _picker = ImagePicker();
-  final List<XFile> _images = [];
+  final List<Map<String, dynamic>> _images = [];
   final int maxImages = 5;
   final int maxImageSizeInBytes = 5 * 1024 * 1024;
 
@@ -31,7 +33,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
     List<int> newBytes = await File(newFile.path).readAsBytes();
     String newHash = base64Encode(newBytes);
 
-    for (XFile existingFile in _images) {
+    for (XFile existingFile in getImages()) {
       List<int> existingBytes = await File(existingFile.path).readAsBytes();
       String existingHash = base64Encode(existingBytes);
 
@@ -40,6 +42,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
     return false;
   }
 
+  List<XFile> getImages() => _images.map((e) => e['file'] as XFile).toList();
   Future<bool> requestCameraPermission() async {
     var status = await Permission.camera.request();
     return status.isGranted;
@@ -48,6 +51,24 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
   Future<bool> requestGalleryPermission() async {
     var status = await Permission.photos.request();
     return status.isGranted;
+  }
+
+  void addImage(XFile image, bool isCamera) {
+    setState(() {
+      if (_images.length < maxImages) {
+        _images.add({'file': image, 'isCamera': isCamera});
+        widget.onImagePicked!(getImages());
+        widget.indicateCameraPicture!(_images);
+      }
+    });
+  }
+
+  void removeImage(int index) {
+    setState(() {
+      _images.removeAt(index);
+      widget.onImagePicked!(getImages());
+      widget.indicateCameraPicture!(_images);
+    });
   }
 
   Future<void> pickImagesFromGallery() async {
@@ -70,14 +91,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
             continue; // Skip this image
           }
 
-          setState(() {
-            if (_images.length < maxImages) {
-              _images.add(image);
-              widget.onImagePicked!(_images);
-            } else {
-              buildSnackBar(context, S.of(context).max_images);
-            }
-          });
+          addImage(image, false);
         }
       }
     } catch (e) {
@@ -93,14 +107,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         final XFile? selectedImage =
             await _picker.pickImage(source: ImageSource.camera);
         if (selectedImage != null) {
-          setState(() {
-            if (_images.length < maxImages) {
-              _images.add(selectedImage);
-              widget.onImagePicked!(_images);
-            } else {
-              buildSnackBar(context, S.of(context).max_images);
-            }
-          });
+          addImage(selectedImage, true);
         }
       } catch (e) {
         buildSnackBar(
@@ -189,13 +196,15 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                           if (newIndex > oldIndex) {
                             newIndex -= 1;
                           }
-                          final XFile movedImage = _images.removeAt(oldIndex);
+
+                          final Map<String, dynamic> movedImage =
+                              _images.removeAt(oldIndex);
                           _images.insert(newIndex, movedImage);
                         });
                       },
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        final image = _images[index];
+                        final image = _images[index]['file'] as XFile;
                         // Display selected images
 
                         return ReorderableListViewItem(
@@ -203,8 +212,8 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                           image: image,
                           onPressed: () {
                             setState(() {
-                              _images.remove(image);
-                              widget.onImagePicked!(_images);
+                              removeImage(index);
+                              widget.onImagePicked!(getImages());
                             });
                           },
                         );
