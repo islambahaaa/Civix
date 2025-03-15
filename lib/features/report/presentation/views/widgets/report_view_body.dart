@@ -89,8 +89,13 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                         context
                             .read<ReportCubit>()
                             .saveFieldsInCubit(title, description, category!);
-                        Navigator.of(context).pushNamed(LocationPick.routeName,
-                            arguments: BlocProvider.of<ReportCubit>(context));
+                        if (context.read<ReportCubit>().images.isNotEmpty) {
+                          Navigator.of(context).pushNamed(
+                              LocationPick.routeName,
+                              arguments: BlocProvider.of<ReportCubit>(context));
+                        } else {
+                          buildSnackBar(context, S.of(context).provide_images);
+                        }
                       }
                     } else {
                       buildSnackBar(context, S.of(context).fill_fields);

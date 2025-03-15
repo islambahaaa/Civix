@@ -124,20 +124,7 @@ class ReportCubit extends Cubit<ReportState> {
     double lat,
     double long,
   ) async {
-    if (await Gal.requestAccess()) {
-      if (images.isNotEmpty) {
-        for (var image in images) {
-          emit(ReportLoading());
-          await Gal.putImage(image.path, album: 'Civix');
-        }
-      } else {
-        emit(ReportFailure(S.current.provide_images));
-        return;
-      }
-    } else {
-      emit(ReportFailure(S.current.gallery_denied));
-      return;
-    }
+    emit(ReportLoading());
     String token = await getToken();
     if (token.isEmpty) return;
 

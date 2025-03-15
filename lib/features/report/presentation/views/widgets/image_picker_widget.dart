@@ -90,7 +90,6 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                 "${S.of(context).image}${image.name}${S.of(context).image_exceeds}");
             continue; // Skip this image
           }
-
           addImage(image, false);
         }
       }
