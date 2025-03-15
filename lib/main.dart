@@ -4,6 +4,7 @@ import 'package:civix_app/core/helper_functions/on_generate_routes.dart';
 import 'package:civix_app/core/services/custom_bloc_observer.dart';
 import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
+import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/language/lang_cubit.dart';
@@ -52,8 +53,9 @@ class MainApp extends StatelessWidget {
                 darkTheme: AppThemes.darkTheme,
                 themeMode: theme,
                 debugShowCheckedModeBanner: false,
-                onGenerateRoute: onGenerateRoute,
-                initialRoute: SplashView.routeName,
+                // onGenerateRoute: onGenerateRoute,
+                // initialRoute: SplashView.routeName,
+                home: const MapPickerScreen(),
               );
             },
           );
