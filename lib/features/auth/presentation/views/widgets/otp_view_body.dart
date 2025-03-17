@@ -88,7 +88,7 @@ class _OtpViewBodyState extends State<OtpViewBody> {
                 onTap: widget.countdown == 0 ? widget.resendCode : null,
                 child: Text(
                     widget.countdown > 0
-                        ? S.of(context).resend_code
+                        ? '${S.of(context).resend_code}${widget.countdown} ${S.of(context).seconds_left}'
                         : S.of(context).resend,
                     style: TextStyles.bold15inter),
               ),
