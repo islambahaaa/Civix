@@ -1,10 +1,15 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -88,21 +93,38 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   void executeNavigation() async {
+    final targetRoute = await getTargetRoute(); // Get the target route safely
+
+    if (!mounted) return; // Prevent navigation after disposal
+
+    if (targetRoute == 'tokenExpired') {
+      Navigator.pushReplacementNamed(context, SigninView.routeName);
+    } else {
+      Navigator.pushReplacementNamed(context, targetRoute);
+    }
+  }
+
+  Future<String> getTargetRoute() async {
     await Future.delayed(const Duration(milliseconds: 1200));
 
-    if (!mounted) return; // Prevents navigation after disposal
-
     bool isOnBoardingSeen = Prefs.getBool(kIsOnBoardingSeen) ?? false;
-    String? user = Prefs.getString(kUserData);
+    String? user = await Prefs.getString(kUserData);
 
     if (isOnBoardingSeen) {
       if (user != null) {
-        Navigator.pushReplacementNamed(context, HomeView.routeName);
+        Map<String, dynamic> userMap = jsonDecode(user);
+        var token = userMap['token'] ?? '';
+        if (JwtDecoder.isExpired(token)) {
+          await Prefs.remove(kUserData);
+          return 'tokenExpired'; // Return the route
+        } else {
+          return HomeView.routeName; // Return the route
+        }
       } else {
-        Navigator.pushReplacementNamed(context, SigninView.routeName);
+        return SigninView.routeName; // Return the route
       }
     } else {
-      Navigator.pushReplacementNamed(context, OnBoardingView.routeName);
+      return OnBoardingView.routeName; // Return the route
     }
   }
 }
