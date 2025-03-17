@@ -25,7 +25,8 @@ class MapPickerBlocConsumer extends StatelessWidget {
           Navigator.of(context).pop(); // Close the current screen
 
           Future.delayed(const Duration(milliseconds: 300), () {
-            showCustomDialog(rootContext, S.current.report_submitted);
+            showCustomDialog(rootContext, S.of(context).success,
+                S.current.report_submitted, Icons.check_circle);
 
             Future.delayed(const Duration(seconds: 2), () {
               if (rootContext.mounted) {

@@ -6,7 +6,8 @@ import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
-void showCustomDialog(BuildContext context, String text) {
+void showCustomDialog(
+    BuildContext context, String title, String text, IconData icon) {
   showDialog(
       context: context,
       // Prevent dismissing by tapping outside
@@ -20,11 +21,10 @@ void showCustomDialog(BuildContext context, String text) {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Icon(Icons.check_circle,
-                    color: AppColors.primaryColor, size: 100),
+                Icon(icon, color: AppColors.primaryColor, size: 100),
                 const SizedBox(height: 16),
                 Text(
-                  S.of(context).success,
+                  title,
                   style: TextStyles.semibold24inter,
                   textAlign: TextAlign.center,
                 ),

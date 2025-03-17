@@ -55,10 +55,11 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
             target: _currentPosition,
             zoom: _currentZoom,
           ),
+          buildingsEnabled: false,
           onMapCreated: (controller) => _mapController = controller,
           onCameraMove: _onCameraMove,
           myLocationEnabled: true,
-          myLocationButtonEnabled: true,
+          myLocationButtonEnabled: false,
           zoomControlsEnabled: false,
         ),
         const Positioned(
