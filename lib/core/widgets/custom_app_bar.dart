@@ -1,5 +1,6 @@
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 AppBar buildAppBar({context, required String text, Widget? leading}) {
@@ -46,10 +47,9 @@ PreferredSize otpAppBar(BuildContext context) {
       child: Container(
           padding: const EdgeInsets.only(top: 16),
           child: AppBar(
-            backgroundColor: Colors.white,
             scrolledUnderElevation: 0,
             title: Text(
-              'Forgot Password ?',
+              S.of(context).forgot_pass,
               style: TextStyles.semibold16inter.copyWith(),
             ),
             centerTitle: true,
