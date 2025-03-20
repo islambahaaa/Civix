@@ -61,7 +61,7 @@ class MainApp extends StatelessWidget {
                   title: "Damaged Street Light",
                   description: "A broken street light at the main road.",
                   status: "Pending",
-                  dateTime: "March 20, 2025 - 10:30 AM",
+                  dateTime: "20/12/2025",
                   location: LatLng(37.7749, -122.4194), // Example coordinates
                   images: [
                     "https://civix.runasp.net/uploads/0d0a6439-f3f3-4636-83ca-96a98775355f.jpg",

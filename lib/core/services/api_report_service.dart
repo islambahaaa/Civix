@@ -31,4 +31,6 @@ class ApiReportService {
     );
     return response.data;
   }
+
+  Future<Map<String, dynamic>> getMyIssues(String token) async {}
 }

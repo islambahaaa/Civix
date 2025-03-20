@@ -1,3 +1,4 @@
+import 'package:civix_app/features/report_details/presentation/views/widgets/description_section.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/image_slider.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/location_section.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class ItemDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(title: const Text('Issue Details')),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,8 +45,6 @@ class ItemDetailsScreen extends StatelessWidget {
                   const SizedBox(height: 8),
 
                   /// Description
-                  Text(description,
-                      style: TextStyle(fontSize: 16, color: Colors.grey[700])),
 
                   const SizedBox(height: 12),
 
@@ -54,8 +53,7 @@ class ItemDetailsScreen extends StatelessWidget {
                     children: [
                       const Icon(Icons.info, color: Colors.blue),
                       const SizedBox(width: 8),
-                      Text("Status: $status",
-                          style: const TextStyle(fontSize: 16)),
+                      Text(status, style: const TextStyle(fontSize: 16)),
                     ],
                   ),
 
@@ -67,9 +65,13 @@ class ItemDetailsScreen extends StatelessWidget {
                       const Icon(Icons.calendar_today, color: Colors.green),
                       const SizedBox(width: 8),
                       Text(dateTime, style: const TextStyle(fontSize: 16)),
+                      const Spacer(),
+                      const Text('12:00 AM', style: TextStyle(fontSize: 16)),
                     ],
                   ),
-
+                  const SizedBox(height: 12),
+                  const Divider(thickness: 0.25, color: Colors.grey),
+                  DescriptionSection(description: description),
                   const SizedBox(height: 12),
                   const Divider(thickness: 0.25, color: Colors.grey),
 
