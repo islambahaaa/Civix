@@ -36,12 +36,29 @@ class ProfileViewBody extends StatelessWidget {
               Column(children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(100),
-                    child: Image.asset(Assets.imagesAvatar1,
+                    child: Image.asset(Assets.imagesProfileImage,
                         width: 120, height: 120)),
                 const SizedBox(
                   height: 16,
                 ),
-                const Text('Islam Bahaa', style: TextStyles.semibold24inter),
+                BlocBuilder<UserCubit, UserState>(
+                  builder: (context, state) {
+                    if (state is UserLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is UserSuccess) {
+                      return Text(
+                        '${state.user.fname} ${state.user.lname}',
+                        style: TextStyles.semibold24inter,
+                      );
+                    } else if (state is UserFailure) {
+                      return Center(child: Text(state.message));
+                    } else {
+                      return Center(child: Text(S.of(context).no_user_data));
+                    }
+                  },
+                ),
               ]),
             ]),
             const SizedBox(

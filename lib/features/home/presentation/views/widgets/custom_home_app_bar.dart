@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
-import 'package:civix_app/core/widgets/logout_widget.dart';
+import 'package:civix_app/core/widgets/notification_item.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 import '../../../../../core/utils/app_images.dart';
