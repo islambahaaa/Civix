@@ -21,7 +21,8 @@ class ReportDetailsView extends StatelessWidget {
             padding: EdgeInsets.symmetric(horizontal: width * 0.2),
             child: Hero(
               tag: 'imageHero${report.id}',
-              child: const CustomReportImage(
+              child: CustomReportImage(
+                borderRadius: BorderRadius.circular(8),
                 imageUrl: 'https://picsum.photos/200',
               ),
             ),
