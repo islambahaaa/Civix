@@ -9,22 +9,15 @@ class CustomReportImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final BookModel? book;
-    return GestureDetector(
-      onTap: () {
-        // if (book != null) {
-        //   GoRouter.of(context).push(AppRouter.kBookDetailsRoute, extra: book);
-        // }
-      },
-      child: ClipRRect(
-        borderRadius: borderRadius ?? BorderRadius.circular(20),
-        child: AspectRatio(
-          aspectRatio: 4 / 3.5,
-          // child: Image.network(imageUrl, fit: BoxFit.cover),
-          child: CachedNetworkImage(
-            imageUrl: imageUrl,
-            fit: BoxFit.cover,
-            errorWidget: (context, url, error) => const Icon(Icons.error),
-          ),
+    return ClipRRect(
+      borderRadius: borderRadius ?? BorderRadius.circular(20),
+      child: AspectRatio(
+        aspectRatio: 4 / 3.5,
+        // child: Image.network(imageUrl, fit: BoxFit.cover),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          fit: BoxFit.cover,
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
       ),
     );
