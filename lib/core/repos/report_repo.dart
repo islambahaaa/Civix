@@ -11,6 +11,5 @@ abstract class ReportRepo {
     double longitude,
     int category,
     List<File> imageFiles,
-    String token,
   );
 }

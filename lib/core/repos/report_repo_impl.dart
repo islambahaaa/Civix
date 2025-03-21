@@ -18,7 +18,6 @@ class ReportRepoImpl implements ReportRepo {
     double longitude,
     int category,
     List<File> imageFiles,
-    String token,
   ) async {
     try {
       List<MultipartFile> imageMultipartList = await Future.wait(
@@ -31,7 +30,7 @@ class ReportRepoImpl implements ReportRepo {
         }),
       );
       var response = await apiReportService.createIssue(title, description,
-          latitude, longitude, category, imageMultipartList, token);
+          latitude, longitude, category, imageMultipartList);
       return right(response['id']);
     } catch (e) {
       if (e is DioException) {

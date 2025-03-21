@@ -100,14 +100,12 @@ class ReportCubit extends Cubit<ReportState> {
       return;
     }
     await checkAndGetLocation();
-    String token = await getToken();
-    if (token.isEmpty) return;
     if (latitude == null || longitude == null) {
       emit(ReportFailure(S.current.location_fail));
       return;
     }
     await createIssue(
-        title, description, latitude!, longitude!, category, images, token);
+        title, description, latitude!, longitude!, category, images);
   }
 
   void saveFieldsInCubit(
@@ -125,40 +123,19 @@ class ReportCubit extends Cubit<ReportState> {
     double long,
   ) async {
     emit(ReportLoading());
-    String token = await getToken();
-    if (token.isEmpty) return;
-
-    log(token);
-    await createIssue(
-        title!, description!, lat, long, category!, images, token);
-  }
-
-  Future<String> getToken() async {
-    try {
-      String? user = await Prefs.getString(kUserData);
-      if (user != null) {
-        Map<String, dynamic> userMap = jsonDecode(user);
-        return userMap['token'] ?? '';
-      } else {
-        emit(ReportFailure(S.current.login_first));
-        return '';
-      }
-    } catch (e) {
-      emit(ReportFailure("Failed to fetch user: ${e.toString()}"));
-      return '';
-    }
+    await createIssue(title!, description!, lat, long, category!, images);
   }
 
   Future<void> createIssue(
-      String title,
-      String description,
-      double latitude,
-      double longitude,
-      int category,
-      List<File> imageFiles,
-      String token) async {
+    String title,
+    String description,
+    double latitude,
+    double longitude,
+    int category,
+    List<File> imageFiles,
+  ) async {
     var result = await reportRepo.createReport(
-        title, description, latitude, longitude, category, imageFiles, token);
+        title, description, latitude, longitude, category, imageFiles);
     result.fold(
       (failure) => emit(ReportFailure(failure.message)),
       (s) => emit(ReportSuccess(s)),

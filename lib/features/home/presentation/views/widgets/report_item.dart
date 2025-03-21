@@ -1,4 +1,4 @@
-import 'package:civix_app/features/report/data/models/report_model.dart';
+import 'package:civix_app/features/home/data/models/report_model.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -91,7 +91,7 @@ class ReportItem extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(report.city,
+                        Text(report.city!,
                             style: TextStyle(
                                 fontSize: 12, color: Colors.grey[600])),
                       ],

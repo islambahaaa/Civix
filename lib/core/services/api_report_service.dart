@@ -14,7 +14,6 @@ class ApiReportService {
     double longitude,
     int category,
     List<MultipartFile> imageMultipartList,
-    String token,
   ) async {
     FormData formData = FormData.fromMap({
       'title': title,
@@ -27,10 +26,12 @@ class ApiReportService {
     var response = await dio.reportPost(
       ApiConstants.createIssueEndPoint,
       formData,
-      token,
     );
     return response.data;
   }
 
-  Future<Map<String, dynamic>> getMyIssues(String token) async {}
+  Future<Map<String, dynamic>> getMyIssues() async {
+    var response = await dio.getMyIssues(ApiConstants.myIssuesEndpoint);
+    return response.data;
+  }
 }

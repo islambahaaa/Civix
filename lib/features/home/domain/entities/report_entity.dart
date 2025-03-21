@@ -2,8 +2,8 @@ class ReportEntity {
   final String id;
   final String title;
   final String description;
-  final String lat;
-  final String long;
+  final double lat;
+  final double long;
   final String category;
   final String status;
   final String date;
