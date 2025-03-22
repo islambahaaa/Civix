@@ -17,6 +17,7 @@ import 'package:civix_app/features/report_details/presentation/views/report_deta
 import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -57,9 +58,11 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
     case LocationPick.routeName:
       final ReportCubit reportCubit = settings.arguments as ReportCubit;
       return MaterialPageRoute(
-          builder: (context) => LocationPick(
-                reportCubit: reportCubit,
-              ));
+        builder: (context) => BlocProvider.value(
+          value: reportCubit, // Reuse the same instance
+          child: const LocationPick(),
+        ),
+      );
     case ProfileView.routeName:
       return MaterialPageRoute(builder: (context) => const ProfileView());
     case HomeView.routeName:

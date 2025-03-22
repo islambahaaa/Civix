@@ -8,13 +8,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/repos/report_repo.dart';
 
 class LocationPick extends StatelessWidget {
-  const LocationPick({super.key, required this.reportCubit});
+  const LocationPick({
+    super.key,
+  });
   static const routeName = 'map-picker';
-  final ReportCubit reportCubit;
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => reportCubit,
+    final reportCubit = context.read<ReportCubit>();
+    return BlocProvider.value(
+      value: reportCubit,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
