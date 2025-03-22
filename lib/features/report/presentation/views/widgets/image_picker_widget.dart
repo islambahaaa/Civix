@@ -10,6 +10,7 @@ import 'package:civix_app/features/report/presentation/views/widgets/list_view_i
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -53,7 +54,22 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
     return status.isGranted;
   }
 
-  void addImage(XFile image, bool isCamera) {
+  Future<XFile> compressImage(XFile file) async {
+    final String filePath = file.path;
+    final String targetPath =
+        filePath.replaceAll(RegExp(r'\.\w+$'), '_compressed.jpg');
+
+    XFile? compressedFile = await FlutterImageCompress.compressAndGetFile(
+      filePath,
+      targetPath,
+      quality: 80, // Adjust compression quality (1-100)
+      format: CompressFormat.jpeg, // Convert all formats to JPG
+    );
+
+    return compressedFile ?? file; // Return original if compression fails
+  }
+
+  void addImage(XFile image, bool isCamera) async {
     setState(() {
       if (_images.length < maxImages) {
         _images.add({'file': image, 'isCamera': isCamera});
@@ -80,7 +96,9 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         for (var image in selectedImages) {
           final File file = File(image.path);
           final int fileSizeInBytes = await file.length();
-          if (await isDuplicate(image)) {
+          XFile compressedImage =
+              await compressImage(image); // Compress before adding
+          if (await isDuplicate(compressedImage)) {
             buildSnackBar(context, S.of(context).image_selected);
             continue;
           }
@@ -90,7 +108,7 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
                 "${S.of(context).image}${image.name}${S.of(context).image_exceeds}");
             continue; // Skip this image
           }
-          addImage(image, false);
+          addImage(compressedImage, false);
         }
       }
     } catch (e) {
@@ -106,7 +124,9 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         final XFile? selectedImage =
             await _picker.pickImage(source: ImageSource.camera);
         if (selectedImage != null) {
-          addImage(selectedImage, true);
+          XFile compressedImage =
+              await compressImage(selectedImage); // Compress before adding
+          addImage(compressedImage, true);
         }
       } catch (e) {
         buildSnackBar(
