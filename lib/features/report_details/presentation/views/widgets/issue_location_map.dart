@@ -9,20 +9,8 @@ class IssueMapLocation extends StatefulWidget {
 }
 
 late GoogleMapController _mapController;
-late final LatLngBounds _mapBounds;
 
 class _IssueMapLocationState extends State<IssueMapLocation> {
-  @override
-  void initState() {
-    _mapBounds = LatLngBounds(
-      southwest: LatLng(
-          widget.location.latitude - 0.01, widget.location.longitude - 0.01),
-      northeast: LatLng(
-          widget.location.latitude + 0.01, widget.location.longitude + 0.01),
-    );
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -34,7 +22,6 @@ class _IssueMapLocationState extends State<IssueMapLocation> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
         child: GoogleMap(
-          cameraTargetBounds: CameraTargetBounds(_mapBounds),
           initialCameraPosition: CameraPosition(
             target: widget.location,
             zoom: 14,

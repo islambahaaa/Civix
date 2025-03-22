@@ -737,6 +737,16 @@ class S {
     );
   }
 
+  /// `Open`
+  String get open {
+    return Intl.message(
+      'Open',
+      name: 'open',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Jan 12,2024`
   String get date_example_3 {
     return Intl.message(

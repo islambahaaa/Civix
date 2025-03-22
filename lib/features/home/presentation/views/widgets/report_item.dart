@@ -23,12 +23,9 @@ class ReportItem extends StatelessWidget {
           height: 90,
           child: Row(
             children: [
-              Hero(
-                tag: 'imageHero${report.id}',
-                child: CustomReportImage(
-                    borderRadius: BorderRadius.circular(12),
-                    imageUrl: 'https://picsum.photos/200'),
-              ),
+              CustomReportImage(
+                  borderRadius: BorderRadius.circular(12),
+                  imageUrl: report.images[0]),
 
               // Image.asset(
               //   Assets.imagesLogo,
@@ -51,7 +48,7 @@ class ReportItem extends StatelessWidget {
                           decoration: BoxDecoration(
                               color: report.status == S.of(context).solved
                                   ? Colors.green[600]
-                                  : report.status == S.of(context).in_progress
+                                  : report.status == S.of(context).open
                                       ? Theme.of(context).brightness ==
                                               Brightness.dark
                                           ? Theme.of(context).cardTheme.color

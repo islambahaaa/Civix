@@ -11,11 +11,16 @@ class HomeRepoImpl implements HomeRepo {
 
   HomeRepoImpl({required this.apiReportService});
   @override
-  Future<Either<Failure, ReportEntity>> fetchMyReports() async {
+  Future<Either<Failure, List<ReportModel>>> fetchMyReports() async {
     try {
-      var response = await apiReportService.getMyIssues();
-      var report = ReportModel.fromJson(response['data']);
-      return right(report);
+      var data = await apiReportService.getMyIssues();
+      List<ReportModel> reports = [];
+      for (var item in data['data']) {
+        var report = ReportModel.fromJson(item);
+        report.city = 'Cairo';
+        reports.add(report);
+      }
+      return right(reports);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));

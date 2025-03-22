@@ -6,6 +6,8 @@ import 'package:civix_app/core/services/database_service.dart';
 import 'package:civix_app/core/services/dio_client.dart';
 import 'package:civix_app/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:civix_app/features/auth/domain/repos/auth_repo.dart';
+import 'package:civix_app/features/home/data/repos/home_repo_impl.dart';
+import 'package:civix_app/features/home/domain/repos/home_repo.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,6 +22,8 @@ void setupGetIt() {
       ApiReportService(getIt.get<DioClient>()));
   getIt.registerSingleton<AuthRepo>(
       AuthRepoImpl(apiAuthService: getIt.get<ApiAuthService>()));
+  getIt.registerSingleton<HomeRepo>(
+      HomeRepoImpl(apiReportService: getIt.get<ApiReportService>()));
   getIt.registerSingleton<ReportRepo>(
       ReportRepoImpl(apiReportService: getIt.get<ApiReportService>()));
 }

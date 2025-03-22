@@ -60,7 +60,7 @@ class ReportDetailsView extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   const Divider(thickness: 0.25, color: Colors.grey),
-                  DescriptionSection(description: report.status),
+                  DescriptionSection(description: report.description),
                   const SizedBox(height: 12),
                   const Divider(thickness: 0.25, color: Colors.grey),
 

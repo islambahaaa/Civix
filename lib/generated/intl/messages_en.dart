@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notification_settings" : MessageLookupByLibrary.simpleMessage("Notification "),
     "notifications" : MessageLookupByLibrary.simpleMessage("Notifications"),
     "numeric" : MessageLookupByLibrary.simpleMessage("1 Numeric character"),
+    "open" : MessageLookupByLibrary.simpleMessage("Open"),
     "other" : MessageLookupByLibrary.simpleMessage("Other"),
     "otp_digits" : MessageLookupByLibrary.simpleMessage("Otp must be 6 digits"),
     "password" : MessageLookupByLibrary.simpleMessage("Password"),

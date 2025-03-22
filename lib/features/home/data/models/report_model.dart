@@ -1,7 +1,7 @@
 import 'package:civix_app/features/home/domain/entities/report_entity.dart';
 
 class ReportModel extends ReportEntity {
-  final String? city;
+  String? city;
 
   ReportModel({
     this.city,
@@ -26,7 +26,10 @@ class ReportModel extends ReportEntity {
       category: json['category'] ?? 0,
       status: json['status'] ?? '',
       date: json['createdOn'] ?? '',
-      images: json['images'] ?? [],
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => e.toString())
+              .toList() ??
+          [],
     );
   }
 }

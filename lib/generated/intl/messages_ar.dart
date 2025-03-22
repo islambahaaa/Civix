@@ -101,6 +101,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "notification_settings" : MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "notifications" : MessageLookupByLibrary.simpleMessage("الإشعارات"),
     "numeric" : MessageLookupByLibrary.simpleMessage("رقم واحد"),
+    "open" : MessageLookupByLibrary.simpleMessage("مفتوحة"),
     "other" : MessageLookupByLibrary.simpleMessage("أخرى"),
     "otp_digits" : MessageLookupByLibrary.simpleMessage("يجب أن يتكون الرمز من 6 أرقام"),
     "password" : MessageLookupByLibrary.simpleMessage("كلمة المرور"),
