@@ -5,13 +5,11 @@ import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubi
 import 'package:civix_app/features/home/domain/repos/home_repo.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/bottom_nav_bar.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/home_view_body.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
