@@ -4,7 +4,7 @@ import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/domain/repos/home_repo.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/bottom_nav_bar.dart';
+import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -89,7 +89,7 @@ class _HomeViewState extends State<HomeView> {
                     Navigator.pushNamed(context, ReportView.routeName);
                   },
                 ),
-          bottomNavigationBar: BottomNavBar(
+          bottomNavigationBar: CustomBottomNavBar(
             selectedIndex: currentIndex,
             onItemSelected: (index) {
               _onNavItemTapped(index);

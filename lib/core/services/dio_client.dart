@@ -39,7 +39,7 @@ class DioClient {
 
   Future<Response> authPost(String endpoint, var data) async {
     return await dio.post(
-      '${ApiConstants.baseUrl}${ApiConstants.AuthEndpoint}$endpoint',
+      '${ApiConstants.baseUrl}${ApiConstants.authEndpoint}$endpoint',
       data: data,
     );
   }

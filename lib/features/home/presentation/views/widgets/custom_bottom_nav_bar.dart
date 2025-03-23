@@ -1,11 +1,12 @@
 import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-class BottomNavBar extends StatelessWidget {
+class CustomBottomNavBar extends StatelessWidget {
   final int selectedIndex;
   final ValueChanged<int> onItemSelected;
 
-  const BottomNavBar({
+  const CustomBottomNavBar({
     super.key,
     required this.selectedIndex,
     required this.onItemSelected,
@@ -51,7 +52,7 @@ class BottomNavBar extends StatelessWidget {
               Icons.home_outlined,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            label: 'Home',
+            label: S.of(context).home,
           ),
           NavigationDestination(
             selectedIcon: const Icon(
@@ -62,7 +63,7 @@ class BottomNavBar extends StatelessWidget {
               Icons.person_outline_outlined,
               color: Theme.of(context).colorScheme.onSurface,
             ),
-            label: 'Profile',
+            label: S.of(context).profile,
           ),
         ],
       ),
