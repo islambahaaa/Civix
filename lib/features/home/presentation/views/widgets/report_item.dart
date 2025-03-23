@@ -89,6 +89,7 @@ class ReportItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(report.city!,
+                            overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                                 fontSize: 12, color: Colors.grey[600])),
                       ],

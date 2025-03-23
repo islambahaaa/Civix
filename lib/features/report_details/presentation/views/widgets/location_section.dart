@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class LocationSection extends StatelessWidget {
-  const LocationSection({super.key, required this.location});
+  const LocationSection(
+      {super.key, required this.location, required this.address});
   final LatLng location;
+  final String address;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +17,7 @@ class LocationSection extends StatelessWidget {
         const Text("Location",
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 16),
-        const LocationWidget(text: 'Cairo, Egypt'),
+        LocationWidget(text: address),
         const SizedBox(
           height: 16,
         ),

@@ -55,7 +55,7 @@ class ReportDetailsView extends StatelessWidget {
                       const SizedBox(width: 8),
                       Text(report.date, style: const TextStyle(fontSize: 16)),
                       const Spacer(),
-                      const Text('12:00 AM', style: TextStyle(fontSize: 16)),
+                      Text(report.time!, style: const TextStyle(fontSize: 16)),
                     ],
                   ),
                   const SizedBox(height: 12),
@@ -65,7 +65,10 @@ class ReportDetailsView extends StatelessWidget {
                   const Divider(thickness: 0.25, color: Colors.grey),
 
                   /// Location
-                  LocationSection(location: location)
+                  LocationSection(
+                    location: location,
+                    address: report.city!,
+                  )
                 ],
               ),
             ),
