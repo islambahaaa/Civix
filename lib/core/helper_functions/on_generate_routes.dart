@@ -14,10 +14,12 @@ import 'package:civix_app/features/report/presentation/cubits/report_cubit/repor
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
+import 'package:civix_app/features/report_details/presentation/views/widgets/issue_location_map.dart';
 import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 Route<dynamic> onGenerateRoute(RouteSettings settings) {
   switch (settings.name) {
@@ -63,6 +65,12 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           child: const LocationPick(),
         ),
       );
+    case IssueMapLocation.routeName:
+      final LatLng location = settings.arguments as LatLng;
+      return MaterialPageRoute(
+          builder: (context) => IssueMapLocation(
+                location: location,
+              ));
     case ProfileView.routeName:
       return MaterialPageRoute(builder: (context) => const ProfileView());
     case HomeView.routeName:

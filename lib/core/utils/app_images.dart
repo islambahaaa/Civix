@@ -90,17 +90,13 @@ class Assets {
   /// assets/images/logout.svg
   static const String imagesLogout = "assets/images/logout.svg";
 
+  /// Assets for imagesMap
+  /// assets/images/map.webp
+  static const String imagesMap = "assets/images/map.webp";
+
   /// Assets for imagesNotification
   /// assets/images/notification.svg
   static const String imagesNotification = "assets/images/notification.svg";
-
-  /// Assets for imagesNotificationBellSvgrepoCom
-  /// assets/images/notification-bell-svgrepo-com.svg
-  static const String imagesNotificationBellSvgrepoCom = "assets/images/notification-bell-svgrepo-com.svg";
-
-  /// Assets for imagesOldLogo
-  /// assets/images/old_logo.png
-  static const String imagesOldLogo = "assets/images/old_logo.png";
 
   /// Assets for imagesPageview1
   /// assets/images/pageview1.svg
