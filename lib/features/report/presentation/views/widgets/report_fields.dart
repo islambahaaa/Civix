@@ -61,6 +61,7 @@ class CustomTitleField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLength: 50,
       textInputAction: TextInputAction.next,
       onSaved: onSaved,
       validator: (value) {
