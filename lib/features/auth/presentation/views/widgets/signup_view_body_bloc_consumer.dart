@@ -1,14 +1,10 @@
-import 'dart:developer';
-
-import 'package:civix_app/generated/l10n.dart';
+import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/widgets/custom_progress_hud.dart';
 import 'package:civix_app/features/auth/presentation/cubits/signup_cubit/signup_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/widgets/sign_up_view_body.dart';
-import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class SignUpBodyBlocConsumer extends StatelessWidget {
   const SignUpBodyBlocConsumer({
@@ -20,8 +16,21 @@ class SignUpBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupSuccess) {
-          buildSnackBar(context, S.of(context).success);
-          Navigator.of(context).pop();
+          BuildContext rootContext =
+              Navigator.of(context, rootNavigator: true).context;
+
+          Navigator.of(context).pop(); // Close the current screen
+
+          Future.delayed(const Duration(milliseconds: 300), () {
+            showCustomDialog(
+                rootContext,
+                'Verify Email',
+                'We\'ve sent a confirmation link to your email address.\n'
+                    'Please check your inbox and click the link to verify your account.',
+                Icons.email);
+          });
+
+          // buildSnackBar(context, S.of(context).success);
         }
         if (state is SignupFailure) {
           buildSnackBar(context, state.message);
