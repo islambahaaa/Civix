@@ -12,14 +12,48 @@ class CustomBottomNavBar extends StatelessWidget {
     required this.onItemSelected,
   });
   Widget buildNavItem({required IconData icon, required int index}) {
-    return GestureDetector(
-      onTap: () => onItemSelected(index),
-      child: Icon(
-        icon,
-        size: 30,
-        color: selectedIndex == index ? AppColors.primaryColor : Colors.grey,
+    return Expanded(
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          highlightColor: Colors.transparent,
+          splashColor: Colors.transparent,
+          enableFeedback: false,
+          onTap: () => onItemSelected(index),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Tooltip(
+                message:
+                    getTabName(index), // Shows "Home", "Notifications", etc.
+                child: Icon(
+                  icon,
+                  size: 30,
+                  color: selectedIndex == index
+                      ? AppColors.primaryColor
+                      : Colors.grey,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
+  }
+
+  getTabName(int index) {
+    switch (index) {
+      case 0:
+        return S.current.home;
+      case 1:
+        return S.current.notifications;
+      case 2:
+        return S.current.prev_submissions;
+      case 3:
+        return S.current.profile;
+      default:
+        return S.current.home;
+    }
   }
 
   @override
@@ -46,7 +80,7 @@ class CustomBottomNavBar extends StatelessWidget {
           children: <Widget>[
             buildNavItem(icon: Icons.home, index: 0),
             buildNavItem(icon: Icons.notifications, index: 1),
-            if (selectedIndex != 3) const SizedBox(width: 40),
+            if (selectedIndex != 3) const SizedBox(width: 50),
             buildNavItem(icon: Icons.history, index: 2),
             buildNavItem(icon: Icons.person, index: 3),
           ],

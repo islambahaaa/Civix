@@ -7,6 +7,7 @@ import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/home_view_body.dart';
@@ -81,6 +82,7 @@ class _HomeViewState extends State<HomeView> {
                   height: 150,
                   width: 70,
                   child: FloatingActionButton(
+                    tooltip: S.of(context).report,
                     shape: const CircleBorder(),
                     splashColor: AppColors.primaryColor,
                     backgroundColor: AppColors.secondaryColor,
