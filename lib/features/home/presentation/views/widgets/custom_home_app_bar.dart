@@ -28,10 +28,6 @@ class CustomHomeAppBar extends StatelessWidget {
         subtitle: Text(
           "$fname $lname",
         ),
-        trailing: NotificationItem(
-          notificationCount: 5,
-          onTap: () {},
-        ),
       ),
     );
   }

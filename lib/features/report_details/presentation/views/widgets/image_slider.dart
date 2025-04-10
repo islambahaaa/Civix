@@ -6,33 +6,44 @@ import 'package:flutter/material.dart';
 class ImageSlider extends StatefulWidget {
   const ImageSlider({super.key, required this.images});
   final List<String> images;
+
   @override
   State<ImageSlider> createState() => _ImageSliderState();
 }
 
 class _ImageSliderState extends State<ImageSlider> {
   int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    bool isOneImage = widget.images.length == 1;
     return Column(
       children: [
-        CarouselSlider(
-          items: widget.images.map((imageUrl) {
-            return ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CachedNetworkImage(
-                  imageUrl: imageUrl,
-                  fit: BoxFit.cover,
-                  width: double.infinity),
-            );
-          }).toList(),
-          options: CarouselOptions(
-            height: 250,
-            autoPlay: true,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              setState(() => _currentIndex = index);
-            },
+        Padding(
+          padding: isOneImage
+              ? const EdgeInsets.symmetric(horizontal: 16)
+              : EdgeInsets.zero,
+          child: CarouselSlider(
+            items: widget.images.map((imageUrl) {
+              return ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: CachedNetworkImage(
+                    imageUrl: imageUrl,
+                    fit: BoxFit.cover,
+                    width: double.infinity),
+              );
+            }).toList(),
+            options: CarouselOptions(
+              height: 250,
+              autoPlay: !isOneImage,
+              enlargeCenterPage: !isOneImage,
+              enableInfiniteScroll: !isOneImage,
+              viewportFraction:
+                  isOneImage ? 1.0 : 0.8, // To show one full image at a time
+              onPageChanged: (index, reason) {
+                setState(() => _currentIndex = index);
+              },
+            ),
           ),
         ),
         const SizedBox(

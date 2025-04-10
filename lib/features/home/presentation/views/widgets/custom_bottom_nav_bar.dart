@@ -11,61 +11,46 @@ class CustomBottomNavBar extends StatelessWidget {
     required this.selectedIndex,
     required this.onItemSelected,
   });
+  Widget buildNavItem({required IconData icon, required int index}) {
+    return GestureDetector(
+      onTap: () => onItemSelected(index),
+      child: Icon(
+        icon,
+        size: 30,
+        color: selectedIndex == index ? AppColors.primaryColor : Colors.grey,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 1,
-            blurRadius: 4,
-            offset: const Offset(0, 4), // changes position of shadow
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.transparent
+                : Colors.grey.withOpacity(0.3),
+            offset: const Offset(0, -1),
+            blurRadius: 8,
           ),
         ],
       ),
-      width: double.infinity,
-      child: NavigationBar(
-        labelTextStyle: WidgetStatePropertyAll(
-          TextStyle(
-            color: Theme.of(context).colorScheme.onSurface,
-            fontSize: 14,
-          ),
+      child: BottomAppBar(
+        //color: Theme.of(context).bottomAppBarTheme.color,
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
+        elevation: 0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            buildNavItem(icon: Icons.home, index: 0),
+            buildNavItem(icon: Icons.notifications, index: 1),
+            if (selectedIndex != 3) const SizedBox(width: 40),
+            buildNavItem(icon: Icons.history, index: 2),
+            buildNavItem(icon: Icons.person, index: 3),
+          ],
         ),
-        labelPadding: const EdgeInsets.all(4),
-        indicatorShape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        indicatorColor: Theme.of(context).cardTheme.color,
-        onDestinationSelected: onItemSelected,
-        selectedIndex: selectedIndex,
-        labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-        destinations: [
-          NavigationDestination(
-            selectedIcon: const Icon(
-              Icons.home,
-              color: AppColors.primaryColor,
-            ),
-            icon: Icon(
-              Icons.home_outlined,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            label: S.of(context).home,
-          ),
-          NavigationDestination(
-            selectedIcon: const Icon(
-              Icons.person,
-              color: AppColors.primaryColor,
-            ),
-            icon: Icon(
-              Icons.person_outline_outlined,
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
-            label: S.of(context).profile,
-          ),
-        ],
       ),
     );
   }

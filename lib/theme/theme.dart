@@ -11,6 +11,9 @@ class AppThemes {
       primary: AppColors.secondaryColor,
     ),
     cardTheme: const CardTheme(color: AppColors.lightprimaryColor2),
+    bottomAppBarTheme: const BottomAppBarTheme(
+      color: Colors.white,
+    ),
     // Use light icons in dark mode
   );
 
@@ -25,6 +28,7 @@ class AppThemes {
       tertiary: Colors.grey.shade400,
     ),
     cardTheme: CardTheme(color: Colors.grey.shade900),
+    bottomAppBarTheme: BottomAppBarTheme(color: Colors.grey[900]),
     appBarTheme: const AppBarTheme(
       systemOverlayStyle: SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
