@@ -4,6 +4,8 @@ import 'package:civix_app/core/helper_functions/on_generate_routes.dart';
 import 'package:civix_app/core/services/custom_bloc_observer.dart';
 import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
+import 'package:civix_app/core/services/signalr_service.dart';
+import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -21,6 +23,11 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
+
+  // //
+  // final signalRService = SignalRService();
+  // await signalRService.connectToHub();
+  // //
   runApp(const MainApp());
 }
 
@@ -52,10 +59,12 @@ class MainApp extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 theme: AppThemes.lightTheme,
                 darkTheme: AppThemes.darkTheme,
-                themeMode: theme,
+                themeMode: ThemeMode.dark,
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: onGenerateRoute,
                 initialRoute: SplashView.routeName,
+                //
+                //home: const NotificationsPage(),
               );
             },
           );

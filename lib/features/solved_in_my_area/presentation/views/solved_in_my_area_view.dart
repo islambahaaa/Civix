@@ -1,5 +1,5 @@
 import 'package:civix_app/core/utils/app_colors.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/newest_reports_header.dart';
+import 'package:civix_app/features/my_reports/presentation/views/widgets/my_reports_header.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 

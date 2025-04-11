@@ -1,14 +1,14 @@
 import 'package:civix_app/core/errors/failures.dart';
-import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/core/services/api_report_service.dart';
-import 'package:civix_app/features/home/domain/repos/home_repo.dart';
+import 'package:civix_app/core/models/report_model.dart';
+import 'package:civix_app/features/my_reports/domain/repos/my_reports_repo.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-class HomeRepoImpl implements HomeRepo {
+class MyReportsRepoImpl implements MyReportsRepo {
   final ApiReportService apiReportService;
 
-  HomeRepoImpl({required this.apiReportService});
+  MyReportsRepoImpl({required this.apiReportService});
   @override
   Future<Either<Failure, List<ReportModel>>> fetchMyReports() async {
     try {

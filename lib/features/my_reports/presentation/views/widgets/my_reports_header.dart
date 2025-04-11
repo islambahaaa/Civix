@@ -11,8 +11,10 @@ class NewestReportsHeader extends StatelessWidget {
     return Row(
       children: [
         Text(
-          S.of(context).prev_submissions,
-          style: TextStyles.regular17inter,
+          "My Reports",
+          style: TextStyles.bold28insturment.copyWith(
+            fontSize: 24,
+          ),
         ),
       ],
     );

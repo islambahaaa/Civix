@@ -1,4 +1,4 @@
-import 'package:civix_app/features/home/data/models/report_model.dart';
+import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/description_section.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/image_slider.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/location_section.dart';

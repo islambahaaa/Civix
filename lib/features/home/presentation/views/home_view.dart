@@ -4,6 +4,9 @@ import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubi
 import 'package:civix_app/features/home/domain/repos/home_repo.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_bottom_nav_bar.dart';
+import 'package:civix_app/features/my_reports/domain/repos/my_reports_repo.dart';
+import 'package:civix_app/features/my_reports/presentation/cubit/my_reports_cubit.dart';
+import 'package:civix_app/features/my_reports/presentation/views/my_reports_view.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
@@ -60,6 +63,11 @@ class _HomeViewState extends State<HomeView> {
           create: (context) => UserCubit()..fetchUser(),
         ),
         BlocProvider(
+          create: (context) => MyReportsCubit(
+            getIt.get<MyReportsRepo>(),
+          )..fetchMyReports(),
+        ),
+        BlocProvider(
           create: (context) => HomeCubit(
             getIt.get<HomeRepo>(),
           )..fetchMyReports(),
@@ -113,9 +121,7 @@ class _HomeViewState extends State<HomeView> {
                   },
                 ),
                 const NotificationsPage(),
-                const Center(
-                  child: Text('data'),
-                ),
+                const MyReportsView(),
                 const ProfileView(),
               ],
             ),

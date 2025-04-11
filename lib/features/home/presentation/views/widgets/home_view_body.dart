@@ -1,13 +1,10 @@
+import 'package:civix_app/core/widgets/report_widgets/reports_sliver_list.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/newest_reports_header.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/newest_reports_list_view.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/report_item.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/solved_in_my_area.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:civix_app/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,18 +50,18 @@ class HomeViewBody extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  const SolvedInMyAreaWidget(),
-                  const SizedBox(
-                    height: 16,
-                  ),
-                  const NewestReportsHeader(),
+                  // const SolvedInMyAreaWidget(),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
+                  //const NewestReportsHeader(),
                   const SizedBox(
                     height: 12,
                   ),
                 ],
               ),
             ),
-            const NewestReportsListView(),
+            const ReportsSliverList(),
           ],
         ),
       ),

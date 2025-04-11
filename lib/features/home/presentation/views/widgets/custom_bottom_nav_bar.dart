@@ -24,6 +24,7 @@ class CustomBottomNavBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Tooltip(
+                waitDuration: const Duration(milliseconds: 50),
                 message:
                     getTabName(index), // Shows "Home", "Notifications", etc.
                 child: Icon(

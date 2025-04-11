@@ -1,7 +1,7 @@
 import 'dart:math';
 
+import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
-import 'package:civix_app/features/home/data/models/report_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';

@@ -3,7 +3,6 @@ import 'dart:ffi';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
-import 'package:civix_app/features/home/data/models/report_model.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';

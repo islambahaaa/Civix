@@ -1,22 +1,19 @@
 import 'package:civix_app/core/widgets/shimmer_widgets.dart';
-import 'package:civix_app/features/home/data/models/report_model.dart';
-import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/report_item.dart';
-import 'package:civix_app/generated/l10n.dart';
+import 'package:civix_app/features/my_reports/presentation/cubit/my_reports_cubit.dart';
+import 'package:civix_app/core/widgets/report_widgets/report_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shimmer/shimmer.dart';
 
-class NewestReportsListView extends StatelessWidget {
-  const NewestReportsListView({super.key});
+class ReportsSliverList extends StatelessWidget {
+  const ReportsSliverList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<MyReportsCubit, MyReportsState>(
       builder: (context, state) {
-        if (state is HomeLoading) {
+        if (state is MyReportsLoading) {
           return _buildShimmerLoading();
-        } else if (state is HomeSuccess) {
+        } else if (state is MyReportsSuccess) {
           final reports = state.reports;
           return SliverList.builder(
             itemCount: reports.length,
@@ -33,7 +30,7 @@ class NewestReportsListView extends StatelessWidget {
               );
             },
           );
-        } else if (state is HomeFailure) {
+        } else if (state is MyReportsFailure) {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(state.message,

@@ -1,4 +1,4 @@
-import 'package:civix_app/features/home/domain/entities/report_entity.dart';
+import 'package:civix_app/core/entities/report_entity.dart';
 import 'package:intl/intl.dart';
 import 'package:geocoding/geocoding.dart';
 

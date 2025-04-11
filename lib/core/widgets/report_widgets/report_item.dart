@@ -1,8 +1,7 @@
-import 'package:civix_app/features/home/data/models/report_model.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
-import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/custom_report_image.dart';
+import 'package:civix_app/core/models/report_model.dart';
+import 'package:civix_app/core/widgets/report_widgets/custom_report_image.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
