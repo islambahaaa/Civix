@@ -2,6 +2,7 @@ import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/description_section.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/image_slider.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/location_section.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -14,7 +15,7 @@ class ReportDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final LatLng location = LatLng(report.lat, report.long);
     return Scaffold(
-      appBar: AppBar(title: const Text('Issue Details')),
+      appBar: AppBar(title: Text(S.of(context).report_details)),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

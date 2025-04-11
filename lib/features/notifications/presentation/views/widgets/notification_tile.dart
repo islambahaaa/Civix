@@ -1,4 +1,5 @@
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class NotificationTile extends StatelessWidget {
@@ -70,9 +71,9 @@ class NotificationTile extends StatelessWidget {
 
   String timeAgo(DateTime time) {
     final diff = DateTime.now().difference(time);
-    if (diff.inMinutes < 1) return 'Just now';
-    if (diff.inHours < 1) return '${diff.inMinutes} min ago';
-    if (diff.inDays < 1) return '${diff.inHours} hr ago';
-    return '${diff.inDays} d ago';
+    if (diff.inMinutes < 1) return S.current.just_now;
+    if (diff.inHours < 1) return '${diff.inMinutes} ${S.current.minutes_ago}';
+    if (diff.inDays < 1) return '${diff.inHours} ${S.current.hours_ago}';
+    return '${diff.inDays} ${S.current.days_ago}';
   }
 }

@@ -1,5 +1,7 @@
+import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/features/notifications/presentation/views/widgets/notification_tile.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 class NotificationList extends StatefulWidget {
@@ -53,14 +55,14 @@ class _NotificationListState extends State<NotificationList> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Notifications',
+                S.of(context).notifications,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
               ),
               TextButton(
                 onPressed: _markAllAsRead,
-                child: const Text('Mark all as read'),
+                child: Text(S.of(context).mark_all_as_read),
               ),
             ],
           ),
@@ -100,9 +102,7 @@ class _NotificationListState extends State<NotificationList> {
     setState(() {
       notifications.removeWhere((n) => n.id == id);
     });
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Notification dismissed')),
-    );
+    buildSnackBar(context, S.of(context).notification_dismissed);
   }
 
   void _handleNotificationTap(String id) {
