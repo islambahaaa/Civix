@@ -4,11 +4,13 @@ import 'package:dartz/dartz.dart';
 
 abstract class AuthRepo {
   Future<Either<Failure, UserEntity>> createUserWithEmailAndPassword(
-      String fname,
-      String lname,
-      String email,
-      String password,
-      String confirmedPassword);
+    String fname,
+    String lname,
+    String email,
+    String phoneNumber,
+    String password,
+    String confirmedPassword,
+  );
 
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password);

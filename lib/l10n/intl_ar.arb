@@ -139,6 +139,12 @@
     "hours_ago": "قبل ساعة",
     "days_ago": "قبل يوم",
     "location": "الموقع",
-    "see_location": "عرض الموقع"
+    "see_location": "عرض الموقع",
+    "phone_number" : "رقم الجوال",
+    "enter_your_password": "أدخل كلمة المرور الخاصة بك",
+    "re_enter_your_password": "أعد إدخال كلمة المرور",
+    "egyptian_phone_number": "أدخل رقم هاتف مصري صالح",
+    "verifyEmailTitle": "تحقق من البريد الإلكتروني",
+    "verifyEmailMessage": "لقد أرسلنا رابط تأكيد إلى عنوان بريدك الإلكتروني.\nيرجى التحقق من صندوق الوارد الخاص بك والنقر على الرابط للتحقق من حسابك."
   }
   

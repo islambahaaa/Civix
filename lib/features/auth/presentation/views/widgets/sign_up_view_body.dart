@@ -26,7 +26,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   final TextEditingController passwordController = TextEditingController();
 
-  late String email, password, confirmpass, fname, lname;
+  late String email, password, confirmpass, fname, lname, phoneNumber;
   late bool isTermsAccepted = false;
   late bool isPasswordValid;
   @override
@@ -45,12 +45,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               Row(children: [
                 Flexible(
                   child: CustomChangeBorderTextField(
-                      onSaved: (value) {
-                        fname = value!.trim();
-                      },
-                      hintText: S.of(context).first_name,
-                      prefixIcon: Icons.person,
-                      textInputType: TextInputType.name),
+                    onSaved: (value) {
+                      fname = value!.trim();
+                    },
+                    labelText: S.of(context).first_name,
+                    hintText: 'e.g. John',
+                    prefixIcon: Icons.person,
+                    textInputType: TextInputType.name,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Flexible(
@@ -58,7 +60,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       onSaved: (value) {
                         lname = value!.trim();
                       },
-                      hintText: S.of(context).last_name,
+                      labelText: S.of(context).last_name,
+                      hintText: 'e.g. Doe',
                       prefixIcon: Icons.person,
                       textInputType: TextInputType.name),
                 ),
@@ -70,7 +73,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onSaved: (value) {
                   email = value!.trim();
                 },
-                hintText: S.of(context).email,
+                labelText: S.of(context).email,
+                hintText: 'e.g. user@example.com',
                 prefixIcon: Icons.email,
                 textInputType: TextInputType.emailAddress,
                 isEmailform: true,
@@ -78,13 +82,23 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
               const SizedBox(
                 height: 16,
               ),
-              PasswordField(
-                controller: passwordController,
-                onchanged: (value) {
-                  password = value!;
+              CustomChangeBorderPhoneField(
+                onSaved: (value) {
+                  phoneNumber = value!.trim();
                 },
-                hintText: S.of(context).password,
+                prefixIcon: Icons.phone_android,
+                textInputType: TextInputType.phone,
               ),
+              const SizedBox(
+                height: 16,
+              ),
+              PasswordField(
+                  controller: passwordController,
+                  onchanged: (value) {
+                    password = value!;
+                  },
+                  lablelText: S.of(context).password,
+                  hintText: S.of(context).enter_your_password),
               const SizedBox(
                 height: 8,
               ),
@@ -101,7 +115,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 onchanged: (value) {
                   confirmpass = value!;
                 },
-                hintText: S.of(context).confirm_password,
+                lablelText: S.of(context).confirm_password,
+                hintText: S.of(context).re_enter_your_password,
               ),
               const SizedBox(
                 height: 16,
@@ -125,8 +140,8 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                       } else if (isTermsAccepted) {
                         context
                             .read<SignupCubit>()
-                            .createUserWithEmailAndPassword(
-                                fname, lname, email, password, confirmpass);
+                            .createUserWithEmailAndPassword(fname, lname, email,
+                                phoneNumber, password, confirmpass);
                       } else {
                         buildSnackBar(context, S.of(context).accept_terms);
                       }

@@ -1446,6 +1446,66 @@ class S {
       args: [],
     );
   }
+
+  /// `Phone Number`
+  String get phone_number {
+    return Intl.message(
+      'Phone Number',
+      name: 'phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter your password`
+  String get enter_your_password {
+    return Intl.message(
+      'Enter your password',
+      name: 'enter_your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Re-enter your password`
+  String get re_enter_your_password {
+    return Intl.message(
+      'Re-enter your password',
+      name: 're_enter_your_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter a valid Egyptian phone number`
+  String get egyptian_phone_number {
+    return Intl.message(
+      'Enter a valid Egyptian phone number',
+      name: 'egyptian_phone_number',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Verify Email`
+  String get verifyEmailTitle {
+    return Intl.message(
+      'Verify Email',
+      name: 'verifyEmailTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We've sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account.`
+  String get verifyEmailMessage {
+    return Intl.message(
+      'We\'ve sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account.',
+      name: 'verifyEmailMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

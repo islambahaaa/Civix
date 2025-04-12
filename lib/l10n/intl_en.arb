@@ -139,5 +139,11 @@
     "hours_ago": "hr ago",
     "days_ago": "d ago",
     "location" : "Location",
-    "see_location" : "See Location"
+    "see_location" : "See Location",
+    "phone_number" : "Phone Number",
+    "enter_your_password" : "Enter your password",
+    "re_enter_your_password" : "Re-enter your password",
+    "egyptian_phone_number" : "Enter a valid Egyptian phone number",
+    "verifyEmailTitle": "Verify Email",
+    "verifyEmailMessage": "We've sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account."
   }

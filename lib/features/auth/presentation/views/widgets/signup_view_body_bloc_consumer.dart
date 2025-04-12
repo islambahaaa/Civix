@@ -1,4 +1,5 @@
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
@@ -22,12 +23,8 @@ class SignUpBodyBlocConsumer extends StatelessWidget {
           Navigator.of(context).pop(); // Close the current screen
 
           Future.delayed(const Duration(milliseconds: 300), () {
-            showCustomDialog(
-                rootContext,
-                'Verify Email',
-                'We\'ve sent a confirmation link to your email address.\n'
-                    'Please check your inbox and click the link to verify your account.',
-                Icons.email);
+            showCustomDialog(rootContext, S.current.verifyEmailTitle,
+                S.current.verifyEmailMessage, Icons.email);
           });
 
           // buildSnackBar(context, S.of(context).success);

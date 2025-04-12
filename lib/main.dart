@@ -59,7 +59,7 @@ class MainApp extends StatelessWidget {
                 supportedLocales: S.delegate.supportedLocales,
                 theme: AppThemes.lightTheme,
                 darkTheme: AppThemes.darkTheme,
-                themeMode: ThemeMode.dark,
+                themeMode: theme,
                 debugShowCheckedModeBanner: false,
                 onGenerateRoute: onGenerateRoute,
                 initialRoute: SplashView.routeName,

@@ -1,3 +1,4 @@
+import 'package:civix_app/core/helper_functions/get_status_color.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/models/report_model.dart';
@@ -9,6 +10,7 @@ import 'package:flutter/material.dart';
 class ReportItem extends StatelessWidget {
   const ReportItem({super.key, required this.report});
   final ReportModel report;
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -45,23 +47,12 @@ class ReportItem extends StatelessWidget {
                         Container(
                           padding: const EdgeInsets.all(5),
                           decoration: BoxDecoration(
-                              color: report.status == S.of(context).solved
-                                  ? Colors.green[600]
-                                  : report.status == S.of(context).open
-                                      ? Theme.of(context).brightness ==
-                                              Brightness.dark
-                                          ? Theme.of(context).cardTheme.color
-                                          : Colors.grey[200]
-                                      : Colors.red[600],
+                              color: getStatusColor(report.status, context),
                               //color: Colors.grey[200],
                               borderRadius: BorderRadius.circular(8)),
-                          child: Text(
-                            report.status,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                          child: Text(report.status,
+                              style: TextStyles.bold15inter
+                                  .copyWith(fontSize: 10, color: Colors.white)),
                         ),
                         const Spacer(),
                         Text(

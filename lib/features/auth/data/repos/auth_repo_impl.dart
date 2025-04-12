@@ -27,11 +27,12 @@ class AuthRepoImpl implements AuthRepo {
       String fname,
       String lname,
       String email,
+      String phoneNumber,
       String password,
       String confirmedPassword) async {
     try {
       var response = await apiAuthService.createUserWithEmailAndPassword(
-          fname, lname, email, password, confirmedPassword);
+          fname, lname, email, phoneNumber, password, confirmedPassword);
       var userEntity = UserEntity(
           fname: fname, lname: lname, email: email, token: response['token']);
       return right(userEntity);

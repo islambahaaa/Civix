@@ -2,6 +2,7 @@ import 'package:civix_app/core/constants/api_constants.dart';
 import 'package:civix_app/core/errors/failures.dart';
 import 'package:civix_app/core/services/dio_client.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -12,6 +13,7 @@ class ApiAuthService {
       String fname,
       String lname,
       String email,
+      String phoneNumber,
       String password,
       String confirmedPassword) async {
     var response = await dio.authPost(ApiConstants.register, {
@@ -20,7 +22,7 @@ class ApiAuthService {
       "email": email,
       "password": password,
       "confirmedPassword": confirmedPassword,
-      "phoneNumber": "011111111",
+      "phoneNumber": phoneNumber,
     });
     return response.data;
   }
