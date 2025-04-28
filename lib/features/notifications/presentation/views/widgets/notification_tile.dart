@@ -1,3 +1,4 @@
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -27,17 +28,21 @@ class NotificationTile extends StatelessWidget {
       ),
       onDismissed: (direction) => onDismiss(notification.id),
       child: ListTile(
+          tileColor: notification.isRead
+              ? Colors.transparent
+              : AppColors.primaryColor.withOpacity(0.1),
           onTap: () => onTap(notification.id),
-          leading: AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            margin: const EdgeInsets.only(left: 8),
-            width: 15,
-            height: 15,
-            decoration: BoxDecoration(
-              color: notification.isRead ? Colors.grey : Colors.orange,
-              shape: BoxShape.circle,
-            ),
-          ),
+          minLeadingWidth: 0,
+          leading: notification.isRead
+              ? null
+              : Container(
+                  width: 8,
+                  height: 8,
+                  decoration: const BoxDecoration(
+                    color: Colors.orange,
+                    shape: BoxShape.circle,
+                  ),
+                ),
           title: Text(
             notification.title,
             style: TextStyle(

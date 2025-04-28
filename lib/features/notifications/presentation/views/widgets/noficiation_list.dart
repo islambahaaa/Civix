@@ -72,10 +72,8 @@ class _NotificationListState extends State<NotificationList> {
             padding: const EdgeInsets.only(top: 8),
             itemCount: notifications.length,
             separatorBuilder: (context, index) => const Divider(
-              height: 1,
+              height: 0.2,
               thickness: 0.15,
-              indent: 16,
-              endIndent: 16,
             ),
             itemBuilder: (context, index) {
               return NotificationTile(
