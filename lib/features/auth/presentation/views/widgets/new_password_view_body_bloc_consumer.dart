@@ -11,9 +11,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class NewPasswordViewBodyBlocConsumer extends StatelessWidget {
   const NewPasswordViewBodyBlocConsumer({
     super.key,
-    required this.userEntity,
+    required this.email,
+    required this.token,
   });
-  final UserEntity userEntity;
+  final String email, token;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<NewPasswordCubit, NewPasswordState>(
@@ -33,7 +34,8 @@ class NewPasswordViewBodyBlocConsumer extends StatelessWidget {
         return CustomProgressHud(
           isLoading: state is NewPasswordLoading,
           child: NewPasswordViewBody(
-            user: userEntity,
+            email: email,
+            token: token,
           ),
         );
       },

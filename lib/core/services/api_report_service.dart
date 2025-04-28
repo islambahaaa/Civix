@@ -20,7 +20,7 @@ class ApiReportService {
       'description': description,
       'latitude': latitude,
       'longitude': longitude,
-      'categoryId': category,
+      // 'categoryId': category,
       'images': imageMultipartList, // Attach image file
     });
     var response = await dio.reportPost(

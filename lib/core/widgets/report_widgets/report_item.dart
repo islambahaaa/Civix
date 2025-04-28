@@ -27,13 +27,6 @@ class ReportItem extends StatelessWidget {
               CustomReportImage(
                   borderRadius: BorderRadius.circular(12),
                   imageUrl: report.images[0]),
-
-              // Image.asset(
-              //   Assets.imagesLogo,
-              //   fit: BoxFit.cover,
-              //   width: 100,
-              //   height: 50,
-              // ),
               const SizedBox(
                 width: 20,
               ),

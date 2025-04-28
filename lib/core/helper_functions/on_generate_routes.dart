@@ -32,10 +32,14 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
                 email: email,
               ));
     case NewPasswordView.routeName:
-      final UserEntity userEntity = settings.arguments as UserEntity;
+      final Map<String, dynamic> args =
+          settings.arguments as Map<String, dynamic>;
+      final String email = args['email'];
+      final String token = args['token'];
       return MaterialPageRoute(
           builder: (context) => NewPasswordView(
-                userEntity: userEntity,
+                email: email,
+                token: token,
               ));
     case ForgotPasswordView.routeName:
       return MaterialPageRoute(

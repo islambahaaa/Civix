@@ -66,14 +66,14 @@ class _OtpViewBodyBlocConsumerState extends State<OtpViewBodyBlocConsumer> {
     return BlocConsumer<OtpCubit, OtpState>(
       listener: (context, state) {
         if (state is CheckOtpSuccess) {
-          UserEntity userEntity = UserEntity(
-            fname: "",
-            lname: "",
-            email: widget.email,
-            token: state.token,
+          Navigator.pushReplacementNamed(
+            context,
+            NewPasswordView.routeName,
+            arguments: {
+              'email': widget.email,
+              'token': state.token,
+            },
           );
-          Navigator.pushReplacementNamed(context, NewPasswordView.routeName,
-              arguments: userEntity);
         }
         if (state is CheckOtpFailure) {
           buildSnackBar(context, state.message);

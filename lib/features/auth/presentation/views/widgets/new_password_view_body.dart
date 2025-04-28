@@ -12,8 +12,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
 class NewPasswordViewBody extends StatefulWidget {
-  const NewPasswordViewBody({super.key, required this.user});
-  final UserEntity user;
+  const NewPasswordViewBody(
+      {super.key, required this.email, required this.token});
+  final String email, token;
   @override
   State<NewPasswordViewBody> createState() => _NewPasswordViewBodyState();
 }
@@ -69,10 +70,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                         buildSnackBar(context, S.of(context).password_mismatch);
                       } else {
                         context.read<NewPasswordCubit>().newPassword(
-                            widget.user.token,
-                            widget.user.email,
-                            password,
-                            confirmpass);
+                            widget.token, widget.email, password, confirmpass);
                       }
                     } else {
                       setState(() {

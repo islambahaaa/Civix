@@ -47,16 +47,16 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                 },
               ),
               const SizedBox(height: 20),
-              DropdownMenuExample(
-                onSelected: (value) {
-                  setState(() {
-                    category = value;
-                  });
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              // DropdownMenuExample(
+              //   onSelected: (value) {
+              //     setState(() {
+              //       category = value;
+              //     });
+              //   },
+              // ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               CustomTitleField(
                 onSaved: (value) {
                   title = value!;

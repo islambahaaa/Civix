@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPasswordView extends StatelessWidget {
-  final UserEntity userEntity;
-  const NewPasswordView({super.key, required this.userEntity});
+  final String email;
+  final String token;
+  const NewPasswordView({super.key, required this.email, required this.token});
   static const routeName = 'new-password';
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,8 @@ class NewPasswordView extends StatelessWidget {
       child: Scaffold(
           appBar: otpAppBar(context),
           body: NewPasswordViewBodyBlocConsumer(
-            userEntity: userEntity,
+            email: email,
+            token: token,
           )),
     );
   }

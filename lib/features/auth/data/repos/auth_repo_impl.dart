@@ -34,7 +34,11 @@ class AuthRepoImpl implements AuthRepo {
       var response = await apiAuthService.createUserWithEmailAndPassword(
           fname, lname, email, phoneNumber, password, confirmedPassword);
       var userEntity = UserEntity(
-          fname: fname, lname: lname, email: email, token: response['token']);
+          fname: fname,
+          lname: lname,
+          email: email,
+          phoneNumber: phoneNumber,
+          token: response['token']);
       return right(userEntity);
     } catch (e) {
       if (e is DioException) {

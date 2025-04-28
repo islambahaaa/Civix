@@ -74,17 +74,32 @@ class ProfileViewBody extends StatelessWidget {
                   text: S.of(context).notifications,
                   trailing: const SwitchWidget(),
                 ),
-                ProfileListTile(
-                  icon: Icons.phone_outlined,
-                  text: S.of(context).mobile_number,
-                  trailing: Text(
-                    '01090357957',
-                    style: TextStyles.regular14inter.copyWith(
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Theme.of(context).colorScheme.secondary
-                          : AppColors.secondaryColor,
-                    ),
-                  ),
+                BlocBuilder<UserCubit, UserState>(
+                  builder: (context, state) {
+                    if (state is UserLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is UserSuccess) {
+                      return ProfileListTile(
+                        icon: Icons.phone_outlined,
+                        text: S.of(context).mobile_number,
+                        trailing: Text(
+                          state.user.phoneNumber,
+                          style: TextStyles.regular14inter.copyWith(
+                            color:
+                                Theme.of(context).brightness == Brightness.dark
+                                    ? Theme.of(context).colorScheme.secondary
+                                    : AppColors.secondaryColor,
+                          ),
+                        ),
+                      );
+                    } else if (state is UserFailure) {
+                      return Center(child: Text(state.message));
+                    } else {
+                      return Center(child: Text(S.of(context).no_user_data));
+                    }
+                  },
                 ),
               ],
             ),
