@@ -35,74 +35,77 @@ class _SigninViewBodyState extends State<SigninViewBody> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: SingleChildScrollView(
-        child: Form(
-          key: formKey,
-          autovalidateMode: autovalidateMode,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 16,
-              ),
-              CustomChangeBorderTextField(
-                isEmailform: true,
-                onSaved: (value) {
-                  email = value!;
-                },
-                hintText: S.of(context).email,
-                prefixIcon: Icons.email,
-                textInputType: TextInputType.emailAddress,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              PasswordField(
-                onSaved: (value) {
-                  password = value!;
-                },
-                hintText: S.of(context).password,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed(ForgotPasswordView.routeName);
-                    },
-                    child: Text(
-                      S.of(context).forgot_pass,
-                      style: TextStyles.semibold16inter
-                          .copyWith(color: AppColors.primaryColor),
+        child: AutofillGroup(
+          child: Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: Column(
+              children: [
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomChangeBorderTextField(
+                  autofillHints: const [AutofillHints.email],
+                  isEmailform: true,
+                  onSaved: (value) {
+                    email = value!;
+                  },
+                  hintText: S.of(context).email,
+                  prefixIcon: Icons.email,
+                  textInputType: TextInputType.emailAddress,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                PasswordField(
+                  onSaved: (value) {
+                    password = value!;
+                  },
+                  hintText: S.of(context).password,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed(ForgotPasswordView.routeName);
+                      },
+                      child: Text(
+                        S.of(context).forgot_pass,
+                        style: TextStyles.semibold16inter
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    context
-                        .read<SigninCubit>()
-                        .signInWithEmailAndPassword(email, password);
-                  } else {
-                    setState(() {
-                      autovalidateMode = AutovalidateMode.always;
-                    });
-                  }
-                },
-                text: S.of(context).login,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              const DontHaveAccount(),
-            ],
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      formKey.currentState!.save();
+                      context
+                          .read<SigninCubit>()
+                          .signInWithEmailAndPassword(email, password);
+                    } else {
+                      setState(() {
+                        autovalidateMode = AutovalidateMode.always;
+                      });
+                    }
+                  },
+                  text: S.of(context).login,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                const DontHaveAccount(),
+              ],
+            ),
           ),
         ),
       ),

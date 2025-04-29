@@ -35,131 +35,137 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
       padding: const EdgeInsets.symmetric(horizontal: kHorizontalPadding),
       child: SingleChildScrollView(
           reverse: true,
-          child: Form(
-            key: formKey,
-            autovalidateMode: autovalidateMode,
-            child: Column(children: [
-              const SizedBox(
-                height: 24,
-              ),
-              Row(children: [
-                Flexible(
-                  child: CustomChangeBorderTextField(
-                    onSaved: (value) {
-                      fname = value!.trim();
-                    },
-                    labelText: S.of(context).first_name,
-                    hintText: 'e.g. John',
-                    prefixIcon: Icons.person,
-                    textInputType: TextInputType.name,
-                  ),
+          child: AutofillGroup(
+            child: Form(
+              key: formKey,
+              autovalidateMode: autovalidateMode,
+              child: Column(children: [
+                const SizedBox(
+                  height: 24,
                 ),
-                const SizedBox(width: 8),
-                Flexible(
-                  child: CustomChangeBorderTextField(
+                Row(children: [
+                  Flexible(
+                    child: CustomChangeBorderTextField(
+                      autofillHints: const [AutofillHints.givenName],
                       onSaved: (value) {
-                        lname = value!.trim();
+                        fname = value!.trim();
                       },
-                      labelText: S.of(context).last_name,
-                      hintText: 'e.g. Doe',
+                      labelText: S.of(context).first_name,
+                      hintText: 'e.g. John',
                       prefixIcon: Icons.person,
-                      textInputType: TextInputType.name),
+                      textInputType: TextInputType.name,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: CustomChangeBorderTextField(
+                        autofillHints: const [AutofillHints.familyName],
+                        onSaved: (value) {
+                          lname = value!.trim();
+                        },
+                        labelText: S.of(context).last_name,
+                        hintText: 'e.g. Doe',
+                        prefixIcon: Icons.person,
+                        textInputType: TextInputType.name),
+                  ),
+                ]),
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomChangeBorderTextField(
+                  autofillHints: const [AutofillHints.email],
+                  onSaved: (value) {
+                    email = value!.trim();
+                  },
+                  labelText: S.of(context).email,
+                  hintText: 'e.g. user@example.com',
+                  prefixIcon: Icons.email,
+                  textInputType: TextInputType.emailAddress,
+                  isEmailform: true,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                CustomChangeBorderPhoneField(
+                  onSaved: (value) {
+                    phoneNumber = value!.trim();
+                  },
+                  prefixIcon: Icons.phone_android,
+                  textInputType: TextInputType.phone,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                PasswordField(
+                    controller: passwordController,
+                    onchanged: (value) {
+                      password = value!;
+                    },
+                    lablelText: S.of(context).password,
+                    hintText: S.of(context).enter_your_password),
+                const SizedBox(
+                  height: 8,
+                ),
+                PasswordValidator(
+                  controller: passwordController,
+                  onFailure: (value) {
+                    isPasswordValid = value;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                PasswordField(
+                  onchanged: (value) {
+                    confirmpass = value!;
+                  },
+                  lablelText: S.of(context).confirm_password,
+                  hintText: S.of(context).re_enter_your_password,
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                TermsAndConditions(
+                  onChange: (value) {
+                    isTermsAccepted = value;
+                  },
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                CustomButton(
+                    onPressed: () {
+                      if (formKey.currentState!.validate()) {
+                        formKey.currentState!.save();
+                        if (isPasswordValid == false) {
+                          buildSnackBar(context, S.of(context).weak_password);
+                        } else if (password != confirmpass) {
+                          buildSnackBar(
+                              context, S.of(context).password_mismatch);
+                        } else if (isTermsAccepted) {
+                          context
+                              .read<SignupCubit>()
+                              .createUserWithEmailAndPassword(fname, lname,
+                                  email, phoneNumber, password, confirmpass);
+                        } else {
+                          buildSnackBar(context, S.of(context).accept_terms);
+                        }
+                      } else {
+                        setState(() {
+                          autovalidateMode = AutovalidateMode.always;
+                        });
+                      }
+                    },
+                    text: S.of(context).signup),
+                const SizedBox(
+                  height: 26,
+                ),
+                const HaveAccountWidget(),
+                const SizedBox(
+                  height: 8,
                 ),
               ]),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomChangeBorderTextField(
-                onSaved: (value) {
-                  email = value!.trim();
-                },
-                labelText: S.of(context).email,
-                hintText: 'e.g. user@example.com',
-                prefixIcon: Icons.email,
-                textInputType: TextInputType.emailAddress,
-                isEmailform: true,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              CustomChangeBorderPhoneField(
-                onSaved: (value) {
-                  phoneNumber = value!.trim();
-                },
-                prefixIcon: Icons.phone_android,
-                textInputType: TextInputType.phone,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              PasswordField(
-                  controller: passwordController,
-                  onchanged: (value) {
-                    password = value!;
-                  },
-                  lablelText: S.of(context).password,
-                  hintText: S.of(context).enter_your_password),
-              const SizedBox(
-                height: 8,
-              ),
-              PasswordValidator(
-                controller: passwordController,
-                onFailure: (value) {
-                  isPasswordValid = value;
-                },
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              PasswordField(
-                onchanged: (value) {
-                  confirmpass = value!;
-                },
-                lablelText: S.of(context).confirm_password,
-                hintText: S.of(context).re_enter_your_password,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              TermsAndConditions(
-                onChange: (value) {
-                  isTermsAccepted = value;
-                },
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              CustomButton(
-                  onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      formKey.currentState!.save();
-                      if (isPasswordValid == false) {
-                        buildSnackBar(context, S.of(context).weak_password);
-                      } else if (password != confirmpass) {
-                        buildSnackBar(context, S.of(context).password_mismatch);
-                      } else if (isTermsAccepted) {
-                        context
-                            .read<SignupCubit>()
-                            .createUserWithEmailAndPassword(fname, lname, email,
-                                phoneNumber, password, confirmpass);
-                      } else {
-                        buildSnackBar(context, S.of(context).accept_terms);
-                      }
-                    } else {
-                      setState(() {
-                        autovalidateMode = AutovalidateMode.always;
-                      });
-                    }
-                  },
-                  text: S.of(context).signup),
-              const SizedBox(
-                height: 26,
-              ),
-              const HaveAccountWidget(),
-              const SizedBox(
-                height: 8,
-              ),
-            ]),
+            ),
           )),
     );
   }

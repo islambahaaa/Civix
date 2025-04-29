@@ -11,6 +11,7 @@ class CustomTextFormField extends StatelessWidget {
     super.key,
     this.hintText,
     required this.textInputType,
+    this.autofillhints,
     this.suffixIcon,
     this.onSaved,
     this.onChanged,
@@ -34,9 +35,11 @@ class CustomTextFormField extends StatelessWidget {
   final bool obscureText;
   final bool isEmailform;
   final bool isDone;
+  final Iterable<String>? autofillhints;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      autofillHints: autofillhints,
       focusNode: focusNode,
       controller: controller,
       textInputAction: TextInputAction.next,
@@ -95,6 +98,7 @@ class CustomChangeBorderTextField extends StatefulWidget {
     super.key,
     this.hintText,
     required this.textInputType,
+    this.autofillHints,
     this.labelText,
     this.suffixIcon,
     this.prefixIcon,
@@ -114,6 +118,7 @@ class CustomChangeBorderTextField extends StatefulWidget {
   final void Function(String?)? onChanged;
   final bool obscureText;
   final bool isEmailform;
+  final Iterable<String>? autofillHints;
   @override
   State<CustomChangeBorderTextField> createState() =>
       _CustomChangeBorderTextFieldState();
@@ -145,6 +150,7 @@ class _CustomChangeBorderTextFieldState
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      autofillhints: widget.autofillHints,
       isEmailform: widget.isEmailform,
       suffixIcon: widget.suffixIcon,
       prefixIcon: widget.prefixIcon,
@@ -208,6 +214,7 @@ class _CustomChangeBorderPhoneFieldState
   Widget build(BuildContext context) {
     final phoneRegex = RegExp(r'^01[0-2,5][0-9]{8}$');
     return TextFormField(
+      autofillHints: const [AutofillHints.telephoneNumber],
       focusNode: _focusNode,
       controller: widget.controller,
       textInputAction: TextInputAction.next,
