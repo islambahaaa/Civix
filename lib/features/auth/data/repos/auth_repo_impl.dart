@@ -13,6 +13,7 @@ import 'package:civix_app/features/auth/data/models/user_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 
 import '../../domain/repos/auth_repo.dart';
 
@@ -62,6 +63,13 @@ class AuthRepoImpl implements AuthRepo {
     try {
       var response =
           await apiAuthService.signInWithEmailAndPassword(email, password);
+      final token =
+          response['token']; // Change this if your token is in another key
+
+      if (token == null || !hasUserRole(token)) {
+        return left(ServerFailure(
+            'Your account does not have permission to access this app. Please contact support if you believe this is an error.'));
+      }
       var userEntity = UserModel.fromJson(response);
       saveUserData(user: userEntity);
       return right(userEntity);
@@ -127,5 +135,15 @@ class AuthRepoImpl implements AuthRepo {
     final userModel = UserModel.fromUserEntity(user);
     var jsonData = jsonEncode(userModel.toJson());
     await Prefs.setString(kUserData, jsonData);
+  }
+
+  bool hasUserRole(String token) {
+    try {
+      final decodedToken = JwtDecoder.decode(token);
+      final roles = decodedToken['roles'];
+      return roles is List && roles.contains('User');
+    } catch (e) {
+      return false;
+    }
   }
 }

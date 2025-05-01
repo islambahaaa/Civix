@@ -75,9 +75,8 @@ class _ReportViewBodyState extends State<ReportViewBody> {
               ),
               CustomButton(
                   onPressed: () {
-                    if (formKey.currentState!.validate() && category != null) {
+                    if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-
                       if (hasCameraImage) {
                         context.read<ReportCubit>().submitReportFromCamera(
                               title,
@@ -85,9 +84,8 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                               category!,
                             );
                       } else {
-                        context
-                            .read<ReportCubit>()
-                            .saveFieldsInCubit(title, description, category!);
+                        context.read<ReportCubit>().saveFieldsInCubit(
+                            title, description, category ?? 0);
                         if (context.read<ReportCubit>().images.isNotEmpty) {
                           Navigator.of(context).pushNamed(
                               LocationPick.routeName,
@@ -97,7 +95,7 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                         }
                       }
                     } else {
-                      buildSnackBar(context, S.of(context).fill_fields);
+                      //buildSnackBar(context, S.of(context).fill_fields);
                       setState(() {
                         autovalidateMode = AutovalidateMode.always;
                       });
