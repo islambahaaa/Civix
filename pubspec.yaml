@@ -7,6 +7,7 @@ environment:
   sdk: ^3.5.4
 
 dependencies:
+
   cached_network_image: ^3.4.1
   carousel_slider: ^5.0.0
   dartz: ^0.10.1
@@ -31,6 +32,8 @@ dependencies:
   get_it: ^8.0.2
   google_maps_flutter: ^2.10.1
   google_nav_bar: ^5.0.7
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
   image_picker: ^1.1.2
   jwt_decoder: ^2.0.1
   lottie: ^3.2.0
@@ -44,6 +47,8 @@ dependencies:
   svg_flutter: ^0.0.1
 
 dev_dependencies:
+  hive_generator: ^2.0.1
+  build_runner: ^2.4.15
   flutter_launcher_icons: ^0.14.2
   flutter_lints: ^4.0.0
   flutter_test:

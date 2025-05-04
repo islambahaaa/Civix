@@ -1,10 +1,12 @@
 import 'dart:async';
 
+import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/helper_functions/on_generate_routes.dart';
 import 'package:civix_app/core/services/custom_bloc_observer.dart';
 import 'package:civix_app/core/services/get_it_service.dart';
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/services/signalr_service.dart';
+import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
@@ -18,6 +20,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import 'firebase_options.dart';
 
@@ -26,6 +29,9 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter();
+  Hive.registerAdapter(NotificationModelAdapter());
+  await Hive.openBox<NotificationModel>(kNotificationsBox);
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();

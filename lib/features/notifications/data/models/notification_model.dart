@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+part 'notification_model.g.dart';
 
-class NotificationModel {
+@HiveType(typeId: 0)
+class NotificationModel extends HiveObject {
+  @HiveField(0)
   final String id;
+  @HiveField(1)
   final String title;
+  @HiveField(2)
   final String body;
+  @HiveField(3)
   final DateTime time;
+  @HiveField(4)
   bool isRead;
-  final IconData icon;
-  final Color color;
-  final String type;
+  @HiveField(5)
   String? image;
 
   NotificationModel({
@@ -18,9 +24,6 @@ class NotificationModel {
     required this.body,
     required this.time,
     required this.isRead,
-    required this.icon,
-    required this.color,
-    required this.type,
   });
 
   // factory NotificationModel.fromJson(Map<String, dynamic> json) {
