@@ -8,22 +8,28 @@ import 'package:civix_app/core/services/signalr_service.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
+import 'package:civix_app/firebase_service.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/language/lang_cubit.dart';
 import 'package:civix_app/theme/theme.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
-
+  await FirebaseService.initialize();
   // //
   // final signalRService = SignalRService();
   // await signalRService.connectToHub();

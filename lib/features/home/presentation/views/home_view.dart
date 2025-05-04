@@ -10,6 +10,7 @@ import 'package:civix_app/features/my_reports/presentation/views/my_reports_view
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
+import 'package:civix_app/firebase_service.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -30,10 +31,13 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   int currentIndex = 0;
   late PageController pageController;
-
+  final firebaseService = FirebaseService();
   @override
   void initState() {
     super.initState();
+    firebaseService.requestPermission();
+    firebaseService.getToken();
+    firebaseService.setupOnMessageListener();
     pageController = PageController(initialPage: currentIndex);
   }
 
