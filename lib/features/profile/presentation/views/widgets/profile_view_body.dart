@@ -5,6 +5,7 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
+import 'package:civix_app/features/edit_profile/presentation/pages/edit_profile_page.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/language_dialog.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_list_tile.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_section.dart';
@@ -66,9 +67,14 @@ class ProfileViewBody extends StatelessWidget {
             ),
             ProfileSection(
               children: [
-                ProfileListTile(
-                    icon: Icons.notes_outlined,
-                    text: S.of(context).edit_profile),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(context, EditProfileView.routeName);
+                  },
+                  child: ProfileListTile(
+                      icon: Icons.notes_outlined,
+                      text: S.of(context).edit_profile),
+                ),
                 ProfileListTile(
                   icon: Icons.notifications_outlined,
                   text: S.of(context).notifications,

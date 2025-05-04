@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
     super.key,
     this.hintText,
+    this.isEnabled,
     required this.textInputType,
     this.autofillhints,
     this.suffixIcon,
@@ -36,9 +37,11 @@ class CustomTextFormField extends StatelessWidget {
   final bool isEmailform;
   final bool isDone;
   final Iterable<String>? autofillhints;
+  final bool? isEnabled;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      enabled: isEnabled,
       autofillHints: autofillhints,
       focusNode: focusNode,
       controller: controller,
@@ -97,6 +100,7 @@ class CustomChangeBorderTextField extends StatefulWidget {
   const CustomChangeBorderTextField({
     super.key,
     this.hintText,
+    this.isEnabled,
     required this.textInputType,
     this.autofillHints,
     this.labelText,
@@ -119,6 +123,8 @@ class CustomChangeBorderTextField extends StatefulWidget {
   final bool obscureText;
   final bool isEmailform;
   final Iterable<String>? autofillHints;
+  final bool? isEnabled;
+
   @override
   State<CustomChangeBorderTextField> createState() =>
       _CustomChangeBorderTextFieldState();
@@ -150,6 +156,7 @@ class _CustomChangeBorderTextFieldState
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      isEnabled: widget.isEnabled,
       autofillhints: widget.autofillHints,
       isEmailform: widget.isEmailform,
       suffixIcon: widget.suffixIcon,
