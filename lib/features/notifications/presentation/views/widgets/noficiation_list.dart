@@ -2,6 +2,7 @@ import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/features/notifications/presentation/views/widgets/notification_tile.dart';
 import 'package:civix_app/generated/l10n.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 class NotificationList extends StatefulWidget {
@@ -12,38 +13,35 @@ class NotificationList extends StatefulWidget {
 }
 
 class _NotificationListState extends State<NotificationList> {
-  final List<NotificationModel> notifications = [
-    NotificationModel(
-      id: '1',
-      title: 'New message from Sarah',
-      body: 'Hey, are we still meeting tomorrow?',
-      time: DateTime.now().subtract(const Duration(minutes: 5)),
-      isRead: false,
-      icon: Icons.message,
-      color: Colors.blue,
-      type: 'message',
-    ),
-    NotificationModel(
-      id: '2',
-      title: 'Payment received',
-      body: 'You\'ve received \$250 from John Doe',
-      time: DateTime.now().subtract(const Duration(hours: 2)),
-      isRead: false,
-      icon: Icons.payment,
-      color: Colors.green,
-      type: 'payment',
-    ),
-    NotificationModel(
-      id: '3',
-      title: 'System update',
-      body: 'New version 2.3.0 is available',
-      time: DateTime.now().subtract(const Duration(days: 1)),
-      isRead: true,
-      icon: Icons.system_update,
-      color: Colors.orange,
-      type: 'system',
-    ),
-  ];
+  List<NotificationModel> notifications = [];
+  @override
+  void initState() {
+    super.initState();
+    _listenToFirebaseMessages();
+  }
+
+  void _listenToFirebaseMessages() {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      if (message.notification != null) {
+        final newNotification = NotificationModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          title: message.notification?.title ?? 'No title',
+          body: message.notification?.body ?? 'No body',
+          image: message.notification?.android?.imageUrl,
+          time: DateTime.now(),
+          isRead: false,
+          icon: Icons
+              .notifications, // You could change this based on `message.data`
+          color: Colors.purple,
+          type: message.data['type'] ?? 'general', // Default to 'general'
+        );
+
+        setState(() {
+          notifications.insert(0, newNotification);
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

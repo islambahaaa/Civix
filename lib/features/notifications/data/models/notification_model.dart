@@ -9,9 +9,11 @@ class NotificationModel {
   final IconData icon;
   final Color color;
   final String type;
+  String? image;
 
   NotificationModel({
     required this.id,
+    this.image,
     required this.title,
     required this.body,
     required this.time,

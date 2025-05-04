@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class FirebaseService {
+class FirebaseNotificationService {
   final FirebaseMessaging _messaging = FirebaseMessaging.instance;
 
   static final FlutterLocalNotificationsPlugin _localNotificationsPlugin =
@@ -30,10 +32,9 @@ class FirebaseService {
     }
   }
 
-  /// Get FCM token
   Future<String?> getToken() async {
     String? token = await _messaging.getToken();
-    print("📱 FCM Token: $token");
+    log('FCMToken: $token');
     return token;
   }
 
@@ -77,7 +78,6 @@ class FirebaseService {
     print('📦 Handling background message: ${message.messageId}');
   }
 
-  /// Setup local notification plugin (only once)
   static Future<void> _setupFlutterNotifications() async {
     const AndroidInitializationSettings initializationSettingsAndroid =
         AndroidInitializationSettings('@mipmap/ic_launcher');

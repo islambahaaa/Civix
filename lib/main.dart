@@ -8,7 +8,7 @@ import 'package:civix_app/core/services/signalr_service.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
-import 'package:civix_app/firebase_service.dart';
+import 'package:civix_app/core/services/firebase_notification_service.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/language/lang_cubit.dart';
 import 'package:civix_app/theme/theme.dart';
@@ -29,7 +29,7 @@ void main() async {
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
-  await FirebaseService.initialize();
+  await FirebaseNotificationService.initialize();
   // //
   // final signalRService = SignalRService();
   // await signalRService.connectToHub();

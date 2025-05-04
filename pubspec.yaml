@@ -23,6 +23,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   flutter_pw_validator: ^1.6.0
+  flutter_slidable: ^4.0.0
   flutter_svg_provider: ^1.0.7
   gal: ^2.3.1
   geocoding: ^3.0.0

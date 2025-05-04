@@ -6,11 +6,13 @@ import 'package:civix_app/core/errors/exceptions.dart';
 import 'package:civix_app/core/errors/failures.dart';
 import 'package:civix_app/core/services/api_auth_service.dart';
 import 'package:civix_app/core/services/database_service.dart';
+import 'package:civix_app/core/services/get_it_service.dart';
 
 import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/utils/backend_endpoints.dart';
 import 'package:civix_app/features/auth/data/models/user_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
+import 'package:civix_app/core/services/firebase_notification_service.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
@@ -61,10 +63,14 @@ class AuthRepoImpl implements AuthRepo {
   Future<Either<Failure, UserEntity>> signInWithEmailAndPassword(
       String email, String password) async {
     try {
-      var response =
-          await apiAuthService.signInWithEmailAndPassword(email, password);
-      final token =
-          response['token']; // Change this if your token is in another key
+      String? fcmToken =
+          await getIt.get<FirebaseNotificationService>().getToken();
+      var response = await apiAuthService.signInWithEmailAndPassword(
+        email,
+        password,
+        fcmToken: fcmToken,
+      );
+      final token = response['token'];
 
       if (token == null || !hasUserRole(token)) {
         return left(ServerFailure(

@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class NotificationTile extends StatelessWidget {
   final NotificationModel notification;
@@ -17,16 +19,21 @@ class NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
+    return Slidable(
       key: Key(notification.id),
-      direction: DismissDirection.endToStart,
-      background: Container(
-        color: Colors.red,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        child: const Icon(Icons.delete, color: Colors.white),
+      useTextDirection: true,
+      endActionPane: ActionPane(
+        extentRatio: 0.25,
+        motion: const ScrollMotion(),
+        children: [
+          SlidableAction(
+            onPressed: (context) => onDismiss(notification.id),
+            backgroundColor: Colors.red,
+            foregroundColor: Colors.white,
+            icon: Icons.delete,
+          ),
+        ],
       ),
-      onDismissed: (direction) => onDismiss(notification.id),
       child: ListTile(
           tileColor: notification.isRead
               ? Colors.transparent
@@ -64,12 +71,16 @@ class NotificationTile extends StatelessWidget {
               ),
             ],
           ),
-          trailing: Container(
-            width: 60,
-            height: 60,
-            padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-                color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+          trailing: ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: notification.image != null
+                ? CachedNetworkImage(
+                    width: 60,
+                    height: 60,
+                    imageUrl: notification.image!,
+                    fit: BoxFit.cover,
+                  )
+                : null,
           )),
     );
   }
