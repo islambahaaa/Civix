@@ -1,37 +1,24 @@
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
+import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
+import 'package:civix_app/features/auth/data/models/user_model.dart';
+import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
-// Mock data fetch
-Future<Map<String, dynamic>> fetchUserProfile() async {
-  await Future.delayed(const Duration(seconds: 2)); // simulate network delay
-  return {
-    "userName": "islam.bahaa",
-    "email": "email@gmail.com",
-    "firstName": "islam",
-    "lastName": "bahaa",
-    "phoneNumber": "01200887855",
-  };
-}
-
-// Mock update function
-Future<bool> updateUserProfile(Map<String, dynamic> data) async {
-  await Future.delayed(const Duration(seconds: 1)); // simulate network delay
-  return true; // simulate success
-}
-
-class EditProfileScreen extends StatefulWidget {
-  const EditProfileScreen({super.key});
-
+class EditProfileViewBody extends StatefulWidget {
+  const EditProfileViewBody(
+      {super.key, required this.user, required this.token});
+  final UserEntity user;
+  final String token;
   @override
-  State<EditProfileScreen> createState() => _EditProfileScreenState();
+  State<EditProfileViewBody> createState() => _EditProfileViewBodyState();
 }
 
-class _EditProfileScreenState extends State<EditProfileScreen> {
+class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   // Controllers
@@ -41,42 +28,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   late String email, fname, lname, phoneNumber;
-  late Map<String, dynamic> _originalData;
-  bool _isLoading = true;
-  bool _isUpdating = false;
-  String? _errorMessage;
-  bool _showSuccessMessage = false;
 
   @override
   void initState() {
     super.initState();
-    _loadUserProfile();
+    loadProfile();
   }
 
-  Future<void> _loadUserProfile() async {
-    try {
-      final data = await fetchUserProfile();
-      _userNameController.text = data['userName'] ?? '';
-      _emailController.text = data['email'] ?? '';
-      _firstNameController.text = data['firstName'] ?? '';
-      _lastNameController.text = data['lastName'] ?? '';
-      _phoneController.text = data['phoneNumber'] ?? '';
-      _originalData = {
-        'firstName': _firstNameController.text,
-        'lastName': _lastNameController.text,
-        'phoneNumber': _phoneController.text,
-      };
-    } catch (e) {
-      setState(() => _errorMessage = 'Failed to load user data');
-    } finally {
-      setState(() => _isLoading = false);
-    }
+  Future<void> loadProfile() async {
+    _emailController.text = widget.user.email;
+    _firstNameController.text = widget.user.fname;
+    _lastNameController.text = widget.user.lname;
+    _phoneController.text = widget.user.phoneNumber;
   }
 
   bool _hasChanges() {
-    return _firstNameController.text != _originalData['firstName'] ||
-        _lastNameController.text != _originalData['lastName'] ||
-        _phoneController.text != (_originalData['phoneNumber'] ?? '');
+    return _firstNameController.text != widget.user.fname ||
+        _lastNameController.text != widget.user.lname ||
+        _phoneController.text != widget.user.phoneNumber;
   }
 
   Future<void> _saveProfile() async {
@@ -87,23 +56,13 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       );
       return;
     }
-    setState(() {
-      _isUpdating = true;
-      _showSuccessMessage = false;
-    });
+    setState(() {});
 
     final updatedData = {
       "firstName": _firstNameController.text.trim(),
       "lastName": _lastNameController.text.trim(),
       "phoneNumber": _phoneController.text.trim(),
     };
-
-    final success = await updateUserProfile(updatedData);
-
-    setState(() {
-      _isUpdating = false;
-      _showSuccessMessage = success;
-    });
   }
 
   @override
@@ -168,20 +127,25 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => NewPasswordView(
-                                  email: email,
-                                  token: '',
-                                )));
-                  },
-                  child: const Text("Change Password"),
+                SizedBox(
+                  width: double.infinity,
+                  height: 45,
+                  child: CustomButton(
+                    color: AppColors.secondaryColor,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (_) => NewPasswordView(
+                                    email: widget.user.email,
+                                    token: widget.token,
+                                  )));
+                    },
+                    text: 'Change Password',
+                  ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 16,
                 ),
                 CustomButton(
                     onPressed: () {

@@ -1,15 +1,17 @@
-abstract class Edit_profileState {}
+import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 
-class Edit_profileInitial extends Edit_profileState {}
+abstract class EditProfileState {}
 
-class Edit_profileLoading extends Edit_profileState {}
+class EditProfileInitial extends EditProfileState {}
 
-class Edit_profileSuccess extends Edit_profileState {
-  // final result;
-  // Success(this.result);
+class EditProfileLoading extends EditProfileState {}
+
+class EditProfileSuccess extends EditProfileState {
+  final UserEntity user;
+  EditProfileSuccess(this.user);
 }
 
-class Edit_profileFailure extends Edit_profileState {
+class EditProfileFailure extends EditProfileState {
   final String error;
-  Edit_profileFailure(this.error);
+  EditProfileFailure(this.error);
 }

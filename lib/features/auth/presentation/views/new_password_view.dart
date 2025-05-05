@@ -20,7 +20,7 @@ class NewPasswordView extends StatelessWidget {
         getIt.get<AuthRepo>(),
       ),
       child: Scaffold(
-          appBar: otpAppBar(context),
+          appBar: AppBar(),
           body: NewPasswordViewBodyBlocConsumer(
             email: email,
             token: token,

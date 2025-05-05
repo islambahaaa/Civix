@@ -66,4 +66,14 @@ class ApiAuthService {
     });
     return response.data;
   }
+
+  Future<Map<String, dynamic>> getCurrentUser() async {
+    var response = await dio.get(ApiConstants.meEndPoint);
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> editUserProfile() async {
+    var response = await dio.get(ApiConstants.meEndPoint);
+    return response.data;
+  }
 }

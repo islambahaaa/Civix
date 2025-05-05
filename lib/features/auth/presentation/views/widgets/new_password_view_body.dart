@@ -39,12 +39,12 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                 height: 30,
               ),
               Text(
-                S.of(context).create_account,
+                S.of(context).new_password,
                 style: TextStyles.semibold28inter
                     .copyWith(color: AppColors.secondaryColor),
               ),
               const SizedBox(
-                height: 29,
+                height: 30,
               ),
               PasswordField(
                 onchanged: (value) {
@@ -78,7 +78,7 @@ class _NewPasswordViewBodyState extends State<NewPasswordViewBody> {
                       });
                     }
                   },
-                  text: S.of(context).verify),
+                  text: S.of(context).submit),
             ],
           ),
         ),

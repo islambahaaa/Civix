@@ -36,6 +36,7 @@ class _HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     firebaseService.requestPermission();
+    firebaseService.getToken();
     firebaseService.setupOnMessageListener();
     pageController = PageController(initialPage: currentIndex);
   }

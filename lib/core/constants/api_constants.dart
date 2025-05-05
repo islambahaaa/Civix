@@ -10,4 +10,5 @@ class ApiConstants {
   static const String createIssueEndPoint = '/api/issues/';
   static const String citiesNames = '/api/auth/cities-names';
   static const String solvedInMyArea = '/api/issues/solved-me';
+  static const String meEndPoint = '/me';
 }

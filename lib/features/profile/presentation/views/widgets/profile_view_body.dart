@@ -5,7 +5,7 @@ import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
-import 'package:civix_app/features/edit_profile/presentation/pages/edit_profile_page.dart';
+import 'package:civix_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/language_dialog.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_list_tile.dart';
 import 'package:civix_app/features/profile/presentation/views/widgets/profile_section.dart';
@@ -67,13 +67,29 @@ class ProfileViewBody extends StatelessWidget {
             ),
             ProfileSection(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(context, EditProfileView.routeName);
+                BlocBuilder<UserCubit, UserState>(
+                  builder: (context, state) {
+                    if (state is UserLoading) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    } else if (state is UserSuccess) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, EditProfileView.routeName,
+                              arguments: state.user.token);
+                        },
+                        child: ProfileListTile(
+                            icon: Icons.notes_outlined,
+                            text: S.of(context).edit_profile),
+                      );
+                    } else if (state is UserFailure) {
+                      return Center(child: Text(state.message));
+                    } else {
+                      return Center(child: Text(S.of(context).no_user_data));
+                    }
                   },
-                  child: ProfileListTile(
-                      icon: Icons.notes_outlined,
-                      text: S.of(context).edit_profile),
                 ),
                 ProfileListTile(
                   icon: Icons.notifications_outlined,
