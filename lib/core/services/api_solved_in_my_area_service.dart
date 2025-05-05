@@ -14,8 +14,17 @@ class ApiSolvedInMyAreaService {
 
   Future<Map<String, dynamic>> getIssuesInMyArea(String? area) async {
     log("area :${area.toString()}");
-    var response =
-        await dio.get(ApiConstants.solvedInMyArea, queryParameter: area);
+    var response = await dio
+        .get(ApiConstants.solvedInMyArea, queryParameter: {'area': area});
+    log(response.data.toString());
+    return response.data;
+  }
+
+  Future<String> getAreaBylatlong(double lat, double long) async {
+    var response = await dio.get(
+      ApiConstants.areaByLatLong,
+      queryParameter: {'latitude': lat, 'longitude': long},
+    );
     log(response.data.toString());
     return response.data;
   }

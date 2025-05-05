@@ -22,8 +22,11 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   Future<void> fetchNearMe() async {
+    if (savedArea == null) {
+      emit(HomeInitial());
+      return;
+    }
     emit(HomeLoading());
-    if (savedArea == null) return;
     var result = await homeRepo.fetchNearMe(area: savedArea);
     log(result.toString());
     result.fold(

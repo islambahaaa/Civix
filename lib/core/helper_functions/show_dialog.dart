@@ -10,7 +10,7 @@ void showCustomDialog(
     BuildContext context, String title, String text, IconData icon) {
   showDialog(
       context: context,
-      // Prevent dismissing by tapping outside
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return Dialog(
           shape: RoundedRectangleBorder(

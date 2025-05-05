@@ -29,4 +29,21 @@ class PickMyAreaRepoImpl implements PickMyAreaRepo {
       ));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> fetchAreasBylatlong(
+      double lat, double long) async {
+    try {
+      var response = await apiSolvedInMyAreaService.getAreaBylatlong(lat, long);
+      if (response == 'Unknown') return left(ServerFailure("No area found"));
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
+  }
 }
