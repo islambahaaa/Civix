@@ -13,4 +13,15 @@ class EditProfileCubit extends Cubit<EditProfileState> {
       (user) => emit(EditProfileSuccess(user)),
     );
   }
+
+  Future<void> editCurrentUser(
+      String fname, String lname, String phoneNumber, String area) async {
+    emit(EditProfileLoading());
+    var result =
+        await editProfileRepo.editUserProfile(fname, lname, phoneNumber, area);
+    result.fold(
+      (failure) => emit(EditProfileFailure(failure.message)),
+      (_) => emit(EditProfileUpdated()),
+    );
+  }
 }

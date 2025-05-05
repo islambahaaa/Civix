@@ -72,8 +72,18 @@ class ApiAuthService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> editUserProfile() async {
-    var response = await dio.get(ApiConstants.meEndPoint);
+  Future<String> editUserProfile(
+    String fname,
+    String lname,
+    String phoneNumber,
+    String area,
+  ) async {
+    var response = await dio.put(ApiConstants.editProfile, {
+      "firstName": fname,
+      "lastName": lname,
+      "phoneNumber": phoneNumber,
+      "area": area
+    });
     return response.data;
   }
 }

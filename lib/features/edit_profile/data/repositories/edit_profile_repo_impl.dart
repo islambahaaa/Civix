@@ -30,8 +30,20 @@ class EditProfileRepoImpl implements EditProfileRepo {
   }
 
   @override
-  Future<Either<Failure, UserEntity>> editUserProfile() {
-    // TODO: implement editUserProfile
-    throw UnimplementedError();
+  Future<Either<Failure, String>> editUserProfile(
+      String fname, String lname, String phoneNumber, String area) async {
+    try {
+      var response =
+          await apiAuthService.editUserProfile(fname, lname, phoneNumber, area);
+
+      return right(response);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
   }
 }

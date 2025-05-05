@@ -11,6 +11,8 @@ class EditProfileSuccess extends EditProfileState {
   EditProfileSuccess(this.user);
 }
 
+class EditProfileUpdated extends EditProfileState {}
+
 class EditProfileFailure extends EditProfileState {
   final String error;
   EditProfileFailure(this.error);

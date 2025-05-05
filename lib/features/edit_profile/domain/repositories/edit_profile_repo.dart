@@ -4,5 +4,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class EditProfileRepo {
   Future<Either<Failure, UserEntity>> getCurrentUser();
-  Future<Either<Failure, UserEntity>> editUserProfile();
+  Future<Either<Failure, String>> editUserProfile(
+      String fname, String lname, String phoneNumber, String area);
 }

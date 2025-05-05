@@ -63,4 +63,11 @@ class DioClient {
       queryParameters: queryParameter,
     );
   }
+
+  Future<Response> put(String endpoint, var data) async {
+    return await dio.put(
+      '${ApiConstants.baseUrl}$endpoint',
+      data: data,
+    );
+  }
 }

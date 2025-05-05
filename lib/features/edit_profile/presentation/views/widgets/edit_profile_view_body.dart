@@ -1,13 +1,18 @@
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
 import 'package:civix_app/features/auth/data/models/user_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
+import 'package:civix_app/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
+import 'package:civix_app/features/home/presentation/views/widgets/pick_location_widget.dart';
+import 'package:civix_app/features/pickmyarea/presentation/views/pick_my_area_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class EditProfileViewBody extends StatefulWidget {
   const EditProfileViewBody(
@@ -27,7 +32,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  late String email, fname, lname, phoneNumber;
+  late String email, fname, lname, phoneNumber, area;
 
   @override
   void initState() {
@@ -36,6 +41,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   }
 
   Future<void> loadProfile() async {
+    area = 'Select your area';
     _emailController.text = widget.user.email;
     _firstNameController.text = widget.user.fname;
     _lastNameController.text = widget.user.lname;
@@ -48,21 +54,10 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         _phoneController.text != widget.user.phoneNumber;
   }
 
-  Future<void> _saveProfile() async {
-    if (!formKey.currentState!.validate()) return;
-    if (!_hasChanges()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('No changes detected')),
-      );
-      return;
-    }
-    setState(() {});
-
-    final updatedData = {
-      "firstName": _firstNameController.text.trim(),
-      "lastName": _lastNameController.text.trim(),
-      "phoneNumber": _phoneController.text.trim(),
-    };
+  Future<void> saveFields() async {
+    fname = _firstNameController.text.trim();
+    lname = _lastNameController.text.trim();
+    phoneNumber = _phoneController.text.trim();
   }
 
   @override
@@ -127,6 +122,44 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 const SizedBox(
                   height: 16,
                 ),
+                GestureDetector(
+                  onTap: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const PickMyAreaView()),
+                    );
+
+                    if (result != null && context.mounted) {
+                      setState(() {
+                        area = result;
+                      });
+                    }
+                  },
+                  child: Container(
+                    height: 56,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade400),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 16),
+                          child: Icon(
+                            Icons.location_on,
+                          ),
+                        ),
+                        Text(area),
+                        const Spacer(),
+                        const Icon(Icons.arrow_drop_down),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                   width: double.infinity,
                   height: 45,
@@ -155,6 +188,9 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                           return;
                         }
                         formKey.currentState!.save();
+                        saveFields();
+                        BlocProvider.of<EditProfileCubit>(context)
+                            .editCurrentUser(fname, lname, phoneNumber, area);
                       } else {
                         setState(() {
                           autovalidateMode = AutovalidateMode.always;
