@@ -40,6 +40,27 @@ class _PickMyAreaViewBodyState extends State<PickMyAreaViewBody> {
       return;
     }
     final position = await Geolocator.getCurrentPosition();
+    final placemarks = await placemarkFromCoordinates(
+      position.latitude,
+      position.longitude,
+    );
+    if (placemarks.isNotEmpty) {
+      final place = placemarks.first;
+      final cleaned = cleanGovernorate(place.administrativeArea ?? '');
+      setState(() {
+        selectedArea = cleaned;
+      });
+      if (mounted) {
+        Navigator.pop(context, selectedArea);
+      }
+    }
+  }
+
+  String cleanGovernorate(String administrativeArea) {
+    return administrativeArea
+        .replaceAll(' Governorate', '')
+        .replaceAll('Governorate ', '')
+        .trim();
   }
 
   Widget buildCityList() {
@@ -84,7 +105,9 @@ class _PickMyAreaViewBodyState extends State<PickMyAreaViewBody> {
               color: Colors.orange,
             ),
             label: Align(
-              alignment: Alignment.centerLeft,
+              alignment: Directionality.of(context) == TextDirection.rtl
+                  ? Alignment.centerRight
+                  : Alignment.centerLeft,
               child: Text(
                 S.of(context).use_current_location,
                 style: TextStyle(color: Theme.of(context).colorScheme.tertiary),

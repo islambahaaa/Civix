@@ -2,6 +2,7 @@ import 'package:civix_app/core/widgets/shimmer_widgets.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/my_reports/presentation/cubit/my_reports_cubit.dart';
 import 'package:civix_app/core/widgets/report_widgets/report_item.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,6 +17,13 @@ class ReportsSliverList extends StatelessWidget {
           return _buildShimmerLoading();
         } else if (state is HomeSuccess) {
           final reports = state.reports;
+          if (reports.isEmpty) {
+            return const SliverToBoxAdapter(
+              child: Center(
+                child: Text('NO REPORTS', style: TextStyle(color: Colors.red)),
+              ),
+            );
+          }
           return SliverList.builder(
             itemCount: reports.length,
             itemBuilder: (context, index) {

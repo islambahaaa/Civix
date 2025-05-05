@@ -29,7 +29,7 @@ class UserCubit extends Cubit<UserState> {
   }
 
   Future<void> logout() async {
-    await Prefs.remove(kUserData); // Clear the saved user
-    emit(UserInitial()); // Reset the state
+    await Prefs.remove(kUserData);
+    emit(UserInitial());
   }
 }
