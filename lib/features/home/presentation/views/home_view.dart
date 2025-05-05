@@ -73,7 +73,7 @@ class _HomeViewState extends State<HomeView> {
         BlocProvider(
           create: (context) => HomeCubit(
             getIt.get<HomeRepo>(),
-          )..fetchMyReports(),
+          )..fetchNearMe(),
         ),
       ],
       child: AnnotatedRegion(

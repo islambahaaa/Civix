@@ -56,9 +56,10 @@ class DioClient {
     );
   }
 
-  Future<Response> getMyIssues(String endpoint) async {
+  Future<Response> get(String endpoint, {String? queryParameter}) async {
     return await dio.get(
       '${ApiConstants.baseUrl}$endpoint',
+      queryParameters: queryParameter != null ? {'area': queryParameter} : null,
     );
   }
 }

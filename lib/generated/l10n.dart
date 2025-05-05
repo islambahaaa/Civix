@@ -1506,6 +1506,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Select Location`
+  String get select_location {
+    return Intl.message(
+      'Select Location',
+      name: 'select_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Pick Location`
+  String get pick_location {
+    return Intl.message(
+      'Pick Location',
+      name: 'pick_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Zoom In to Select Location`
+  String get zoom_in_to_select {
+    return Intl.message(
+      'Zoom In to Select Location',
+      name: 'zoom_in_to_select',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use Current Location`
+  String get use_current_location {
+    return Intl.message(
+      'Use Current Location',
+      name: 'use_current_location',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search city or area`
+  String get search_city {
+    return Intl.message(
+      'Search city or area',
+      name: 'search_city',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

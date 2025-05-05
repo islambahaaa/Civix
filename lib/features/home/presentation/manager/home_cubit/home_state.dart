@@ -8,9 +8,9 @@ final class HomeInitial extends HomeState {}
 final class HomeLoading extends HomeState {}
 
 final class HomeSuccess extends HomeState {
-  //final List<ReportModel> reports;
+  final List<ReportModel> reports;
 
-  //HomeSuccess(this.reports);
+  HomeSuccess(this.reports);
 }
 
 final class HomeFailure extends HomeState {

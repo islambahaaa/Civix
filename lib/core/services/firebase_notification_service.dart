@@ -74,7 +74,6 @@ class FirebaseNotificationService {
   /// Background message handler (must be top-level or static)
   static Future<void> _firebaseMessagingBackgroundHandler(
       RemoteMessage message) async {
-    await Firebase.initializeApp();
     print('📦 Handling background message: ${message.messageId}');
   }
 

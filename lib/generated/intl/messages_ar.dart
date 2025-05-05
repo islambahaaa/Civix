@@ -117,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "password_mismatch" : MessageLookupByLibrary.simpleMessage("كلمة المرور غير متطابقة"),
     "password_reset" : MessageLookupByLibrary.simpleMessage("تمت إعادة تعيين كلمة المرور بنجاح\nسيتم توجيهك إلى شاشة تسجيل الدخول الآن"),
     "phone_number" : MessageLookupByLibrary.simpleMessage("رقم الجوال"),
+    "pick_location" : MessageLookupByLibrary.simpleMessage("اختيار الموقع"),
     "pothole" : MessageLookupByLibrary.simpleMessage("حفرة"),
     "pothole_example" : MessageLookupByLibrary.simpleMessage("حفرة في الشارع الرئيسي"),
     "prev_submissions" : MessageLookupByLibrary.simpleMessage("البلاغات السابقة"),
@@ -134,8 +135,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "resend_code" : MessageLookupByLibrary.simpleMessage("إعادة إرسال الرمز خلال "),
     "safe_neighborhood" : MessageLookupByLibrary.simpleMessage("إنشاء حي آمن ومسالم"),
     "safety" : MessageLookupByLibrary.simpleMessage("أمان"),
+    "search_city" : MessageLookupByLibrary.simpleMessage("ابحث عن مدينة او منطقة"),
     "seconds_left" : MessageLookupByLibrary.simpleMessage("ثانية"),
     "see_location" : MessageLookupByLibrary.simpleMessage("عرض الموقع"),
+    "select_location" : MessageLookupByLibrary.simpleMessage("حدد الموقع"),
     "select_theme" : MessageLookupByLibrary.simpleMessage("اختيار المظهر"),
     "send_code" : MessageLookupByLibrary.simpleMessage("إرسال الرمز"),
     "send_timeout" : MessageLookupByLibrary.simpleMessage("انتهت مهلة الإرسال"),
@@ -160,12 +163,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "trusted_fix" : MessageLookupByLibrary.simpleMessage("نوفر لك الجهات الموثوقة لحل مشاكلك"),
     "unexpected_error" : MessageLookupByLibrary.simpleMessage("حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى!"),
     "uppercase" : MessageLookupByLibrary.simpleMessage("حرف كبير واحد"),
+    "use_current_location" : MessageLookupByLibrary.simpleMessage("استخدام الموقع الحالي"),
     "valid_email" : MessageLookupByLibrary.simpleMessage("أدخل بريدًا إلكترونيًا صالحًا"),
     "verification_code" : MessageLookupByLibrary.simpleMessage("أين تود استلام رمز التحقق؟"),
     "verify" : MessageLookupByLibrary.simpleMessage("تحقق"),
     "verifyEmailMessage" : MessageLookupByLibrary.simpleMessage("لقد أرسلنا رابط تأكيد إلى عنوان بريدك الإلكتروني.\nيرجى التحقق من صندوق الوارد الخاص بك والنقر على الرابط للتحقق من حسابك."),
     "verifyEmailTitle" : MessageLookupByLibrary.simpleMessage("تحقق من البريد الإلكتروني"),
     "water_leak" : MessageLookupByLibrary.simpleMessage("تسرب مياه"),
-    "weak_password" : MessageLookupByLibrary.simpleMessage("كلمة المرور ليست قوية بما يكفي")
+    "weak_password" : MessageLookupByLibrary.simpleMessage("كلمة المرور ليست قوية بما يكفي"),
+    "zoom_in_to_select" : MessageLookupByLibrary.simpleMessage("تكبير لتحديد الموقع")
   };
 }

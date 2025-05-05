@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:civix_app/constants.dart';
 import 'package:civix_app/core/helper_functions/on_generate_routes.dart';
@@ -25,21 +26,18 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'firebase_options.dart';
 
 void main() async {
+  log('main is called');
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseNotificationService.initialize();
   await Hive.initFlutter();
   Hive.registerAdapter(NotificationModelAdapter());
   await Hive.openBox<NotificationModel>(kNotificationsBox);
   Bloc.observer = CustomBlocObserver();
   await Prefs.init();
   setupGetIt();
-  await FirebaseNotificationService.initialize();
-  // //
-  // final signalRService = SignalRService();
-  // await signalRService.connectToHub();
-  // //
   runApp(const MainApp());
 }
 

@@ -31,7 +31,7 @@ class ApiReportService {
   }
 
   Future<Map<String, dynamic>> getMyIssues() async {
-    var response = await dio.getMyIssues(ApiConstants.myIssuesEndpoint);
+    var response = await dio.get(ApiConstants.myIssuesEndpoint);
     return response.data;
   }
 }

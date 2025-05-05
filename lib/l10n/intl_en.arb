@@ -145,5 +145,10 @@
     "re_enter_your_password" : "Re-enter your password",
     "egyptian_phone_number" : "Enter a valid Egyptian phone number",
     "verifyEmailTitle": "Verify Email",
-    "verifyEmailMessage": "We've sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account."
+    "verifyEmailMessage": "We've sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account.",
+    "select_location": "Select Location",
+    "pick_location": "Pick Location",
+    "zoom_in_to_select": "Zoom In to Select Location",
+    "use_current_location": "Use Current Location",
+    "search_city": "Search city or area"
   }

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
@@ -39,7 +40,6 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
   }
 
   void _pickLocation() {
-    log("Picked Location: $_currentPosition");
     double lat = _currentPosition.latitude;
     double long = _currentPosition.longitude;
     BlocProvider.of<ReportCubit>(context).submitReportFromGallery(lat, long);
@@ -79,8 +79,8 @@ class _MapPickerScreenState extends State<MapPickerScreen> {
             height: 70,
             child: CustomButton(
               text: _currentZoom < _zoomThreshold
-                  ? 'Zoom In to Select Location'
-                  : 'Pick Location',
+                  ? S.of(context).zoom_in_to_select
+                  : S.of(context).pick_location,
               onPressed: _onButtonPressed,
             ),
           ),

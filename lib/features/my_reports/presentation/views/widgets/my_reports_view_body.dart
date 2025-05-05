@@ -1,6 +1,7 @@
 import 'package:civix_app/features/my_reports/presentation/cubit/my_reports_cubit.dart';
 import 'package:civix_app/features/my_reports/presentation/views/widgets/my_reports_header.dart';
 import 'package:civix_app/core/widgets/report_widgets/reports_sliver_list.dart';
+import 'package:civix_app/features/my_reports/presentation/views/widgets/my_reports_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,7 +30,7 @@ class MyReportsViewBody extends StatelessWidget {
                 ],
               ),
             ),
-            ReportsSliverList(),
+            MyReportsSliverList(),
           ],
         ),
       ),

@@ -5,16 +5,16 @@ import 'package:civix_app/core/widgets/report_widgets/report_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ReportsSliverList extends StatelessWidget {
-  const ReportsSliverList({super.key});
+class MyReportsSliverList extends StatelessWidget {
+  const MyReportsSliverList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(
+    return BlocBuilder<MyReportsCubit, MyReportsState>(
       builder: (context, state) {
-        if (state is HomeLoading) {
+        if (state is MyReportsLoading) {
           return _buildShimmerLoading();
-        } else if (state is HomeSuccess) {
+        } else if (state is MyReportsSuccess) {
           final reports = state.reports;
           return SliverList.builder(
             itemCount: reports.length,
@@ -31,7 +31,7 @@ class ReportsSliverList extends StatelessWidget {
               );
             },
           );
-        } else if (state is HomeFailure) {
+        } else if (state is MyReportsFailure) {
           return SliverToBoxAdapter(
             child: Center(
               child: Text(state.message,

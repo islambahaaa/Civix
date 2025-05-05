@@ -117,6 +117,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "password_mismatch" : MessageLookupByLibrary.simpleMessage("Password does not match"),
     "password_reset" : MessageLookupByLibrary.simpleMessage("Password Reset Successful\nYou’ll be redirected to the login screen now"),
     "phone_number" : MessageLookupByLibrary.simpleMessage("Phone Number"),
+    "pick_location" : MessageLookupByLibrary.simpleMessage("Pick Location"),
     "pothole" : MessageLookupByLibrary.simpleMessage("Pothole"),
     "pothole_example" : MessageLookupByLibrary.simpleMessage("a pothole in the main street"),
     "prev_submissions" : MessageLookupByLibrary.simpleMessage("Previous Submissions"),
@@ -134,8 +135,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "resend_code" : MessageLookupByLibrary.simpleMessage("Resend code in "),
     "safe_neighborhood" : MessageLookupByLibrary.simpleMessage("Create a safe and peaceful neighborhood"),
     "safety" : MessageLookupByLibrary.simpleMessage("SAFETY"),
+    "search_city" : MessageLookupByLibrary.simpleMessage("Search city or area"),
     "seconds_left" : MessageLookupByLibrary.simpleMessage("seconds"),
     "see_location" : MessageLookupByLibrary.simpleMessage("See Location"),
+    "select_location" : MessageLookupByLibrary.simpleMessage("Select Location"),
     "select_theme" : MessageLookupByLibrary.simpleMessage("Select Theme"),
     "send_code" : MessageLookupByLibrary.simpleMessage("Send Code"),
     "send_timeout" : MessageLookupByLibrary.simpleMessage("Send Timeout"),
@@ -160,12 +163,14 @@ class MessageLookup extends MessageLookupByLibrary {
     "trusted_fix" : MessageLookupByLibrary.simpleMessage("Providing you with the trusted authorities to fix your issues "),
     "unexpected_error" : MessageLookupByLibrary.simpleMessage("Unexpected Error, Please try again!"),
     "uppercase" : MessageLookupByLibrary.simpleMessage("1 Uppercase letter"),
+    "use_current_location" : MessageLookupByLibrary.simpleMessage("Use Current Location"),
     "valid_email" : MessageLookupByLibrary.simpleMessage("Enter a valid email"),
     "verification_code" : MessageLookupByLibrary.simpleMessage("Where would you like to receive a Verification Code ?"),
     "verify" : MessageLookupByLibrary.simpleMessage("Verify"),
     "verifyEmailMessage" : MessageLookupByLibrary.simpleMessage("We\'ve sent a confirmation link to your email address.\nPlease check your inbox and click the link to verify your account."),
     "verifyEmailTitle" : MessageLookupByLibrary.simpleMessage("Verify Email"),
     "water_leak" : MessageLookupByLibrary.simpleMessage("Water leak"),
-    "weak_password" : MessageLookupByLibrary.simpleMessage("Password is not strong enough")
+    "weak_password" : MessageLookupByLibrary.simpleMessage("Password is not strong enough"),
+    "zoom_in_to_select" : MessageLookupByLibrary.simpleMessage("Zoom In to Select Location")
   };
 }

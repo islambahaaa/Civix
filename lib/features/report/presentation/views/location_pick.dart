@@ -2,6 +2,7 @@ import 'package:civix_app/core/services/get_it_service.dart';
 
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/map_picker_bloc_consumer.dart';
+import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +22,7 @@ class LocationPick extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          title: const Text('Pick Location'),
+          title: Text(S.of(context).pick_location),
         ),
         body: const MapPickerBlocConsumer(),
       ),

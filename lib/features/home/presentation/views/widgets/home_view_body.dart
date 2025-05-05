@@ -1,10 +1,13 @@
+import 'dart:developer';
+
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/report_widgets/reports_sliver_list.dart';
 import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/custom_home_app_bar.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/pick_location_view.dart';
-import 'package:civix_app/features/home/presentation/views/widgets/solved_in_my_area.dart';
+import 'package:civix_app/features/home/presentation/views/widgets/pick_location_widget.dart';
+import 'package:civix_app/features/pickmyarea/presentation/views/pick_my_area_view.dart';
+import 'package:civix_app/features/pickmyarea/presentation/views/widgets/pick_my_area_view_body.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:civix_app/constants.dart';
@@ -21,7 +24,7 @@ class HomeViewBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: RefreshIndicator(
-        onRefresh: () => BlocProvider.of<HomeCubit>(context).fetchMyReports(),
+        onRefresh: () => BlocProvider.of<HomeCubit>(context).fetchNearMe(),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
@@ -62,22 +65,7 @@ class HomeViewBody extends StatelessWidget {
                             color: Colors.white,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () => selectLocation(context),
-                          child: const Row(
-                            children: [
-                              Icon(Icons.location_on_outlined,
-                                  color: Colors.orange),
-                              SizedBox(
-                                width: 4,
-                              ),
-                              Text('New York', style: TextStyles.bold15inter),
-                              Icon(
-                                Icons.arrow_drop_down,
-                              ),
-                            ],
-                          ),
-                        )
+                        const PickLocationWidget()
                       ]),
                   const SizedBox(
                     height: 16,
@@ -94,20 +82,5 @@ class HomeViewBody extends StatelessWidget {
         ),
       ),
     );
-  }
-}
-
-void selectLocation(BuildContext context) async {
-  final result = await Navigator.push(
-    context,
-    MaterialPageRoute(builder: (_) => const LocationPickerPage()),
-  );
-
-  if (result != null) {
-    final city = result['city'];
-    final area = result['area'];
-    print('Selected: $city - $area');
-
-    // Now call your ads fetching logic
   }
 }
