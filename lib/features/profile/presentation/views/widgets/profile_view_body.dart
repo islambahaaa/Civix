@@ -91,11 +91,11 @@ class ProfileViewBody extends StatelessWidget {
                     }
                   },
                 ),
-                ProfileListTile(
-                  icon: Icons.notifications_outlined,
-                  text: S.of(context).notifications,
-                  trailing: const SwitchWidget(),
-                ),
+                // ProfileListTile(
+                //   icon: Icons.notifications_outlined,
+                //   text: S.of(context).notifications,
+                //   trailing: const SwitchWidget(),
+                // ),
                 BlocBuilder<UserCubit, UserState>(
                   builder: (context, state) {
                     if (state is UserLoading) {

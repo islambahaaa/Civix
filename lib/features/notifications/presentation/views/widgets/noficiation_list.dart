@@ -6,6 +6,7 @@ import 'package:civix_app/generated/l10n.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class NotificationList extends StatefulWidget {
   const NotificationList({super.key});
@@ -23,30 +24,15 @@ class _NotificationListState extends State<NotificationList> {
     super.initState();
     notificationBox = Hive.box<NotificationModel>(kNotificationsBox);
     _loadNotifications();
-    _listenToFirebaseMessages();
+
+    notificationBox.listenable().addListener(() {
+      _loadNotifications();
+    });
   }
 
   void _loadNotifications() {
     setState(() {
       notifications = notificationBox.values.toList().reversed.toList();
-    });
-  }
-
-  void _listenToFirebaseMessages() {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      if (message.notification != null) {
-        final newNotification = NotificationModel(
-          id: message.messageId ?? '',
-          title: message.notification?.title ?? 'No title',
-          body: message.notification?.body ?? 'No body',
-          image: message.notification?.android?.imageUrl,
-          time: DateTime.now(),
-          isRead: false,
-        );
-
-        await notificationBox.add(newNotification);
-        _loadNotifications();
-      }
     });
   }
 
