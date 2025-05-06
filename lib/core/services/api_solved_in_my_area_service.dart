@@ -12,7 +12,7 @@ class ApiSolvedInMyAreaService {
     return response.data;
   }
 
-  Future<Map<String, dynamic>> getIssuesInMyArea(String? area) async {
+  Future<List<dynamic>> getIssuesInMyArea(String? area) async {
     log("area :${area.toString()}");
     var response = await dio
         .get(ApiConstants.solvedInMyArea, queryParameter: {'area': area});

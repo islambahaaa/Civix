@@ -81,7 +81,7 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                         context.read<ReportCubit>().submitReportFromCamera(
                               title,
                               description,
-                              category!,
+                              category ?? 0,
                             );
                       } else {
                         context.read<ReportCubit>().saveFieldsInCubit(

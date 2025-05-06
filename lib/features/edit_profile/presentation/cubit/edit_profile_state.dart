@@ -11,7 +11,11 @@ class EditProfileSuccess extends EditProfileState {
   EditProfileSuccess(this.user);
 }
 
-class EditProfileUpdated extends EditProfileState {}
+class EditProfileUpdated extends EditProfileState {
+  String email, fname, lname, phoneNumber, area;
+  EditProfileUpdated(
+      this.email, this.fname, this.lname, this.phoneNumber, this.area);
+}
 
 class EditProfileFailure extends EditProfileState {
   final String error;

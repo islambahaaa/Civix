@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:hive/hive.dart';
@@ -15,12 +17,16 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   }
 
   final box = await Hive.openBox<NotificationModel>(kNotificationsBox);
+  log(message.data['IssueId']);
 
   final newNotification = NotificationModel(
     id: message.messageId ?? '',
-    title: message.notification?.title ?? 'No title',
-    body: message.notification?.body ?? 'No body',
-    image: message.notification?.android?.imageUrl,
+    title: message.data['title'] ??
+        message.notification?.title ??
+        'No title' ??
+        'No title',
+    body: message.data['body'] ?? message.notification?.body ?? 'No body',
+    image: message.data['image'] ?? message.notification?.android?.imageUrl,
     time: DateTime.now(),
     isRead: false,
   );

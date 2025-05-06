@@ -14,6 +14,7 @@ class ApiAuthService {
       String lname,
       String email,
       String phoneNumber,
+      String area,
       String password,
       String confirmedPassword) async {
     var response = await dio.authPost(ApiConstants.register, {
@@ -23,6 +24,7 @@ class ApiAuthService {
       "password": password,
       "confirmedPassword": confirmedPassword,
       "phoneNumber": phoneNumber,
+      "area": area
     });
     return response.data;
   }

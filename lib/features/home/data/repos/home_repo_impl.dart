@@ -15,7 +15,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       var data = await apiSolvedInMyAreaService.getIssuesInMyArea(area);
       List<ReportModel> reports = [];
-      for (var item in data['value']) {
+      for (var item in data) {
         var report = ReportModel.fromJson(item);
         await report.fetchCityName(); // Fetch city name asynchronously
         print(

@@ -15,6 +15,7 @@ class SignupCubit extends Cubit<SignupState> {
     String lname,
     String email,
     String phoneNumber,
+    String area,
     String password,
     String confirmedPassword,
   ) async {
@@ -24,6 +25,7 @@ class SignupCubit extends Cubit<SignupState> {
       lname,
       email,
       phoneNumber,
+      area,
       password,
       confirmedPassword,
     );

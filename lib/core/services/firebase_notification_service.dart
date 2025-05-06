@@ -18,6 +18,25 @@ class FirebaseNotificationService {
   static Future<void> initialize() async {
     await _setupFlutterNotifications();
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+    final initialMessage = await FirebaseMessaging.instance.getInitialMessage();
+    if (initialMessage != null) {
+      await _handleInitialMessage(initialMessage);
+    }
+  }
+
+  static Future<void> _handleInitialMessage(RemoteMessage message) async {
+    final box = await Hive.openBox<NotificationModel>(kNotificationsBox);
+
+    final newNotification = NotificationModel(
+      id: message.messageId ?? '',
+      title: message.notification?.title ?? 'No title',
+      body: message.notification?.body ?? 'No body',
+      image: message.notification?.android?.imageUrl,
+      time: DateTime.now(),
+      isRead: false,
+    );
+
+    await box.add(newNotification);
   }
 
   /// Request permissions (iOS & Android 13+)

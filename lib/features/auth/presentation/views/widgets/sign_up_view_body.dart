@@ -1,7 +1,10 @@
 import 'dart:ffi';
 
+import 'package:civix_app/core/utils/app_colors.dart';
+import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/password_validator.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
+import 'package:civix_app/features/pickmyarea/presentation/views/pick_my_area_view.dart';
 import 'package:civix_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,6 +30,7 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
   final TextEditingController passwordController = TextEditingController();
 
   late String email, password, confirmpass, fname, lname, phoneNumber;
+  String area = 'Select your area';
   late bool isTermsAccepted = false;
   late bool isPasswordValid;
   @override
@@ -96,6 +100,52 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                 const SizedBox(
                   height: 16,
                 ),
+                GestureDetector(
+                  onTap: () async {
+                    final result = await Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const PickMyAreaView()),
+                    );
+
+                    if (result != null && context.mounted) {
+                      setState(() {
+                        area = result;
+                      });
+                    }
+                  },
+                  child: Container(
+                    height: 56,
+                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade400),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.only(right: 16),
+                          child: Icon(
+                            Icons.location_on,
+                            color: AppColors.secondaryColor,
+                          ),
+                        ),
+                        Text(
+                          area,
+                          style: TextStyles.medium16inter.copyWith(
+                            color:
+                                Theme.of(context).textTheme.bodyMedium?.color,
+                          ),
+                        ),
+                        const Spacer(),
+                        const Icon(Icons.arrow_drop_down,
+                            color: AppColors.primaryColor, size: 32),
+                      ],
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
                 PasswordField(
                     controller: passwordController,
                     onchanged: (value) {
@@ -145,8 +195,14 @@ class _SignUpViewBodyState extends State<SignUpViewBody> {
                         } else if (isTermsAccepted) {
                           context
                               .read<SignupCubit>()
-                              .createUserWithEmailAndPassword(fname, lname,
-                                  email, phoneNumber, password, confirmpass);
+                              .createUserWithEmailAndPassword(
+                                  fname,
+                                  lname,
+                                  email,
+                                  phoneNumber,
+                                  area,
+                                  password,
+                                  confirmpass);
                         } else {
                           buildSnackBar(context, S.of(context).accept_terms);
                         }

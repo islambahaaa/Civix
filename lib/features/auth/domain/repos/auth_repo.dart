@@ -8,6 +8,7 @@ abstract class AuthRepo {
     String lname,
     String email,
     String phoneNumber,
+    String area,
     String password,
     String confirmedPassword,
   );

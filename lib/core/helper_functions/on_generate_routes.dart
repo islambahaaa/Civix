@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:civix_app/core/models/report_model.dart';
 import 'package:civix_app/features/edit_profile/presentation/views/edit_profile_view.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
-import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
 import 'package:civix_app/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:civix_app/features/auth/presentation/views/otp_view.dart';
@@ -16,7 +15,6 @@ import 'package:civix_app/features/report/presentation/views/location_pick.dart'
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/widgets/issue_location_map.dart';
-import 'package:civix_app/features/solved_in_my_area/presentation/views/solved_in_my_area_view.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,9 +47,6 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const ReportView());
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
-    case SolvedInMyAreaView.routeName:
-      return MaterialPageRoute(
-          builder: (context) => const SolvedInMyAreaView());
     case SigninView.routeName:
       return MaterialPageRoute(builder: (context) => const SigninView());
     case ReportDetailsView.routeName:

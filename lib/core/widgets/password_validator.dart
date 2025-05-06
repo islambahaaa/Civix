@@ -20,7 +20,7 @@ class PasswordValidator extends StatelessWidget {
       // successColor: AppColors.secondaryColor,
       numericCharCount: 1,
       specialCharCount: 1,
-      strings: FrenchStrings(),
+      strings: DefineStrings(),
       width: size.width - 32,
       height: size.height * 0.18 < 104 ? 150 : size.height * 0.18,
       onSuccess: () {
@@ -33,7 +33,7 @@ class PasswordValidator extends StatelessWidget {
   }
 }
 
-class FrenchStrings implements FlutterPwValidatorStrings {
+class DefineStrings implements FlutterPwValidatorStrings {
   @override
   final String atLeast = S.current.min_chars;
   @override

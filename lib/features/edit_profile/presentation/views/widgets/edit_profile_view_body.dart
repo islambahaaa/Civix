@@ -6,6 +6,7 @@ import 'package:civix_app/core/widgets/custom_button.dart';
 import 'package:civix_app/core/widgets/custom_text_form_field.dart';
 import 'package:civix_app/features/auth/data/models/user_model.dart';
 import 'package:civix_app/features/auth/domain/entities/user_entity.dart';
+import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/auth/presentation/views/new_password_view.dart';
 import 'package:civix_app/features/edit_profile/presentation/cubit/edit_profile_cubit.dart';
 import 'package:civix_app/features/home/presentation/views/widgets/pick_location_widget.dart';
@@ -32,7 +33,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
-  late String email, fname, lname, phoneNumber, area;
+  late String fname, lname, phoneNumber, area;
 
   @override
   void initState() {
@@ -41,7 +42,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   }
 
   Future<void> loadProfile() async {
-    area = 'Select your area';
+    area = widget.user.area ?? 'Select your area';
     _emailController.text = widget.user.email;
     _firstNameController.text = widget.user.fname;
     _lastNameController.text = widget.user.lname;
@@ -51,7 +52,8 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   bool _hasChanges() {
     return _firstNameController.text != widget.user.fname ||
         _lastNameController.text != widget.user.lname ||
-        _phoneController.text != widget.user.phoneNumber;
+        _phoneController.text != widget.user.phoneNumber ||
+        area != widget.user.area;
   }
 
   Future<void> saveFields() async {
@@ -187,10 +189,17 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                           buildSnackBar(context, 'No changes');
                           return;
                         }
+                        if (area == 'Select your area') {
+                          buildSnackBar(context, 'Select your area');
+                          return;
+                        }
                         formKey.currentState!.save();
                         saveFields();
+                        BlocProvider.of<UserCubit>(context).saveUser(
+                            widget.user.email, fname, lname, phoneNumber, area);
                         BlocProvider.of<EditProfileCubit>(context)
-                            .editCurrentUser(fname, lname, phoneNumber, area);
+                            .editCurrentUser(widget.user.email, fname, lname,
+                                phoneNumber, area);
                       } else {
                         setState(() {
                           autovalidateMode = AutovalidateMode.always;
@@ -202,43 +211,6 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
             ),
           )),
     );
-  }
-
-  Widget _buildTextField(
-    TextEditingController controller,
-    String label, {
-    bool isEnabled = true,
-    String? Function(String?)? validator,
-    TextInputType keyboardType = TextInputType.text,
-  }) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 16),
-      child: TextFormField(
-        controller: controller,
-        enabled: isEnabled,
-        validator: validator,
-        keyboardType: keyboardType,
-        decoration: InputDecoration(
-          labelStyle:
-              const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          labelText: label,
-          border: const OutlineInputBorder(),
-        ),
-      ),
-    );
-  }
-
-  String? _requiredValidator(String? value) {
-    if (value == null || value.trim().isEmpty) return 'This field is required';
-    return null;
-  }
-
-  String? _phoneValidator(String? value) {
-    if (value == null || value.trim().isEmpty)
-      return 'Phone number is required';
-    final phoneRegExp = RegExp(r'^\+?\d{7,15}$');
-    if (!phoneRegExp.hasMatch(value)) return 'Enter a valid phone number';
-    return null;
   }
 
   @override

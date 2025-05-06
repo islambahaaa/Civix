@@ -31,16 +31,18 @@ class AuthRepoImpl implements AuthRepo {
       String lname,
       String email,
       String phoneNumber,
+      String area,
       String password,
       String confirmedPassword) async {
     try {
       var response = await apiAuthService.createUserWithEmailAndPassword(
-          fname, lname, email, phoneNumber, password, confirmedPassword);
+          fname, lname, email, phoneNumber, area, password, confirmedPassword);
       var userEntity = UserEntity(
           fname: fname,
           lname: lname,
           email: email,
           phoneNumber: phoneNumber,
+          area: area,
           token: response['token']);
       return right(userEntity);
     } catch (e) {
@@ -77,6 +79,7 @@ class AuthRepoImpl implements AuthRepo {
             'Your account does not have permission to access this app. Please contact support if you believe this is an error.'));
       }
       var userEntity = UserModel.fromJson(response);
+
       saveUserData(user: userEntity);
       return right(userEntity);
     } catch (e) {

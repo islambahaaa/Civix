@@ -3,6 +3,7 @@ class UserEntity {
   final String phoneNumber;
   final String email;
   final String token;
+  final String? area;
 
   UserEntity({
     required this.fname,
@@ -10,5 +11,6 @@ class UserEntity {
     required this.phoneNumber,
     required this.email,
     required this.token,
+    this.area,
   });
 }

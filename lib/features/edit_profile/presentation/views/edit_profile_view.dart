@@ -1,5 +1,6 @@
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/services/get_it_service.dart';
+import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/edit_profile/domain/repositories/edit_profile_repo.dart';
 import 'package:civix_app/features/edit_profile/presentation/views/widgets/edit_profile_view_body.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,15 @@ class EditProfileView extends StatelessWidget {
   static const routeName = '/edit_profile';
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => EditProfileCubit(
-        getIt.get<EditProfileRepo>(),
-      )..getCurrentUser(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => EditProfileCubit(
+            getIt.get<EditProfileRepo>(),
+          )..getCurrentUser(),
+        ),
+        BlocProvider(create: (_) => UserCubit()),
+      ],
       child: BlocListener<EditProfileCubit, EditProfileState>(
         listener: (context, state) {
           if (state is EditProfileUpdated) {

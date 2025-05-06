@@ -1,4 +1,5 @@
 import 'package:civix_app/core/utils/app_text_styles.dart';
+import 'package:civix_app/features/auth/presentation/cubits/user_cubit/user_cubit.dart';
 import 'package:civix_app/features/home/presentation/manager/home_cubit/home_cubit.dart';
 import 'package:civix_app/features/pickmyarea/presentation/views/pick_my_area_view.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -12,15 +13,17 @@ class PickLocationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) {
+        final homeCubit = context.read<HomeCubit>();
+        final userCubit = context.read<UserCubit>();
+
         String locationText;
 
-        if (state is HomeSuccess || state is HomeFailure) {
-          locationText = BlocProvider.of<HomeCubit>(context).savedArea ??
-              S.of(context).pick_location;
-        } else if (state is HomeLoading) {
+        if (state is HomeLoading) {
           locationText = 'Loading...';
         } else {
-          locationText = S.of(context).pick_location;
+          locationText = homeCubit.savedArea ??
+              userCubit.area ??
+              S.of(context).pick_location;
         }
 
         return GestureDetector(
