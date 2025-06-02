@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/core/widgets/password_validator.dart';

@@ -62,7 +62,6 @@ class HomeViewBody extends StatelessWidget {
                           S.of(context).solved_area_ab,
                           style: TextStyles.semibold24inter.copyWith(
                             fontSize: 18,
-                            color: Colors.white,
                           ),
                         ),
                         const PickLocationWidget()

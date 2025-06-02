@@ -23,6 +23,7 @@ android {
     }
 
     defaultConfig {
+        resValue "string", "google_maps_key", MAPS_API_KEY
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "com.example.civix_app"
         // You can update the following values to match your application needs.
