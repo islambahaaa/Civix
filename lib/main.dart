@@ -11,6 +11,7 @@ import 'package:civix_app/core/services/shared_prefrences_singleton.dart';
 import 'package:civix_app/core/services/signalr_service.dart';
 import 'package:civix_app/features/notifications/data/models/notification_model.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
+import 'package:civix_app/features/report/presentation/views/image_pick.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/splash/presentation/views/splash_view.dart';
 import 'package:civix_app/core/services/firebase_notification_service.dart';
@@ -82,10 +83,9 @@ class MainApp extends StatelessWidget {
                 darkTheme: AppThemes.darkTheme,
                 themeMode: theme,
                 debugShowCheckedModeBanner: false,
-                onGenerateRoute: onGenerateRoute,
-                initialRoute: SplashView.routeName,
-                //
-                //home: const NotificationsPage(),
+                // onGenerateRoute: onGenerateRoute,
+                // initialRoute: SplashView.routeName,
+                home: const ImagePickView(),
               );
             },
           );
