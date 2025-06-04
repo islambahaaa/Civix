@@ -97,7 +97,6 @@ class ReportCubit extends Cubit<ReportState> {
       }
     } else {
       emit(ReportFailure(S.current.gallery_denied));
-      return;
     }
     await checkAndGetLocation();
     if (latitude == null || longitude == null) {
