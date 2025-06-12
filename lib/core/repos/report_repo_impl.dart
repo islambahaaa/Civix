@@ -46,6 +46,7 @@ class ReportRepoImpl implements ReportRepo {
   Future<Either<Failure, String>> predictImage(File imageFile) async {
     try {
       var response = await apiReportService.predictImage(imageFile);
+      log(response['confidence'].toString());
       return right(response['prediction']);
     } catch (e) {
       if (e is DioException) {
