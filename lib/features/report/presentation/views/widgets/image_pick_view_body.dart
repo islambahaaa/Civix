@@ -3,9 +3,11 @@ import 'dart:io';
 import 'dart:ui';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
+import 'package:civix_app/core/helper_functions/show_full_image.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
+import 'package:civix_app/features/report/presentation/views/instructions_view.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/image_picker_widget.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/images_list_view_items.dart';
 import 'package:civix_app/features/report/presentation/views/widgets/list_view_image_item.dart';
@@ -78,11 +80,11 @@ class SampleImagesViewer extends StatelessWidget {
             IconButton(
               icon: const Icon(Icons.help_outline),
               onPressed: () {
-                // Navigator.push(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (_) => SamplePhotoGuidePage(),
-                //     ));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => UserGuidePage(),
+                    ));
               },
             ),
           ],
@@ -128,43 +130,26 @@ class SampleImagesViewer extends StatelessWidget {
   }
 }
 
-class FullScreenImageViewer extends StatelessWidget {
-  final String imagePath;
+// class FullScreenImageViewer extends StatelessWidget {
+//   final String imagePath;
 
-  const FullScreenImageViewer({super.key, required this.imagePath});
+//   const FullScreenImageViewer({super.key, required this.imagePath});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: InteractiveViewer(
-              child: Image.asset(imagePath),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-void showFullImageDialog(BuildContext context, String imagePath) {
-  showDialog(
-    context: context,
-    builder: (_) => BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
-      child: Dialog(
-        child: GestureDetector(
-          onTap: () => Navigator.of(context).pop(),
-          child: InteractiveViewer(
-            child: Image.asset(imagePath),
-          ),
-        ),
-      ),
-    ),
-  );
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.black,
+//       body: GestureDetector(
+//         onTap: () => Navigator.pop(context),
+//         child: Center(
+//           child: Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: InteractiveViewer(
+//               child: Image.asset(imagePath),
+//             ),
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
