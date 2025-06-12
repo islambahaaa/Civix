@@ -15,6 +15,7 @@ import 'package:civix_app/generated/l10n.dart';
 import 'package:civix_app/theme/theme_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileViewBody extends StatelessWidget {
   const ProfileViewBody({
@@ -151,9 +152,12 @@ class ProfileViewBody extends StatelessWidget {
               height: 25,
             ),
             ProfileSection(children: [
-              ProfileListTile(
-                icon: Icons.help_outline_outlined,
-                text: S.of(context).help,
+              GestureDetector(
+                onTap: launchEmail,
+                child: ProfileListTile(
+                  icon: Icons.help_outline_outlined,
+                  text: S.of(context).contact_us,
+                ),
               )
             ]),
             const SizedBox(
@@ -178,5 +182,19 @@ class ProfileViewBody extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+void launchEmail() async {
+  final String subject = Uri.encodeComponent('App Support');
+  final String body = Uri.encodeComponent('Hello, I need help with...');
+  final Uri emailLaunchUri =
+      Uri.parse('mailto:support@civix.space?subject=$subject&body=$body');
+
+  if (await canLaunchUrl(emailLaunchUri)) {
+    await launchUrl(emailLaunchUri);
+  } else {
+    // Handle error - maybe show a dialog
+    print('Could not launch email app');
   }
 }

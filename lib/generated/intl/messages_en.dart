@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "congrats" : MessageLookupByLibrary.simpleMessage("Congratulations!"),
     "connection_cancelled" : MessageLookupByLibrary.simpleMessage("Connection Cancelled"),
     "connection_timeout" : MessageLookupByLibrary.simpleMessage("Connection Timeout"),
+    "contact_us" : MessageLookupByLibrary.simpleMessage("Contact Us"),
     "create_account" : MessageLookupByLibrary.simpleMessage("Create Account"),
     "dark_mode" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "date_example" : MessageLookupByLibrary.simpleMessage("Jan 4,2022"),

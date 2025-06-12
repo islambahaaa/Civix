@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "congrats" : MessageLookupByLibrary.simpleMessage("تهانينا!"),
     "connection_cancelled" : MessageLookupByLibrary.simpleMessage("تم إلغاء الاتصال"),
     "connection_timeout" : MessageLookupByLibrary.simpleMessage("انتهت مهلة الاتصال"),
+    "contact_us" : MessageLookupByLibrary.simpleMessage("اتصل بنا"),
     "create_account" : MessageLookupByLibrary.simpleMessage("إنشاء حساب"),
     "dark_mode" : MessageLookupByLibrary.simpleMessage("الوضع الداكن"),
     "date_example" : MessageLookupByLibrary.simpleMessage("4 يناير 2022"),
