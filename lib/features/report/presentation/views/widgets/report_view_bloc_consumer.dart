@@ -26,7 +26,7 @@ class ReportViewBodyBlocConsumer extends StatelessWidget {
           BuildContext rootContext =
               Navigator.of(context, rootNavigator: true).context;
 
-          Navigator.of(context).pop(); // Close the current screen
+          Navigator.of(context).popUntil((route) => route.isFirst);
 
           Future.delayed(const Duration(milliseconds: 300), () {
             showCustomDialog(rootContext, S.of(context).success,

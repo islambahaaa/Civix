@@ -9,6 +9,7 @@ import 'package:civix_app/features/my_reports/presentation/cubit/my_reports_cubi
 import 'package:civix_app/features/my_reports/presentation/views/my_reports_view.dart';
 import 'package:civix_app/features/notifications/presentation/views/notification_view.dart';
 import 'package:civix_app/features/profile/presentation/views/profile_view.dart';
+import 'package:civix_app/features/report/presentation/views/images_pick_view.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/core/services/firebase_notification_service.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -99,7 +100,7 @@ class _HomeViewState extends State<HomeView> {
                     splashColor: AppColors.primaryColor,
                     backgroundColor: AppColors.secondaryColor,
                     onPressed: () {
-                      Navigator.pushNamed(context, ReportView.routeName);
+                      Navigator.pushNamed(context, ImagesPickView.routeName);
                     },
                     child: const Icon(Icons.add, color: Colors.white, size: 32),
                   ),

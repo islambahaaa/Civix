@@ -23,8 +23,7 @@ class _ReportViewBodyState extends State<ReportViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String title, description;
-  int? category;
-  bool hasCameraImage = false;
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -35,27 +34,6 @@ class _ReportViewBodyState extends State<ReportViewBody> {
           child: SingleChildScrollView(
             reverse: true,
             child: Column(children: [
-              // MultiImagePickerScreen(
-              //   onImagePicked: (images) {
-              //     log(images.length.toString());
-              //     BlocProvider.of<ReportCubit>(context).addImages(images);
-              //   },
-              //   indicateCameraPicture: (flagedimages) {
-              //     hasCameraImage =
-              //         flagedimages.any((image) => image['isCamera'] == true);
-              //   },
-              // ),
-              // const SizedBox(height: 20),
-              // DropdownMenuExample(
-              //   onSelected: (value) {
-              //     setState(() {
-              //       category = value;
-              //     });
-              //   },
-              // ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
               CustomTitleField(
                 onSaved: (value) {
                   title = value!;
@@ -76,15 +54,16 @@ class _ReportViewBodyState extends State<ReportViewBody> {
                   onPressed: () {
                     if (formKey.currentState!.validate()) {
                       formKey.currentState!.save();
-                      if (hasCameraImage) {
+                      if (context.read<ReportCubit>().isCameraImage) {
                         context.read<ReportCubit>().submitReportFromCamera(
                               title,
                               description,
-                              category ?? 0,
                             );
                       } else {
                         context.read<ReportCubit>().saveFieldsInCubit(
-                            title, description, category ?? 0);
+                              title,
+                              description,
+                            );
                         if (context.read<ReportCubit>().images.isNotEmpty) {
                           Navigator.of(context).pushNamed(
                               LocationPick.routeName,

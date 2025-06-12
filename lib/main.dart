@@ -84,9 +84,8 @@ class MainApp extends StatelessWidget {
                 darkTheme: AppThemes.darkTheme,
                 themeMode: theme,
                 debugShowCheckedModeBanner: false,
-                // onGenerateRoute: onGenerateRoute,
-                // initialRoute: SplashView.routeName,
-                home: const ImagesPickView(),
+                onGenerateRoute: onGenerateRoute,
+                initialRoute: SplashView.routeName,
               );
             },
           );

@@ -25,14 +25,13 @@ import 'package:skeletonizer/skeletonizer.dart';
 
 class ReportView extends StatelessWidget {
   const ReportView({super.key});
-  static const routeName = '/report';
+  static const routeName = 'report';
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ReportCubit(
-        getIt.get<ReportRepo>(),
-      ),
+    final reportCubit = context.read<ReportCubit>();
+    return BlocProvider.value(
+      value: reportCubit,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.primaryColor.withOpacity(0.8),

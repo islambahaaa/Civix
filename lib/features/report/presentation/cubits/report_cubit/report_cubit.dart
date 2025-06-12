@@ -40,6 +40,7 @@ class ReportCubit extends Cubit<ReportState> {
 
   saveCategory(String category) async {
     this.category = getCategoryId(category);
+    log(this.category.toString());
   }
 
   Future<void> predictImage() async {
@@ -114,25 +115,21 @@ class ReportCubit extends Cubit<ReportState> {
   Future<void> submitReportFromCamera(
     String title,
     String description,
-    int category,
   ) async {
     await checkAndGetLocation();
     if (latitude == null || longitude == null) {
       emit(ReportFailure(S.current.location_fail));
       return;
     }
-    await createIssue(
-        title, description, latitude!, longitude!, category, images);
+    await createIssue(title, description, latitude!, longitude!, images);
   }
 
   void saveFieldsInCubit(
     String title,
     String description,
-    int category,
   ) {
     this.title = title;
     this.description = description;
-    this.category = category;
   }
 
   Future<void> submitReportFromGallery(
@@ -140,7 +137,7 @@ class ReportCubit extends Cubit<ReportState> {
     double long,
   ) async {
     emit(ReportLoading());
-    await createIssue(title!, description!, lat, long, category!, images);
+    await createIssue(title!, description!, lat, long, images);
   }
 
   Future<void> createIssue(
@@ -148,11 +145,10 @@ class ReportCubit extends Cubit<ReportState> {
     String description,
     double latitude,
     double longitude,
-    int category,
     List<File> imageFiles,
   ) async {
     var result = await reportRepo.createReport(
-        title, description, latitude, longitude, category, imageFiles);
+        title, description, latitude, longitude, category ?? 0, imageFiles);
     result.fold(
       (failure) => emit(ReportFailure(failure.message)),
       (s) => emit(ReportSuccess(s)),

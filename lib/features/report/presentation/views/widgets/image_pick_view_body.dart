@@ -23,13 +23,9 @@ class ImagePickViewBody extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Pick Images"),
-        centerTitle: true,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
+    return Padding(
+      padding: const EdgeInsets.all(16),
+      child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -51,25 +47,6 @@ class ImagePickViewBody extends StatelessWidget {
                     flagedimages.any((image) => image['isCamera'] == true);
                 context.read<ReportCubit>().isCameraImage = hasCameraImage;
               },
-            ),
-            const SizedBox(height: 24),
-            Center(
-              child: ElevatedButton.icon(
-                onPressed: context.read<ReportCubit>().images.isNotEmpty
-                    ? () {
-                        context.read<ReportCubit>().predictImage();
-                      }
-                    : null,
-                icon: const Icon(Icons.arrow_forward),
-                label: const Text("Next"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryColor,
-                  minimumSize: const Size(140, 48),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-              ),
             ),
           ],
         ),

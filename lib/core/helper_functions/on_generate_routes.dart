@@ -11,6 +11,7 @@ import 'package:civix_app/features/auth/presentation/views/signin_view.dart';
 import 'package:civix_app/features/home/presentation/views/home_view.dart';
 import 'package:civix_app/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
+import 'package:civix_app/features/report/presentation/views/images_pick_view.dart';
 import 'package:civix_app/features/report/presentation/views/location_pick.dart';
 import 'package:civix_app/features/report/presentation/views/report_view.dart';
 import 'package:civix_app/features/report_details/presentation/views/report_details_view.dart';
@@ -44,7 +45,13 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(
           builder: (context) => const ForgotPasswordView());
     case ReportView.routeName:
-      return MaterialPageRoute(builder: (context) => const ReportView());
+      final ReportCubit reportCubit = settings.arguments as ReportCubit;
+      return MaterialPageRoute(
+        builder: (context) => BlocProvider.value(
+          value: reportCubit, // Reuse the same instance
+          child: const ReportView(),
+        ),
+      );
     case SignUpView.routeName:
       return MaterialPageRoute(builder: (context) => const SignUpView());
     case SigninView.routeName:
@@ -65,6 +72,8 @@ Route<dynamic> onGenerateRoute(RouteSettings settings) {
           child: const LocationPick(),
         ),
       );
+    case ImagesPickView.routeName:
+      return MaterialPageRoute(builder: (context) => const ImagesPickView());
     case IssueMapLocation.routeName:
       final LatLng location = settings.arguments as LatLng;
       return MaterialPageRoute(

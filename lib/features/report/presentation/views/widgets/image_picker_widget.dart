@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
+import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_images.dart';
 import 'package:civix_app/features/report/presentation/cubits/report_cubit/report_cubit.dart';
@@ -257,6 +258,25 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         Text(
           '${_images.length} / $maxImages ${S.of(context).images_selected}',
           style: const TextStyle(fontSize: 16, color: Colors.grey),
+        ),
+        const SizedBox(height: 24),
+        Center(
+          child: ElevatedButton.icon(
+            onPressed: _images.isNotEmpty
+                ? () {
+                    context.read<ReportCubit>().predictImage();
+                  }
+                : null,
+            icon: const Icon(Icons.arrow_forward, color: Colors.black),
+            label: const Text("Next", style: TextStyle(color: Colors.black)),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.primaryColor,
+              minimumSize: const Size(140, 48),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          ),
         ),
       ],
     );
