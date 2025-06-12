@@ -35,17 +35,17 @@ class _ReportViewBodyState extends State<ReportViewBody> {
           child: SingleChildScrollView(
             reverse: true,
             child: Column(children: [
-              MultiImagePickerScreen(
-                onImagePicked: (images) {
-                  log(images.length.toString());
-                  BlocProvider.of<ReportCubit>(context).addImages(images);
-                },
-                indicateCameraPicture: (flagedimages) {
-                  hasCameraImage =
-                      flagedimages.any((image) => image['isCamera'] == true);
-                },
-              ),
-              const SizedBox(height: 20),
+              // MultiImagePickerScreen(
+              //   onImagePicked: (images) {
+              //     log(images.length.toString());
+              //     BlocProvider.of<ReportCubit>(context).addImages(images);
+              //   },
+              //   indicateCameraPicture: (flagedimages) {
+              //     hasCameraImage =
+              //         flagedimages.any((image) => image['isCamera'] == true);
+              //   },
+              // ),
+              // const SizedBox(height: 20),
               // DropdownMenuExample(
               //   onSelected: (value) {
               //     setState(() {

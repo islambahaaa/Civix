@@ -1556,6 +1556,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Choose a category`
+  String get choose_a_category {
+    return Intl.message(
+      'Choose a category',
+      name: 'choose_a_category',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

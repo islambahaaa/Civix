@@ -1,3 +1,4 @@
+import 'package:civix_app/core/helper_functions/category_functions.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
 import 'package:civix_app/generated/l10n.dart';
@@ -87,7 +88,7 @@ class CustomTitleField extends StatelessWidget {
 }
 
 class DropdownMenuExample extends StatefulWidget {
-  final Function(int?) onSelected;
+  final Function(String?) onSelected;
 
   const DropdownMenuExample({
     super.key,
@@ -110,19 +111,6 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
     S.current.other,
   ];
 
-  Map<String, int> categoryMap = {
-    S.current.pothole: 1,
-    S.current.broken_streetlight: 2,
-    S.current.garbage: 3,
-    S.current.manhole: 4,
-    S.current.graffiti: 5, // Fixed spelling
-    S.current.flooding: 6,
-    S.current.other: 7,
-  };
-  int _getCategoryId(String category) {
-    return categoryMap[category] ?? 0; // Returns 0 if category is not found
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -138,7 +126,7 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
           padding: const EdgeInsets.all(4),
           isExpanded: true,
           hint: Text(
-            S.of(context).issue_type,
+            S.of(context).choose_a_category,
           ),
           icon:
               const Icon(Icons.arrow_drop_down, color: AppColors.primaryColor),
@@ -155,8 +143,8 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
             setState(() {
               selectedValue = newValue;
             });
-            int categoryId = _getCategoryId(newValue!);
-            widget.onSelected(categoryId);
+            // int categoryId = getCategoryId(newValue!);
+            widget.onSelected(selectedValue);
           }, // Use widget.onChanged
           items: items.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(

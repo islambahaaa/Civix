@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "broken_streetlight" : MessageLookupByLibrary.simpleMessage("Broken Streetlight"),
     "camera_denied" : MessageLookupByLibrary.simpleMessage("Camera permission denied"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "choose_a_category" : MessageLookupByLibrary.simpleMessage("Choose a category"),
     "choose_gallery" : MessageLookupByLibrary.simpleMessage("Choose from Gallery"),
     "city" : MessageLookupByLibrary.simpleMessage("City"),
     "comfort" : MessageLookupByLibrary.simpleMessage("COMFORT"),

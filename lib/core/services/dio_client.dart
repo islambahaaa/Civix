@@ -70,4 +70,12 @@ class DioClient {
       data: data,
     );
   }
+
+  Future<Response> predict(var data) async {
+    return await dio.post(
+      '${ApiConstants.aiBaseUrl}',
+      data: data,
+      options: Options(headers: {"Content-Type": "multipart/form-data"}),
+    );
+  }
 }

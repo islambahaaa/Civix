@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:civix_app/constants.dart';
+import 'package:civix_app/core/helper_functions/category_functions.dart';
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/repos/report_repo.dart';
 import 'package:civix_app/core/services/api_report_service.dart';
@@ -26,12 +27,42 @@ class ReportCubit extends Cubit<ReportState> {
   String? title;
   String? description;
   int? category;
+  bool isCameraImage = false;
 
   Future<void> addImages(List<XFile> pickedImages) async {
     images.clear();
     for (var image in pickedImages) {
       log(image.path);
       images.add(File(image.path));
+    }
+    log(images.length.toString());
+  }
+
+  saveCategory(String category) async {
+    this.category = getCategoryId(category);
+  }
+
+  Future<void> predictImage() async {
+    emit(ReportLoading());
+    if (await Gal.requestAccess()) {
+      if (images.isNotEmpty) {
+        if (isCameraImage) {
+          for (var image in images) {
+            await Gal.putImage(image.path, album: 'Civix');
+          }
+        }
+
+        var result = await reportRepo.predictImage(images.first);
+        result.fold(
+          (failure) => emit(ReportPredictionFailure(failure.message)),
+          (s) => emit(ReportPredictionSuccess(s)),
+        );
+      } else {
+        emit(ReportFailure(S.current.provide_images));
+        return;
+      }
+    } else {
+      emit(ReportFailure(S.current.gallery_denied));
     }
   }
 
@@ -85,19 +116,6 @@ class ReportCubit extends Cubit<ReportState> {
     String description,
     int category,
   ) async {
-    if (await Gal.requestAccess()) {
-      if (images.isNotEmpty) {
-        for (var image in images) {
-          emit(ReportLoading());
-          await Gal.putImage(image.path, album: 'Civix');
-        }
-      } else {
-        emit(ReportFailure(S.current.provide_images));
-        return;
-      }
-    } else {
-      emit(ReportFailure(S.current.gallery_denied));
-    }
     await checkAndGetLocation();
     if (latitude == null || longitude == null) {
       emit(ReportFailure(S.current.location_fail));

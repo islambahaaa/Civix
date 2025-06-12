@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:civix_app/core/constants/api_constants.dart';
 import 'package:civix_app/core/services/dio_client.dart';
@@ -32,6 +33,23 @@ class ApiReportService {
 
   Future<Map<String, dynamic>> getMyIssues() async {
     var response = await dio.get(ApiConstants.myIssuesEndpoint);
+    return response.data;
+  }
+
+  Future<Map<String, dynamic>> predictImage(File imageFile) async {
+    String fileName = imageFile.path.split('/').last;
+
+    FormData formData = FormData.fromMap({
+      'image': await MultipartFile.fromFile(
+        imageFile.path,
+        filename: fileName,
+      ),
+    });
+
+    Response response = await dio.predict(
+      formData,
+    );
+
     return response.data;
   }
 }

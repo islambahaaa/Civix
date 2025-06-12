@@ -41,4 +41,19 @@ class ReportRepoImpl implements ReportRepo {
       ));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> predictImage(File imageFile) async {
+    try {
+      var response = await apiReportService.predictImage(imageFile);
+      return right(response['prediction']);
+    } catch (e) {
+      if (e is DioException) {
+        return left(ServerFailure.fromDioError(e));
+      }
+      return left(ServerFailure(
+        e.toString(),
+      ));
+    }
+  }
 }

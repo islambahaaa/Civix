@@ -241,16 +241,13 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
               // Static "Add" button
               if (_images.length < maxImages)
                 Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: GestureDetector(
-                    onTap: () async {
-                      await show(
-                        context,
-                      );
-                    },
-                    //onTap: pickImages,
-                    child: const AddImageIcon(),
+                  right: 10,
+                  bottom: 10,
+                  child: FloatingActionButton.extended(
+                    icon: const Icon(Icons.add_photo_alternate_outlined),
+                    label: const Text("Add"),
+                    onPressed: () => show(context),
+                    backgroundColor: AppColors.primaryColor,
                   ),
                 ),
             ],

@@ -12,4 +12,7 @@ abstract class ReportRepo {
     int category,
     List<File> imageFiles,
   );
+  Future<Either<Failure, String>> predictImage(
+    File imageFile,
+  );
 }

@@ -150,5 +150,6 @@
     "pick_location": "Pick Location",
     "zoom_in_to_select": "Zoom In to Select Location",
     "use_current_location": "Use Current Location",
-    "search_city": "Search city or area"
+    "search_city": "Search city or area",
+    "choose_a_category": "Choose a category"
   }

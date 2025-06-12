@@ -16,3 +16,13 @@ class ReportSuccess extends ReportState {
   final String message;
   ReportSuccess(this.message);
 }
+
+class ReportPredictionSuccess extends ReportState {
+  final String predictedCategory;
+  ReportPredictionSuccess(this.predictedCategory);
+}
+
+class ReportPredictionFailure extends ReportState {
+  final String message;
+  ReportPredictionFailure(this.message);
+}

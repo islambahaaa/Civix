@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "broken_streetlight" : MessageLookupByLibrary.simpleMessage("إنارة مكسورة"),
     "camera_denied" : MessageLookupByLibrary.simpleMessage("تم رفض إذن الكاميرا"),
     "cancel" : MessageLookupByLibrary.simpleMessage("إلغاء"),
+    "choose_a_category" : MessageLookupByLibrary.simpleMessage("اختر قسم"),
     "choose_gallery" : MessageLookupByLibrary.simpleMessage("اختيار من المعرض"),
     "city" : MessageLookupByLibrary.simpleMessage("المدينة"),
     "comfort" : MessageLookupByLibrary.simpleMessage("راحة"),
