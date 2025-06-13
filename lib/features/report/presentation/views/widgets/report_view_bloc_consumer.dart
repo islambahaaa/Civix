@@ -22,22 +22,22 @@ class ReportViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<ReportCubit, ReportState>(
       listener: (context, state) {
         if (state is ReportSuccess) {
-          log(state.message);
-          BuildContext rootContext =
-              Navigator.of(context, rootNavigator: true).context;
+          // log(state.message);
+          // BuildContext rootContext =
+          //     Navigator.of(context, rootNavigator: true).context;
 
-          Navigator.of(context).popUntil((route) => route.isFirst);
+          // Navigator.of(context).popUntil((route) => route.isFirst);
 
-          Future.delayed(const Duration(milliseconds: 300), () {
-            showCustomDialog(rootContext, S.of(context).success,
-                S.current.report_submitted, Icons.check_circle);
+          // Future.delayed(const Duration(milliseconds: 300), () {
+          //   showCustomDialog(rootContext, S.of(context).success,
+          //       S.current.report_submitted, Icons.check_circle);
 
-            Future.delayed(const Duration(seconds: 2), () {
-              if (rootContext.mounted) {
-                Navigator.of(rootContext).pop(); // Close the dialog
-              }
-            });
-          });
+          //   Future.delayed(const Duration(seconds: 2), () {
+          //     if (rootContext.mounted) {
+          //       Navigator.of(rootContext).pop(); // Close the dialog
+          //     }
+          //   });
+          // });
         }
         if (state is ReportFailure) {
           buildSnackBar(context, state.message);
