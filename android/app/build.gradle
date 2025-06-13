@@ -2,17 +2,9 @@
 
 plugins {
     id "com.android.application"
-    id "com.google.gms.google-services" // ✅ Firebase plugin
+    id "com.google.gms.google-services"
     id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin" // ✅ Flutter plugin must be last
-}
-// ✅ Load `.env` file at the top
-def dotenvFile = rootProject.file(".env")
-def dotenvProps = new Properties()
-if (dotenvFile.exists()) {
-    dotenvFile.withReader('UTF-8') {
-        dotenvProps.load(it)
-    }
+    id "dev.flutter.flutter-gradle-plugin" 
 }
 
 android {
@@ -35,11 +27,6 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-
-        // ✅ Set the API key placeholder from `.env`
-        manifestPlaceholders = [
-            MAPS_API_KEY: dotenvProps['MAPS_API_KEY'] ?: ""
-        ]
     }
 
     buildTypes {
