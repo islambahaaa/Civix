@@ -35,53 +35,51 @@ class NotificationTile extends StatelessWidget {
         ],
       ),
       child: ListTile(
-          tileColor: notification.isRead
-              ? Colors.transparent
-              : AppColors.primaryColor.withOpacity(0.1),
-          onTap: () => onTap(notification.id),
-          minLeadingWidth: 0,
-          leading: notification.isRead
-              ? null
-              : Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: Colors.orange,
-                    shape: BoxShape.circle,
-                  ),
-                ),
-          title: Text(
-            notification.title,
-            style: TextStyle(
-              fontWeight:
-                  notification.isRead ? FontWeight.normal : FontWeight.bold,
-            ),
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(notification.body),
-              const SizedBox(height: 4),
-              Text(
-                timeAgo(notification.time),
-                style: const TextStyle(
-                  fontSize: 12,
-                  color: Colors.grey,
+        tileColor: notification.isRead
+            ? Colors.transparent
+            : AppColors.primaryColor.withOpacity(0.1),
+        onTap: () => onTap(notification.id),
+        minLeadingWidth: 0,
+        leading: notification.isRead
+            ? null
+            : Container(
+                width: 8,
+                height: 8,
+                decoration: const BoxDecoration(
+                  color: Colors.orange,
+                  shape: BoxShape.circle,
                 ),
               ),
-            ],
+        title: Text(
+          notification.title,
+          style: TextStyle(
+            fontWeight:
+                notification.isRead ? FontWeight.normal : FontWeight.bold,
           ),
-          trailing: ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: notification.image != null
-                ? CachedNetworkImage(
-                    width: 60,
-                    height: 60,
-                    imageUrl: notification.image!,
-                    fit: BoxFit.cover,
-                  )
-                : null,
-          )),
+        ),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(notification.body),
+            const SizedBox(height: 4),
+            Text(
+              timeAgo(notification.time),
+              style: const TextStyle(fontSize: 12, color: Colors.grey),
+            ),
+          ],
+        ),
+        trailing: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: notification.image != null
+              ? CachedNetworkImage(
+                  width: 60,
+                  height: 60,
+                  imageUrl: notification.image!,
+                  fit: BoxFit.cover,
+                )
+              : null,
+        ),
+      ),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:civix_app/core/models/report_model.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 part 'notification_model.g.dart';
@@ -16,6 +17,7 @@ class NotificationModel extends HiveObject {
   bool isRead;
   @HiveField(5)
   String? image;
+  final ReportModel? issue;
 
   NotificationModel({
     required this.id,
@@ -24,13 +26,19 @@ class NotificationModel extends HiveObject {
     required this.body,
     required this.time,
     required this.isRead,
+    this.issue,
   });
-
-  // factory NotificationModel.fromJson(Map<String, dynamic> json) {
-  //   return NotificationModel(
-  //     title: json['title'],
-  //     message: json['message'],
-  //     timestamp: DateTime.parse(json['timestamp']),
-  //   );
-  // }
+  factory NotificationModel.fromJson(Map<String, dynamic> json) {
+    return NotificationModel(
+      id: UniqueKey().toString(), // or use a UUID
+      title: json['title'],
+      body: json['body'],
+      image: json['imageUrl'],
+      time: DateTime.parse(
+        json['issue']?['updatedOn'] ?? DateTime.now().toIso8601String(),
+      ),
+      isRead: false,
+      issue: json['issue'] != null ? ReportModel.fromJson(json['issue']) : null,
+    );
+  }
 }

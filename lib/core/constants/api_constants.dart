@@ -4,6 +4,7 @@ class ApiConstants {
   static String? baseUrl = dotenv.env['API_BASE_URL'];
   static String? aiBaseUrl = dotenv.env['AI_URL'];
   static const String authEndpoint = '/api/Auth/';
+  static const String notificationEndpoint = '/api/Notifications/me';
   static const String myIssuesEndpoint = '/me/issues';
   static const String register = 'register';
   static const String login = 'login';

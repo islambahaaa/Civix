@@ -125,7 +125,7 @@ class _HomeViewState extends State<HomeView> {
                         curve: Curves.easeInOutExpo);
                   },
                 ),
-                const NotificationsPage(),
+                const NotificationsView(),
                 const MyReportsView(),
                 const ProfileView(),
               ],

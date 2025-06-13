@@ -1,30 +1,16 @@
-// notification_service.dart
-import 'package:civix_app/features/notifications/data/models/notification_model.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:hive/hive.dart';
-
-import '../../constants.dart';
+import 'package:civix_app/core/constants/api_constants.dart';
+import 'package:civix_app/core/services/dio_client.dart';
 
 class NotificationService {
-  static final FirebaseMessaging _messaging = FirebaseMessaging.instance;
-  static late Box<NotificationModel> notificationBox;
+  DioClient dio;
 
-  static Future<void> init() async {
-    notificationBox = Hive.box<NotificationModel>(kNotificationsBox);
+  NotificationService({required this.dio});
 
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-      if (message.notification != null) {
-        final newNotification = NotificationModel(
-          id: message.messageId ?? '',
-          title: message.notification?.title ?? 'No title',
-          body: message.notification?.body ?? 'No body',
-          image: message.notification?.android?.imageUrl,
-          time: DateTime.now(),
-          isRead: false,
-        );
-
-        await notificationBox.add(newNotification);
-      }
-    });
+  Future<List<dynamic>> fetchNotifications() async {
+    final response = await dio.get(ApiConstants.notificationEndpoint);
+    final List<Map<String, dynamic>> data = List<Map<String, dynamic>>.from(
+      response.data,
+    );
+    return data;
   }
 }

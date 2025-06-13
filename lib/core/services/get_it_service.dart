@@ -4,6 +4,7 @@ import 'package:civix_app/core/services/api_auth_service.dart';
 import 'package:civix_app/core/services/api_report_service.dart';
 import 'package:civix_app/core/services/api_solved_in_my_area_service.dart';
 import 'package:civix_app/core/services/dio_client.dart';
+import 'package:civix_app/core/services/notification_service.dart';
 import 'package:civix_app/features/auth/data/repos/auth_repo_impl.dart';
 import 'package:civix_app/features/auth/domain/repos/auth_repo.dart';
 import 'package:civix_app/features/edit_profile/data/repositories/edit_profile_repo_impl.dart';
@@ -13,6 +14,8 @@ import 'package:civix_app/features/home/domain/repos/home_repo.dart';
 import 'package:civix_app/features/my_reports/data/repos/my_reports_repo_impl.dart';
 import 'package:civix_app/features/my_reports/domain/repos/my_reports_repo.dart';
 import 'package:civix_app/core/services/firebase_notification_service.dart';
+import 'package:civix_app/features/notifications/data/repos/notification_repo_impl.dart';
+import 'package:civix_app/features/notifications/domain/repos/notification_repo.dart';
 import 'package:civix_app/features/pickmyarea/data/repos/pick_my_area_repo_impl.dart';
 import 'package:civix_app/features/pickmyarea/domain/repos/pick_my_area_repo.dart';
 import 'package:dio/dio.dart';
@@ -25,6 +28,10 @@ void setupGetIt() {
   getIt.registerSingleton<Dio>(Dio());
   getIt.registerSingleton(DioClient(getIt.get<Dio>()));
   // services
+
+  getIt.registerSingleton<NotificationService>(
+    NotificationService(dio: getIt.get<DioClient>()),
+  );
   getIt.registerSingleton<ApiAuthService>(
       ApiAuthService(getIt.get<DioClient>()));
   getIt.registerSingleton<ApiSolvedInMyAreaService>(
@@ -34,6 +41,10 @@ void setupGetIt() {
   getIt.registerSingleton<FirebaseNotificationService>(
       FirebaseNotificationService());
   //repos
+
+  getIt.registerSingleton<NotificationRepo>(
+    NotificationRepoImpl(notificationService: getIt.get<NotificationService>()),
+  );
   getIt.registerSingleton<PickMyAreaRepo>(PickMyAreaRepoImpl(
       apiSolvedInMyAreaService: getIt.get<ApiSolvedInMyAreaService>()));
   getIt.registerSingleton<AuthRepo>(
