@@ -5,25 +5,34 @@ import 'package:flutter/material.dart';
 class UserGuidePage extends StatelessWidget {
   final List<GuideStep> steps = [
     GuideStep(
-      imagePath: Assets.imagesCairo,
-      title: 'Use Good Lighting',
-      description: 'Make sure the area is well-lit. Natural light works best!',
-    ),
-    GuideStep(
-      imagePath: Assets.imagesCairo,
-      title: 'Keep the Object Centered',
+      imagePath: Assets.imagesStreetlight,
+      title: 'Capture from the Side',
       description:
-          'Position the subject in the middle of the frame for clarity.',
+          'Take the streetlight photo from the side to show its full structure.',
     ),
     GuideStep(
-      imagePath: Assets.imagesCairo,
-      title: 'Avoid Blurry Images',
-      description: 'Hold your device steady to keep the image sharp and clear.',
+      imagePath: Assets.imagesManhole,
+      title: 'Shoot Directly Above',
+      description:
+          'Photograph the manhole straight from above to clearly show its condition.',
     ),
     GuideStep(
-      imagePath: Assets.imagesCairo,
-      title: 'Use a Clear Background',
-      description: 'Remove clutter from the background to avoid confusion.',
+      imagePath: Assets.imagesGraffiti,
+      title: 'Focus on the Graffiti',
+      description:
+          'Frame the graffiti to fill most of the image and avoid distractions.',
+    ),
+    GuideStep(
+      imagePath: Assets.imagesPothole,
+      title: 'Get Close to the Pothole',
+      description:
+          'Take the photo from a short distance to show the size and depth clearly.',
+    ),
+    GuideStep(
+      imagePath: Assets.imagesGarbage,
+      title: 'Show the Garbage Clearly',
+      description:
+          'Capture the garbage pile fully, including its location on the street.',
     ),
   ];
 

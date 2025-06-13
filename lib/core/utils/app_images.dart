@@ -82,6 +82,14 @@ class Assets {
   /// assets/images/Forgot_password.svg
   static const String imagesForgotPassword = "assets/images/Forgot_password.svg";
 
+  /// Assets for imagesGarbage
+  /// assets/images/garbage.jpeg
+  static const String imagesGarbage = "assets/images/garbage.jpeg";
+
+  /// Assets for imagesGraffiti
+  /// assets/images/graffiti.png
+  static const String imagesGraffiti = "assets/images/graffiti.png";
+
   /// Assets for imagesLogo
   /// assets/images/logo.png
   static const String imagesLogo = "assets/images/logo.png";
@@ -89,6 +97,10 @@ class Assets {
   /// Assets for imagesLogout
   /// assets/images/logout.svg
   static const String imagesLogout = "assets/images/logout.svg";
+
+  /// Assets for imagesManhole
+  /// assets/images/manhole.png
+  static const String imagesManhole = "assets/images/manhole.png";
 
   /// Assets for imagesMap
   /// assets/images/map.webp
@@ -110,9 +122,25 @@ class Assets {
   /// assets/images/pageview3.svg
   static const String imagesPageview3 = "assets/images/pageview3.svg";
 
+  /// Assets for imagesPothole
+  /// assets/images/pothole.jpeg
+  static const String imagesPothole = "assets/images/pothole.jpeg";
+
   /// Assets for imagesProfileImage
   /// assets/images/profile_image.png
   static const String imagesProfileImage = "assets/images/profile_image.png";
+
+  /// Assets for imagesSample1
+  /// assets/images/sample1.jpeg
+  static const String imagesSample1 = "assets/images/sample1.jpeg";
+
+  /// Assets for imagesSample4
+  /// assets/images/sample4.jpeg
+  static const String imagesSample4 = "assets/images/sample4.jpeg";
+
+  /// Assets for imagesSample5
+  /// assets/images/sample5.jpeg
+  static const String imagesSample5 = "assets/images/sample5.jpeg";
 
   /// Assets for imagesSearchIcon
   /// assets/images/search_icon.svg
@@ -125,6 +153,10 @@ class Assets {
   /// Assets for imagesSolvedInMyAreaItemShape
   /// assets/images/solved_in_my_area_item_shape.svg
   static const String imagesSolvedInMyAreaItemShape = "assets/images/solved_in_my_area_item_shape.svg";
+
+  /// Assets for imagesStreetlight
+  /// assets/images/streetlight.png
+  static const String imagesStreetlight = "assets/images/streetlight.png";
 
   /// Assets for imagesVerified
   /// assets/images/Verified.svg

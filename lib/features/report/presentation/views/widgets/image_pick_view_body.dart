@@ -59,10 +59,11 @@ class ImagePickViewBody extends StatelessWidget {
 
 class SampleImagesViewer extends StatelessWidget {
   final List<Map<String, String>> samples = const [
-    {"path": "assets/images/cairo.jpg", "label": "Front View"},
-    {"path": "assets/images/cairo.jpg", "label": "Good Lighting"},
-    {"path": "assets/images/cairo.jpg", "label": "Side View"},
-    {"path": "assets/images/cairo.jpg", "label": "Full View"},
+    {"path": Assets.imagesSample1, "label": "Graffiti"},
+    {"path": Assets.imagesPothole, "label": "Pothole"},
+    {"path": Assets.imagesGarbage, "label": "Garbage"},
+    {"path": Assets.imagesSample4, "label": "Broken Streetlight"},
+    {"path": Assets.imagesSample5, "label": "Manhole"},
   ];
 
   const SampleImagesViewer({super.key});
