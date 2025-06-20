@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:civix_app/generated/l10n.dart';
 
 Map<String, int> categoryMap = {
-  'broken_street': 1,
+  'broken streetlights': 1,
+  'broken streetlight': 1,
   'garbage': 2,
   'graffiti': 3,
   'manhole': 4,
@@ -9,7 +12,8 @@ Map<String, int> categoryMap = {
   'unknown': 6,
 };
 int getCategoryId(String category) {
-  return categoryMap[category] ?? 6; // Returns 0 if category is not found
+  return categoryMap[category.trim().toLowerCase()] ??
+      6; // Returns 0 if category is not found
 }
 
 String getCategory(int id) {

@@ -44,13 +44,16 @@ class ReportModel extends ReportEntity {
   static Map<String, String> _parseDateTime(String dateTimeString) {
     try {
       DateTime dateTime = DateTime.parse(dateTimeString);
-      String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-      String formattedTime = DateFormat('hh:mm a').format(dateTime);
+      DateTime adjusted = dateTime.add(_serverOffset);
+      String formattedDate = DateFormat('dd/MM/yyyy').format(adjusted);
+      String formattedTime = DateFormat('hh:mm a').format(adjusted);
       return {'date': formattedDate, 'time': formattedTime};
     } catch (e) {
       return {'date': dateTimeString, 'time': ''};
     }
   }
+
+  static const _serverOffset = Duration(hours: 3);
 
   /// Reverse geocoding to get city name (Call this method after creation)
   Future<void> fetchCityName() async {

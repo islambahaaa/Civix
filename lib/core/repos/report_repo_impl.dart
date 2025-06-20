@@ -47,7 +47,11 @@ class ReportRepoImpl implements ReportRepo {
     try {
       var response = await apiReportService.predictImage(imageFile);
       log(response['confidence'].toString());
-      return right(response['prediction']);
+      final String prediction = response['prediction'];
+
+      String cleanPrediction = prediction.replaceAll('_', ' ');
+
+      return right(cleanPrediction);
     } catch (e) {
       if (e is DioException) {
         return left(ServerFailure.fromDioError(e));

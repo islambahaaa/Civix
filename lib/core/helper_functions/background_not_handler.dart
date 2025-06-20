@@ -30,6 +30,4 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     time: DateTime.now(),
     isRead: false,
   );
-
-  await box.add(newNotification);
 }

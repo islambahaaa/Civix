@@ -155,87 +155,6 @@ void showAreYouSureDialog(BuildContext context, VoidCallback onYesPressed) {
       });
 }
 
-Future<dynamic> showCategoryDialogTest(
-    BuildContext context, ReportPredictionSuccess state, ReportCubit cubit) {
-  return showDialog(
-    context: context,
-    builder: (context) {
-      String? selectedCategory;
-      bool showDropdown = false;
-
-      return StatefulBuilder(
-        builder: (context, setState) {
-          return AlertDialog(
-            content: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text(
-                  "is this correct?",
-                  style: TextStyles.semibold24inter,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 10),
-                Text.rich(
-                    textAlign: TextAlign.center,
-                    TextSpan(
-                      children: [
-                        TextSpan(
-                            text: "We predicted the issue is",
-                            style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                            children: [
-                              TextSpan(
-                                text: " ${state.predictedCategory}",
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ]),
-                      ],
-                    )),
-              ],
-            ),
-            actions: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: double.infinity,
-                    height: 54,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                        backgroundColor: const Color(0xfff0f0f2),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text("No, I’ll choose",
-                          style: TextStyles.semibold16inter.copyWith(
-                            color: Colors.black,
-                          )),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  CustomButton(
-                    color: AppColors.secondaryColor,
-                    text: 'Yes',
-                    onPressed: () {},
-                  ),
-                ],
-              )
-            ],
-          );
-        },
-      );
-    },
-  );
-}
-
 Future<dynamic> showCategoryDialog(
   BuildContext context,
   ReportPredictionSuccess state,
@@ -350,6 +269,79 @@ Future<dynamic> showCategoryDialog(
                   label: const Text("Yes"),
                 ),
               ],
+            ],
+          );
+        },
+      );
+    },
+  );
+}
+
+Future<dynamic> showManualCategoryDialog(
+  BuildContext context,
+  ReportCubit cubit,
+) {
+  return showDialog(
+    context: context,
+    builder: (context) {
+      String? selectedCategory;
+
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            title: const Text(
+              'Choose the correct category',
+              textAlign: TextAlign.center,
+            ),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'AI could not predict this issue.\nPlease pick a category:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 16, color: Colors.grey),
+                ),
+                const SizedBox(height: 12),
+                DropdownMenuExample(
+                  onSelected: (value) => setState(() {
+                    selectedCategory = value;
+                  }),
+                ),
+              ],
+            ),
+            actionsPadding:
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text(
+                  'Cancel',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+              ElevatedButton.icon(
+                onPressed: selectedCategory != null
+                    ? () {
+                        cubit.saveCategory(selectedCategory!);
+                        Navigator.pop(context);
+                        Navigator.pushNamed(
+                          context,
+                          ReportView.routeName,
+                          arguments: cubit,
+                        );
+                      }
+                    : null,
+                icon: const Icon(Icons.check),
+                label: const Text('Confirm'),
+                style: ElevatedButton.styleFrom(
+                  minimumSize: const Size(110, 45),
+                  backgroundColor: Theme.of(context).colorScheme.primary,
+                  foregroundColor: Colors.white,
+                ),
+              ),
             ],
           );
         },

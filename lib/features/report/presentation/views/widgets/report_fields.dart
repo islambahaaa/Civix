@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:civix_app/core/helper_functions/category_functions.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
 import 'package:civix_app/core/utils/app_text_styles.dart';
@@ -144,7 +146,9 @@ class _DropdownMenuExampleState extends State<DropdownMenuExample> {
               selectedValue = newValue;
             });
             // int categoryId = getCategoryId(newValue!);
-            widget.onSelected(selectedValue);
+            String? lowercased = selectedValue?.toLowerCase();
+            log('lowercased: $lowercased');
+            widget.onSelected(lowercased);
           }, // Use widget.onChanged
           items: items.map<DropdownMenuItem<String>>((String value) {
             return DropdownMenuItem<String>(

@@ -30,6 +30,7 @@ class ImagePickerBlocConsumer extends StatelessWidget {
 
       if (state is ReportFailure) {
         buildSnackBar(context, state.message);
+        showManualCategoryDialog(context, cubit);
       }
     }, builder: (context, state) {
       return CustomProgressHud(

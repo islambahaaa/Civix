@@ -49,7 +49,7 @@ void main() async {
   await Prefs.init();
   setupGetIt();
 
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  //FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await dotenv.load();
   runApp(const MainApp());
 }
