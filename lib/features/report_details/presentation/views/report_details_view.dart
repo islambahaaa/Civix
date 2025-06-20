@@ -83,7 +83,7 @@ class ReportDetailsView extends StatelessWidget {
 
                   LocationSection(
                     location: location,
-                    address: report.city!,
+                    address: report.city ?? '',
                   )
                 ],
               ),

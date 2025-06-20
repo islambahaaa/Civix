@@ -75,6 +75,7 @@ class NotificationTile extends StatelessWidget {
                   width: 60,
                   height: 60,
                   imageUrl: notification.image!,
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                   fit: BoxFit.cover,
                 )
               : null,

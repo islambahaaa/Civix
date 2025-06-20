@@ -147,6 +147,9 @@ class ReportCubit extends Cubit<ReportState> {
     double longitude,
     List<File> imageFiles,
   ) async {
+    log(
+      'title: $title, description: $description, latitude: $latitude, longitude: $longitude',
+    );
     var result = await reportRepo.createReport(
         title, description, latitude, longitude, category ?? 0, imageFiles);
     result.fold(

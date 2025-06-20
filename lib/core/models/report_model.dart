@@ -31,7 +31,7 @@ class ReportModel extends ReportEntity {
       description: json['description'] ?? '',
       lat: json['latitude'] ?? 0.0,
       long: json['longitude'] ?? 0.0,
-      category: json['category'] ?? 0,
+      category: json['category'] ?? '',
       status: json['status'] ?? '',
       date: parsedDateTime['date'] ?? '',
       time: parsedDateTime['time'] ?? '',

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
-
+import 'package:path/path.dart' as p;
+import 'package:path_provider/path_provider.dart';
 import 'package:civix_app/core/helper_functions/build_snack_bar.dart';
 import 'package:civix_app/core/helper_functions/show_dialog.dart';
 import 'package:civix_app/core/utils/app_colors.dart';
@@ -56,18 +57,20 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
   }
 
   Future<XFile> compressImage(XFile file) async {
-    final String filePath = file.path;
-    final String targetPath =
-        filePath.replaceAll(RegExp(r'\.\w+$'), '_compressed.jpg');
-
-    XFile? compressedFile = await FlutterImageCompress.compressAndGetFile(
-      filePath,
-      targetPath,
-      quality: 80, // Adjust compression quality (1-100)
-      format: CompressFormat.jpeg, // Convert all formats to JPG
+    final appDir = await getApplicationDocumentsDirectory();
+    final String targetPath = p.join(
+      appDir.path,
+      '${DateTime.now().millisecondsSinceEpoch}_${p.basenameWithoutExtension(file.path)}.jpg',
     );
 
-    return compressedFile ?? file; // Return original if compression fails
+    final XFile? compressed = await FlutterImageCompress.compressAndGetFile(
+      file.path,
+      targetPath,
+      quality: 80,
+      format: CompressFormat.jpeg,
+    );
+
+    return compressed ?? file;
   }
 
   void addImage(XFile image, bool isCamera) async {
@@ -97,8 +100,8 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         for (var image in selectedImages) {
           final File file = File(image.path);
           final int fileSizeInBytes = await file.length();
-          XFile compressedImage =
-              await compressImage(image); // Compress before adding
+          final XFile savedOriginal = await _saveOriginalToAppDir(image);
+          XFile compressedImage = await compressImage(savedOriginal);
           if (await isDuplicate(compressedImage)) {
             buildSnackBar(context, S.of(context).image_selected);
             continue;
@@ -117,6 +120,18 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
     }
   }
 
+  Future<XFile> _saveOriginalToAppDir(XFile image) async {
+    final docsDir =
+        await getApplicationDocumentsDirectory(); // /data/user/0/<pkg>/files
+    final String destPath = p.join(
+      docsDir.path,
+      '${DateTime.now().millisecondsSinceEpoch}_${p.basename(image.path)}',
+    );
+
+    final File saved = await File(image.path).copy(destPath);
+    return XFile(saved.path);
+  }
+
   Future<void> pickImagesFromCamera() async {
     if (await requestCameraPermission()) {
       Navigator.pop(context);
@@ -125,8 +140,9 @@ class _MultiImagePickerScreenState extends State<MultiImagePickerScreen> {
         final XFile? selectedImage =
             await _picker.pickImage(source: ImageSource.camera);
         if (selectedImage != null) {
-          XFile compressedImage =
-              await compressImage(selectedImage); // Compress before adding
+          final XFile savedOriginal =
+              await _saveOriginalToAppDir(selectedImage);
+          XFile compressedImage = await compressImage(savedOriginal);
           addImage(compressedImage, true);
         }
       } catch (e) {
